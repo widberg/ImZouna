@@ -1,0 +1,27 @@
+#include <fuel.hexpat>
+
+struct SplineSubsection {
+    Vec3f point1;
+    Vec3f point2;
+    f32 length;
+} [[static]];
+
+struct SplineSection {
+    u16 P[2];
+    u16 T[2];
+    u32 flags;
+    f32 length;
+    SplineSubsection spline_subsections[8];
+} [[static]];
+
+struct Spline_Z : Object_Z {
+    PascalArray<Vec3f> vertices;
+    PascalArray<SplineSection> spline_sections;
+    /// (1, 0, 0, 1)
+    Vec4f vec;
+    f32 length;
+};
+
+Spline_Z spline_z @ 0x0;
+
+std::assert(std::mem::eof(), "Whole input not consumed");

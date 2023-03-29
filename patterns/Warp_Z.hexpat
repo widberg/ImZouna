@@ -10,6 +10,8 @@ struct Warp_Z : ResourceObject_Z {
     /// 50
     f32 radius;
     Vec2f texcoords[4];
-};
+} [[static]];
 
 Warp_Z warp_z @ 0x0;
+
+std::assert(std::mem::eof(), "Whole input not consumed");

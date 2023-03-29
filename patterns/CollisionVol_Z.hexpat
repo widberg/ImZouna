@@ -9,6 +9,8 @@ struct CollisionVol_Z : Object_Z {
     Name_Z volume_type;
     /// Always 0
     u32 zero;
-};
+} [[static]];
 
 CollisionVol_Z collision_vol_z @ 0x0;
+
+std::assert(std::mem::eof(), "Whole input not consumed");

@@ -15,6 +15,8 @@ struct LightData_Z : ResourceObject_Z {
     /// not normalized
     /// Slightly smaller values than local_collision_sphere
     Vec3f local_collision_sphere_facing;
-};
+} [[static]];
 
 LightData_Z light_data_z @ 0x0;
+
+std::assert(std::mem::eof(), "Whole input not consumed");

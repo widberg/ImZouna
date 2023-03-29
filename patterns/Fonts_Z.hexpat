@@ -8,7 +8,7 @@ struct Character {
     f32 y;
     f32 x;
     f32 width;
-}
+};
 
 struct Fonts_Z : ResourceObject_Z {
     /// id may be ASCII or Unicode?
@@ -17,3 +17,5 @@ struct Fonts_Z : ResourceObject_Z {
 };
 
 Fonts_Z fonts_z @ 0x0;
+
+std::assert(std::mem::eof(), "Whole input not consumed");

@@ -5,3 +5,5 @@ struct Binary_Z : ResourceObject_Z {
 };
 
 Binary_Z binary_z @ 0x0;
+
+std::assert(std::mem::eof(), "Whole input not consumed");

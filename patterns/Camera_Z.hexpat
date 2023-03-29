@@ -8,6 +8,8 @@ struct Camera_Z : Object_Z {
     f32 zero;
     /// Target?
     Name_Z node_name;
-};
+} [[static]];
 
 Camera_Z camera_z @ 0x0;
+
+std::assert(std::mem::eof(), "Whole input not consumed");
