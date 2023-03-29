@@ -2,10 +2,11 @@
 
 struct Camera_Z : Object_Z {
     /// radians
-    /// always 0.8726646
     f32 angle_of_view;
+    std::assert(angle_of_view == 0.8726646304130554, "angle_of_view != 0.8726646304130554");
     /// Near plane?
     f32 zero;
+    std::assert(zero == 0, "zero != 0");
     /// Target?
     Name_Z node_name;
 } [[static]];

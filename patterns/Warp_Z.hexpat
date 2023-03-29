@@ -3,12 +3,12 @@
 struct Warp_Z : ResourceObject_Z {
     Name_Z material_name;
     Vec3f vertices[8];
-    /// 1
     f32 one;
-    /// 0
+    std::assert(one == 1, "one != 1");
     f32 zero;
-    /// 50
+    std::assert(zero == 0, "zero != 0");
     f32 radius;
+    std::assert(radius == 50, "radius != 50");
     Vec2f texcoords[4];
 } [[static]];
 

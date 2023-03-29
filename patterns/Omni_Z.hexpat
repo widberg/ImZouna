@@ -1,12 +1,10 @@
 #include <fuel.hexpat>
 
 struct Omni_Z : Object_Z {
-    Mat4f scaleMat;
-    Mat4f translation_,at;
-    Mat4f trsMat;
-    /// Observed to contain a MaterialAnim_Z name
+    Mat4f scale_matrix;
+    Mat4f translation_matrix;
+    Mat4f trs_mat;
     Name_Z material_anim_name0;
-    /// Observed to contain zero
     Name_Z material_anim_name1;
 } [[static]];
 

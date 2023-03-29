@@ -25,7 +25,7 @@ extensions = [
     'Mesh_Z',
     'MeshData_Z',
     'Node_Z',
-    'Omin_Z',
+    'Omni_Z',
     'Particles_Z',
     'ParticlesData_Z',
     'RotShape_Z',

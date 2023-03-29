@@ -251,3 +251,12 @@ using KeyframerVec4fLinear_Z = KeyframerTpl_Z<KeyVec4fLinear_Z>;
 using KeyframerVec4fLinearComp_Z = KeyframerTpl_Z<KeyVec4fLinearComp_Z>;
 using KeyframerRot_Z = KeyframerNoFlagsTpl_Z<KeyRot_Z>;
 using KeyframerBezierRot_Z  = KeyframerNoFlagsTpl_Z<KeyBezierRot_Z>;
+
+fn all_eq(ref auto arr, auto size, auto val) {
+    for (usize i = 0, i < size, i = i + 1) {
+        if (arr[i] != val) {
+            return false;
+        }
+    }
+    return true;
+};
