@@ -12,8 +12,8 @@ fn format_point(ref auto point) {
     i32 x = a >> 12;
     i32 y = ((point.encoded_vec2f_data1 | (a << 8)) << 12) >> 12;
     Vec2f vec2f;
-    vec2f.components[0] = x / 4.0;
-    vec2f.components[1] = y / 4.0;
+    vec2f[0] = x / 4.0;
+    vec2f[1] = y / 4.0;
     return vec2f;
 };
 
