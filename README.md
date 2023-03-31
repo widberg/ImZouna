@@ -4,7 +4,15 @@
 
 <sup>This repository is a relative of the main [FMTK repository](https://github.com/widberg/fmtk).</sup>
 
-## Usage
+## Getting Started
+
+### Checkout
+
+```sh
+git clone https://github.com/widberg/ImFUEL.git --recurse-submodules --shallow-submodules
+```
+
+### Usage
 
 Add the `ImFUEL` directory to ImHex `Help -> Settings -> Folders -> +`.
 
