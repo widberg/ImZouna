@@ -18,9 +18,9 @@ struct Unknown1 {
 
 struct SplineGraph_Z : Object_Z {
     /// size equals unknown7s.size, unknown8s.size
-    PascalArray<Vec3f> vecs;
+    DynArray_Z<Vec3f> vecs;
     /// size equals unknown9.size
-    PascalArray<Unknown1> unknown1s;
+    DynArray_Z<Unknown1> unknown1s;
     /// [0, 1]
     f32 unknown2;
     /// [0, 1]
@@ -33,13 +33,13 @@ struct SplineGraph_Z : Object_Z {
     f32 unknown6;
     /// size equals unknown0s.size, unknown8s.size
     /// filled with 0s
-    PascalArray<u32> unknown7s;
+    DynArray_Z<u32> unknown7s;
     /// size equals unknown0s.size, unknown8s.size
     /// filled with 0s
-    PascalArray<PascalArray<u8>> unknown8s;
+    DynArray_Z<DynArray_Z<u8>> unknown8s;
     /// size equals unknown1Count
     /// filled with 0s
-    PascalArray<PascalArray<u8>> unknown9s;
+    DynArray_Z<DynArray_Z<u8>> unknown9s;
 };
 
 SplineGraph_Z spline_graph_z @ 0x0;

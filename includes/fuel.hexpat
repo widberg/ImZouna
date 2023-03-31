@@ -19,9 +19,6 @@
 // ImHex bug
 // doesn't do a great job following diagnostic line numbers into headers
 
-// ImHex bug
-// Array of 0 size still overruns end of file
-
 fn all_eq(ref auto arr, auto val) {
     for (usize i = 0, i < std::core::member_count(arr), i = i + 1) {
         if (arr[i] != val) {
@@ -39,36 +36,36 @@ struct PascalString {
 struct PascalStringNULL {
     u32 size;
     char data[size - 1];
-    char zero;
+    u8 zero;
     std::assert(zero == 0, "zero != 0");
 } [[sealed, format("format_data"), transform("format_data")]];
 
 struct FixedStringNULL<auto Size> {
-    char data[Size];
+    char data[while(std::mem::read_unsigned($, 1) != 0x0)];
+    u8 zeros[Size - std::string::length(data)];
+    std::assert(all_eq(zeros, 0x0), "!all_eq(zeros, 0x0)");
 } [[sealed, format("format_data"), transform("format_data")]];
 
 fn format_data(ref auto x) {
     return x.data;
 };
 
-struct PascalArrayBase<T, U> {
+struct DynArray_ZBase<T, U> {
     U size [[hidden]];
-    if (size != 0) { // ImHex does not handle 0 sized arrays properly in Rtc_Z
-        T data[size] [[inline]];
-    }
+    T data[size] [[inline]];
 } [[format("format_pascal_array"), transform("format_data")]];
 
 fn format_pascal_array(ref auto arr) {
     return "[" + arr.size + "]";
 };
 
-using PascalArray<T> = PascalArrayBase<T, u32>;
-using PascalArrayU16<T> = PascalArrayBase<T, u16>;
+using DynArray_Z<T> = DynArray_ZBase<T, u32>;
+using DynArray_ZU16<T> = DynArray_ZBase<T, u16>;
 
 struct AssociativeArray<T, U, V> {
-    PascalArray<T> values;
-    PascalArray<U> indices;
-    PascalArray<V> associated_values;
+    DynArray_Z<T> values;
+    DynArray_Z<U> indices;
+    DynArray_Z<V> associated_values;
 };
 
 struct Pair<T, U> {
@@ -76,7 +73,7 @@ struct Pair<T, U> {
     U value;
 };
 
-using Map<T, U> = PascalArray<Pair<T, U>>;
+using Map<T, U> = DynArray_Z<Pair<T, U>>;
 
 struct OptionalBase<T, U> {
     U is_some [[hidden]];
@@ -189,8 +186,52 @@ struct ResourceObject_Z : BaseObject_Z {
     Name_Z link_name;
 };
 
+bitfield ObjectDatasFlags {
+    FL_OBJECTDATAS_HIDE : 1; // Object data is hidden
+    FL_OBJECTDATAS_CODE_CONTROL : 1; // Code controlled
+    FL_OBJECTDATAS_CLONED : 1; // Cloned
+    FL_OBJECTDATAS_SKINNED : 1; // Skinned geometry
+    FL_OBJECTDATAS_MORPHED : 1; // Morphable mesh
+    FL_OBJECTDATAS_VREFLECT : 1; // Fake vertical mirror to simulate reflection on the ground
+    FL_OBJECTDATAS_HIDE_SHADOW : 1; // Hide shadow at the object data level
+    FL_OBJECTDATAS_STATIC_SHADOW : 1;
+    // Never change the order of the following 3 flags
+    FL_OBJECTDATAS_VP0_HIDE : 1; // One bit per viewport
+    FL_OBJECTDATAS_VP1_HIDE : 1; // One bit per viewport
+    FL_OBJECTDATAS_VP2_HIDE : 1; // One bit per viewport
+    FL_OBJECTDATAS_VP3_HIDE : 1; // One bit per viewport
+    FL_OBJECTDATAS_LAST : 1; // Last engine flag, first game flag
+    padding : 19;
+};
+
+struct ObjectDatas_Z : ResourceObject_Z {
+    ObjectDatasFlags flags;
+};
+
+bitfield ObjectFlags {
+    FL_OBJECT_INIT : 1; // ?
+    FL_OBJECT_MAX_BSPHERE : 1; // ?
+    FL_OBJECT_SKINNED : 1; // Skinned geometry
+    FL_OBJECT_MORPHED : 1; // Morphed geometry
+    FL_OBJECT_ORIENTEDBBOX : 1; // Oriented box
+    FL_OBJECT_NO_SEADDISPLAY : 1; // Don't use SEADS for display
+    FL_OBJECT_NO_SEADCOLLIDE : 1; // Don't use SEADS for collide
+    FL_OBJECT_NO_DISPLAY : 1; // Don't display object
+    FL_OBJECT_TRANSPARENT : 1; // Object has transparent components
+    FL_OBJECT_OPTIMIZED_VERTEX : 1; // Object has optimized vertices
+    FL_OBJECT_LINEAR_MAPPING : 1; // Object process generate UV to get linear mapping
+    FL_OBJECT_SKINNED_WITH_ONE_BONE : 1; // Skinned geometry with only one bone which is not a usual skin.
+    FL_OBJECT_LIGHT_BAKED : 1; //  Light baken
+    FL_OBJECT_LIGHT_BAKED_WITH_MATERIAL : 1; // Light baken with material and dynamic lights
+    FL_OBJECT_SHADOW_RECEIVER : 1; // Light baken with material and dynamic lights
+    FL_OBJECT_NO_TESSELATE : 1; // Surface will not be tessalate
+    FL_OBJECT_LAST : 1; // Last engine flag, first game flag
+    padding : 15;
+};
+
 struct Object_Z : ResourceObject_Z {
     /// The associated data object for this object or 0 if there is none
+    /// Skel_Z is the corresponding data for Skin_Zs
     Name_Z data_name;
     Quat rot;
     Mat4f transform;
@@ -203,7 +244,7 @@ struct Object_Z : ResourceObject_Z {
     /// 0x2 - mesh load additional field
     /// 0x4 - set in a mesh but never checked
     /// Sometimes a valid float
-    u32 flags;
+    ObjectFlags flags;
     /// Possible values:
     ///   * 6 - Mesh_Z
     ///   * 12
@@ -241,11 +282,11 @@ enum KeyframerInterpolationType : u16 {
 
 struct KeyframerTpl_Z<TKey> : Keyframer_Z {
     KeyframerInterpolationType interpolation_type;
-    PascalArray<TKey> keyframes;
+    DynArray_Z<TKey> keyframes;
 };
 
 struct KeyframerNoFlagsTpl_Z<TKey> : Keyframer_Z {
-    PascalArray<TKey> keyframes;
+    DynArray_Z<TKey> keyframes;
 };
 
 using Vec3Comp = Vec<NumeratorFloat<i16, 4096>, 3>;
@@ -253,7 +294,7 @@ using QuatComp = Vec<NumeratorFloat<i16, 2000>, 4>;
 
 using KeyFlag_Z = KeyLinearTpl_Z<u32>;
 using KeyHdl_Z = KeyLinearTpl_Z<Name_Z>;
-using KeyMessage_Z = KeyLinearTpl_Z<PascalArray<Message_Z>>;
+using KeyMessage_Z = KeyLinearTpl_Z<DynArray_Z<Message_Z>>;
 using KeyFloat_Z = KeyTgtTpl_Z<f32>;
 using KeyFloatComp_Z = KeyTgtTpl_Z<i16>;
 using KeyFloatLinear_Z = KeyLinearTpl_Z<f32>;

@@ -50,8 +50,8 @@ struct ParticlesEmitter_Z {
 };
 
 struct Particles_Z : Object_Z {
-    PascalArray<ParticlesEmitter_Z> particles_emitters;
-    PascalArray<Mat4f> mats;
+    DynArray_Z<ParticlesEmitter_Z> particles_emitters;
+    DynArray_Z<Mat4f> mats;
     f32 unknown2;
     u16 unknown3;
 };

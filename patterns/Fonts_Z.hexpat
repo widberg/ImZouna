@@ -15,7 +15,7 @@ struct Character {
 struct Fonts_Z : ResourceObject_Z {
     /// id may be ASCII or Unicode?
     Map<u32, Character> characters;
-    PascalArray<Name_Z> material_names;
+    DynArray_Z<Name_Z> material_names;
 };
 
 Fonts_Z fonts_z @ 0x0;

@@ -50,14 +50,14 @@ struct Unknown9 {
 struct Rtc_Z : ResourceObject_Z {
     /// duration of the cinematic?
     float duration;
-    PascalArray<RtcAnimationNode> unknown1s;
-    PascalArray<AnimationCamera> unknown2s;
-    PascalArray<Name_Z> unknown_names;
-    PascalArray<AnimationOmni> animationOmnis;
-    PascalArray<Unknown8> unknown8s;
-    PascalArray<Unknown9> unknown9s;
-    PascalArray<Name_Z> unknown_names1;
-    PascalArray<Name_Z> unknown_names2;
+    DynArray_Z<RtcAnimationNode> unknown1s;
+    DynArray_Z<AnimationCamera> unknown2s;
+    DynArray_Z<Name_Z> unknown_names;
+    DynArray_Z<AnimationOmni> animationOmnis;
+    DynArray_Z<Unknown8> unknown8s;
+    DynArray_Z<Unknown9> unknown9s;
+    DynArray_Z<Name_Z> unknown_names1;
+    DynArray_Z<Name_Z> unknown_names2;
     KeyframerMessage_Z unknown30;
 };
 

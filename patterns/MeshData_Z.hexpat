@@ -2,12 +2,20 @@
 
 #include <fuel.hexpat>
 
-struct MeshData_Z : ResourceObject_Z {
-    /// bool 0/1
-    /// 0 for old DPCs like TRAFFIC_TM and P_MOTO
-    /// 1 for latest/newer DPCs like THE_INTRO and vehicles
-    u32 not_traffic_tm_or_p_moto;
-    std::assert(not_traffic_tm_or_p_moto == 1, "not_traffic_tm_or_p_moto != 1");
+struct MeshData_Z : ObjectDatas_Z {
+    std::assert(flags.FL_OBJECTDATAS_HIDE == 1, "flags.FL_OBJECTDATAS_HIDE != 1");
+    std::assert(flags.FL_OBJECTDATAS_CODE_CONTROL == 0, "flags.FL_OBJECTDATAS_CODE_CONTROL != 0");
+    std::assert(flags.FL_OBJECTDATAS_CLONED == 0, "flags.FL_OBJECTDATAS_CLONED != 0");
+    std::assert(flags.FL_OBJECTDATAS_SKINNED == 0, "flags.FL_OBJECTDATAS_SKINNED != 0");
+    std::assert(flags.FL_OBJECTDATAS_MORPHED == 0, "flags.FL_OBJECTDATAS_MORPHED != 0");
+    std::assert(flags.FL_OBJECTDATAS_VREFLECT == 0, "flags.FL_OBJECTDATAS_VREFLECT != 0");
+    std::assert(flags.FL_OBJECTDATAS_HIDE_SHADOW == 0, "flags.FL_OBJECTDATAS_HIDE_SHADOW != 0");
+    std::assert(flags.FL_OBJECTDATAS_STATIC_SHADOW == 0, "flags.FL_OBJECTDATAS_STATIC_SHADOW != 0");
+    std::assert(flags.FL_OBJECTDATAS_VP0_HIDE == 0, "flags.FL_OBJECTDATAS_VP0_HIDE != 0");
+    std::assert(flags.FL_OBJECTDATAS_VP1_HIDE == 0, "flags.FL_OBJECTDATAS_VP1_HIDE != 0");
+    std::assert(flags.FL_OBJECTDATAS_VP2_HIDE == 0, "flags.FL_OBJECTDATAS_VP2_HIDE != 0");
+    std::assert(flags.FL_OBJECTDATAS_VP3_HIDE == 0, "flags.FL_OBJECTDATAS_VP3_HIDE != 0");
+    std::assert(flags.FL_OBJECTDATAS_LAST == 0, "flags.FL_OBJECTDATAS_LAST != 0");
     u32 zero0;
     std::assert(zero0 == 0, "zero0 != 0");
     u32 zero1;

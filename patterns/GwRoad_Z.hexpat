@@ -19,7 +19,7 @@ fn format_point(ref auto point) {
 
 struct Road {
     u8 type;
-    PascalArrayU16<Point> points;
+    DynArray_ZU16<Point> points;
 };
 
 struct Unused5 {

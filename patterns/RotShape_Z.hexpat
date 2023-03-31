@@ -3,18 +3,18 @@
 #include <fuel.hexpat>
 
 struct RotShape_Z : Object_Z {
-    PascalArray<Vec3f> verticies;
+    DynArray_Z<Vec3f> verticies;
     /// Always 0?
     f32 one;
     std::assert(one == 0, "one != 0");
     /// Always full of 0s except for USA1.DPC 3753153500.RotShape_Z
-    PascalArray<u32> material_names_indices;
+    DynArray_Z<u32> material_names_indices;
     std::assert(verticies.size == material_names_indices.size, "verticies.size != material_names_indices.size");
-    PascalArray<Vec3f> sizes;
+    DynArray_Z<Vec3f> sizes;
     std::assert(sizes.size == material_names_indices.size * 2, "sizes.size != material_names_indices.size * 2");
-    PascalArray<Vec2f> texcoords;
+    DynArray_Z<Vec2f> texcoords;
     std::assert(texcoords.size == sizes.size * 2, "texcoords.size != sizes.size * 2");
-    PascalArray<Name_Z> material_names;
+    DynArray_Z<Name_Z> material_names;
     f32 scale;
     std::assert(scale == 0 || scale == 200 || scale == 300, "scale != 0,200,300");
     u16 billboard_mode;

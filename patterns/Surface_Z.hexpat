@@ -49,24 +49,24 @@ struct Unknown15 {
 };
 
 struct SeadIndex_Z {
-    PascalArray<SeadVoxel_Z> sead_voxels;
-    PascalArray<u16> elements;
+    DynArray_Z<SeadVoxel_Z> sead_voxels;
+    DynArray_Z<u16> elements;
     Unknown15 unknown15;
     u32 repeated_patch_count;
 };
 
 struct Surface_Z : Object_Z {
-    PascalArray<Vec3f> vertices;
-    PascalArray<Vec4f> vec4fs;
-    PascalArray<Unknown2> unknown2s;
-    PascalArray<Unknown3> unknown3s;
-    PascalArray<Patch_Z> patches;
-    PascalArray<Edge_Z> edges;
-    PascalArray<Vec3f> normals;
-    PascalArray<Vec3f> vertex9s;
-    PascalArray<Vec2f> vertex10s;
-    PascalArray<ShouldDrawBitfield> should_draw_relateds;
-    PascalArray<Unknown12> unknown12s;
+    DynArray_Z<Vec3f> vertices;
+    DynArray_Z<Vec4f> vec4fs;
+    DynArray_Z<Unknown2> unknown2s;
+    DynArray_Z<Unknown3> unknown3s;
+    DynArray_Z<Patch_Z> patches;
+    DynArray_Z<Edge_Z> edges;
+    DynArray_Z<Vec3f> normals;
+    DynArray_Z<Vec3f> vertex9s;
+    DynArray_Z<Vec2f> vertex10s;
+    DynArray_Z<ShouldDrawBitfield> should_draw_relateds;
+    DynArray_Z<Unknown12> unknown12s;
     Optional<SeadIndex_Z> sead_index;
 };
 

@@ -11,11 +11,11 @@ struct SkinSubsection {
 };
 
 struct SkinSection {
-    PascalArray<SkinSubsection> skin_subsections;
+    DynArray_Z<SkinSubsection> skin_subsections;
 };
 
 struct Skin_Z : Object_Z {
-    PascalArray<Name_Z> mesh_names;
+    DynArray_Z<Name_Z> mesh_names;
     u32 zero0;
     std::assert(zero0 == 0, "zero0 != 0");
     u32 zero1;
@@ -28,7 +28,7 @@ struct Skin_Z : Object_Z {
     std::assert(one_and_a_half == 1.5, "one_and_a_half != 1.5");
     u32 data_count;
     std::assert(data_count == 21, "data_count != 21");
-    PascalArray<SkinSection> skin_sections;
+    DynArray_Z<SkinSection> skin_sections;
     std::assert(skin_sections.size == mesh_names.size, "skin_sections.size != mesh_names.size");
 };
 

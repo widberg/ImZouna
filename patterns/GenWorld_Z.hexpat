@@ -7,7 +7,7 @@ struct Category {
     /// Means enabled?
     /// Stored into the category object
     u32 one;
-    PascalArray<Name_Z> node_name_arrays;
+    DynArray_Z<Name_Z> node_name_arrays;
 };
 
 struct Unknown8 {
@@ -50,16 +50,16 @@ struct Region {
     /// Always 0xFF
     u8 always_255;
     /// Indices into the coordsLineSegments array
-    PascalArray<u32> coords_line_segments_indices;
+    DynArray_Z<u32> coords_line_segments_indices;
 };
 
 struct GenWorld_Z : Object_Z {
     Name_Z node_name;
     Name_Z user_define_name;
     Name_Z gw_road_name;
-    PascalArray<Name_Z> binary_names;
-    PascalArray<Name_Z> bitmap_names;
-    PascalArray<Name_Z> material_names;
+    DynArray_Z<Name_Z> binary_names;
+    DynArray_Z<Name_Z> bitmap_names;
+    DynArray_Z<Name_Z> material_names;
     /// always 41
     u32 equals41;
     /// Valid id values:
@@ -67,11 +67,11 @@ struct GenWorld_Z : Object_Z {
     ///   * BUSHES
     ///   * ROCKS - Appears in an object but empty and the game ignores it
     Map<PascalStringNULL, Category> categories;
-    PascalArray<Unknown8> unknown8s;
-    PascalArray<Mat4f> mats;
-    PascalArray<Unused10> unused10s;
-    PascalArray<Vec2f> coords;
-    PascalArray<CoordsLineSegment> coordsLineSegments;
+    DynArray_Z<Unknown8> unknown8s;
+    DynArray_Z<Mat4f> mats;
+    DynArray_Z<Unused10> unused10s;
+    DynArray_Z<Vec2f> coords;
+    DynArray_Z<CoordsLineSegment> coordsLineSegments;
     Map<FixedStringNULL<31>, Region> regions;
 };
 

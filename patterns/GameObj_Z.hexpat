@@ -13,11 +13,11 @@ struct Prefab {
     u32 in_world;
     std::assert(in_world == 0 || in_world == 1 || in_world == 2, "in_world != 0,1,2");
     /// Child objects in the hierarchy
-    PascalArray<Name_Z> names;
+    DynArray_Z<Name_Z> names;
 };
 
 struct GameObj_Z : ResourceObject_Z {
-    PascalArray<Prefab> prefabs;
+    DynArray_Z<Prefab> prefabs;
 };
 
 GameObj_Z game_obj_z @ 0x0;

@@ -16,16 +16,16 @@ struct WorldRef_Z : Object_Z {
     Name_Z unused14;
     Name_Z gen_world_name;
     Name_Z node_name1;
-    PascalArray<u32> unused17s;
-    PascalArray<u8> unuseds;
-    PascalArray<Mat4f> mats;
+    DynArray_Z<u32> unused17s;
+    DynArray_Z<u8> unuseds;
+    DynArray_Z<Mat4f> mats;
     Vec3f pointA;
     Vec3f pointB;
-    PascalArray<UUIDPair> uuid_pairs;
+    DynArray_Z<UUIDPair> uuid_pairs;
     /// comma-separated list of TSC commands
     /// EX: "OpenBF WORLD\USA1_REGION_HUB_SALTLAKE_37923066;LoadWorldRef DB:>LEVELS>HUBS>QUARTIER_1>3DNODEGEOMETRY>HUB_SALTLAKE.TWORLDREF;CloseBF"
     PascalStringNULL init_script;
-    PascalArray<Name_Z> node_name2;
+    DynArray_Z<Name_Z> node_name2;
     /// Always 0
     /// Never read by the game
     u32 zero;

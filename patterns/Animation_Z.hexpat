@@ -61,10 +61,10 @@ struct Animation_Z : ResourceObject_Z {
     AnimationMaterial animationMaterial;
     AnimationMesh animationMesh;
     AnimationMorph animationMorph;
-    PascalArray<Unknown12> unknown12s;
-    PascalArray<Unknown13> unknown13s;
-    PascalArray<Unknown14> unknown14s;
-    PascalArray<Unknown14> unknown15s;
+    DynArray_Z<Unknown12> unknown12s;
+    DynArray_Z<Unknown13> unknown13s;
+    DynArray_Z<Unknown14> unknown14s;
+    DynArray_Z<Unknown14> unknown15s;
 };
 
 Animation_Z animation_z @ 0x0;

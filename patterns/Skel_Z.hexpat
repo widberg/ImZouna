@@ -55,19 +55,16 @@ struct BoxColBone {
     Name_Z names[3];
 };
 
-struct Skel_Z : ResourceObject_Z {
-    /// ObjectDatas_Z
-    /// same flags as LodData_Z
-    u32 flags;
+struct Skel_Z : ObjectDatas_Z {
     Sphere_Z bounding_sphere_center;
-    PascalArray<Bone> bones;
-    PascalArray<Name_Z> material_names;
-    PascalArray<Name_Z> mesh_data_names;
-    PascalArray<PascalArray<Name_Z>> animation_node_names_arrays;
-    PascalArray<Name_Z> some_names;
-    PascalArray<SphereColBone> sphere_col_bones0;
-    PascalArray<SphereColBone> sphere_col_bones1;
-    PascalArray<BoxColBone> box_col_bones;
+    DynArray_Z<Bone> bones;
+    DynArray_Z<Name_Z> material_names;
+    DynArray_Z<Name_Z> mesh_data_names;
+    DynArray_Z<DynArray_Z<Name_Z>> animation_node_names_arrays;
+    DynArray_Z<Name_Z> some_names;
+    DynArray_Z<SphereColBone> sphere_col_bones0;
+    DynArray_Z<SphereColBone> sphere_col_bones1;
+    DynArray_Z<BoxColBone> box_col_bones;
 };
 
 Skel_Z skel_z @ 0x0;

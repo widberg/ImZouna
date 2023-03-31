@@ -15,15 +15,15 @@ struct BoxCol {
 };
 
 struct Lod_Z : Object_Z {
-    PascalArray<SphereColNode> sphereColNodes;
-    PascalArray<BoxCol> boxCols;
+    DynArray_Z<SphereColNode> sphereColNodes;
+    DynArray_Z<BoxCol> boxCols;
     /// gets fed to the same close function as in mesh
-    /// close.y always 0
     Vec3f close;
+    std::assert(close.data[1] == 0, "close[1] != 0");
     /// Pascal array of skin and/or mesh crc32s
-    PascalArray<Name_Z> skin_or_mesh_names;
-    /// Always 0
+    DynArray_Z<Name_Z> skin_or_mesh_names;
     u32 zero;
+    std::assert(zero == 0, "zero != 0");
     /// Optional map of ids to animation crc32s
     OptionalU32<Map<u32, Name_Z>> animation_entries;
     /// Optional map of ids to sound crc32s

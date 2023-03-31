@@ -2,9 +2,7 @@
 
 #include <fuel.hexpat>
 
-struct LightData_Z : ResourceObject_Z {
-    /// 0/1
-    u32 object_Datas;
+struct LightData_Z : ObjectDatas_Z {
     /// normalized
     Vec3f facing;
     /// not normalized

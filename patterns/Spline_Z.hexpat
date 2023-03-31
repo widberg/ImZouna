@@ -17,8 +17,8 @@ struct SplineSection {
 };
 
 struct Spline_Z : Object_Z {
-    PascalArray<Vec3f> vertices;
-    PascalArray<SplineSection> spline_sections;
+    DynArray_Z<Vec3f> vertices;
+    DynArray_Z<SplineSection> spline_sections;
     /// (1, 0, 0, 1)
     Vec4f vec;
     f32 length;

@@ -38,17 +38,17 @@ struct Extended {
     std::assert(zero11 == 0, "zero11 != 0");
 };
 
-struct LodData_Z : ResourceObject_Z {
-    /// 0x01000000 - 
-    /// 0x00000002 - 
-    /// 0x00004000 - 
-    /// 0x00003FFF - 
-    /// 0xFFFFFFFE - 
-    /// 0x000000FF - 
-    /// 0xFF000000 - 
-    /// 0x00001000 - 
-    u32 flags;
-    PascalArray<Name_Z> mesh_data_names;
+struct LodData_Z : ObjectDatas_Z {
+    // flags values:
+    // 0x01000000 - 
+    // 0x00000002 - 
+    // 0x00004000 - 
+    // 0x00003FFF - 
+    // 0xFFFFFFFE - 
+    // 0x000000FF - 
+    // 0xFF000000 - 
+    // 0x00001000 - 
+    DynArray_Z<Name_Z> mesh_data_names;
     /// always 0
     u32 zero;
     Optional<Extended> extended;

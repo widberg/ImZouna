@@ -85,7 +85,7 @@ struct DynBox {
 
 struct Mesh_Z_LinkHeader : Object_Z {
     /// all the material crc32s followed by the mesh data crc32
-    PascalArray<Name_Z> crc32s;
+    DynArray_Z<Name_Z> crc32s;
     /// how close the camera is allowed to get to the mesh on each axis before it pops out
     /// if close.x or close.z are 0 then the mesh will never pop out
     /// close.y = Usually 1.5
@@ -93,9 +93,9 @@ struct Mesh_Z_LinkHeader : Object_Z {
     Vec3f closeX;
     /// May be referenced in UserDefines
     /// LOCAL_LOOKAT is required on vehicle chassis
-    PascalArray<DynPoint> dyn_points;
+    DynArray_Z<DynPoint> dyn_points;
     /// read only when spawning model into the world
-    PascalArray<DynBox> dyn_boxes;
+    DynArray_Z<DynBox> dyn_boxes;
 };
 
 struct Unused0 {
@@ -106,7 +106,7 @@ struct Unused0 {
 };
 
 struct Strip {
-    PascalArray<u16> strip_vertices_indices;
+    DynArray_Z<u16> strip_vertices_indices;
     Name_Z material_name;
     /// 1/2
     u32 tri_order;
@@ -118,7 +118,7 @@ struct Unused00 {
 };
 
 struct Unused4 {
-    PascalArray<Unused00> unused0s;
+    DynArray_Z<Unused00> unused0s;
 };
 
 struct AABBCol {
@@ -205,7 +205,7 @@ struct VertexGroup {
     u32 zero3;
     u16 vertex_size;
     u16 material_index;
-    PascalArray<Unused1> unused1s;
+    DynArray_Z<Unused1> unused1s;
 };
 
 struct AABBMorphTrigger {
@@ -236,40 +236,40 @@ struct MorphTargetDesc {
     u16 displacement_vertex_buffer_index;
     /// Must be the same size as the base vertex buffer
     /// maps vertices in the base vertex buffer to displacement vectors
-    PascalArray<u16> unknown15_indicies;
+    DynArray_Z<u16> unknown15_indicies;
     /// much larger than any of the vertex buffers
     /// zeroing this array will make it so the deformation never happens
     /// This array contains displacements
-    PascalArray<DisplacementVector> unknown15s;
+    DynArray_Z<DisplacementVector> unknown15s;
 };
 
 struct Morpher {
     /// removing this has no effect
     /// relatively small
-    PascalArray<AABBMorphTrigger> unknown16s;
+    DynArray_Z<AABBMorphTrigger> unknown16s;
     /// Mapping from unknown12sIndex to unknown15sIndicesIndex
     /// removing this causes the game to crash when a collision with a static body occurs while MorphTargetDesc exists
     /// one element smaller than unknown12s
     Map<u16, u16> map;
     /// smaller than unknown15s but much larger than any vertex buffer or pairs
-    PascalArray<u16> unknown15sIndices;
-    /// always 0 or 1 but a loop is used to load it so it is a PascalArray and not an Option
+    DynArray_Z<u16> unknown15sIndices;
+    /// always 0 or 1 but a loop is used to load it so it is a DynArray_Z and not an Option
     /// the game will run as normal when removed
     /// some pieces, as defined in VertexGroup, will be missing
-    PascalArray<MorphTargetDesc> morphs;
+    DynArray_Z<MorphTargetDesc> morphs;
 };
 
 struct MeshBuffers {
     /// If one of the buffers is required by the morpher and it is removed then the game will crash while loading
-    PascalArray<VertexBufferExt> subMeshes;
-    PascalArray<IndexBufferExt> indices;
+    DynArray_Z<VertexBufferExt> subMeshes;
+    DynArray_Z<IndexBufferExt> indices;
     /// Occlusion test quad?
-    PascalArray<WeirdQuad> unknown11s;
+    DynArray_Z<WeirdQuad> unknown11s;
     /// composes vertex and index buffer
     /// when removed the mesh disapears but the game still runs as expected
     /// in wireframe debug view the mesh is not there but that could be a result of no material
     /// does NOT contain collision data
-    PascalArray<VertexGroup> vertexGroups;
+    DynArray_Z<VertexGroup> vertexGroups;
     Morpher morpher;
 };
 
@@ -279,34 +279,34 @@ struct ShortVecWeird {
 
 struct Mesh_Z : Mesh_Z_LinkHeader {
     /// always empty
-    PascalArray<Vec3f> strip_vertices;
+    DynArray_Z<Vec3f> strip_vertices;
     /// always empty
-    PascalArray<Unused0> unused0s;
+    DynArray_Z<Unused0> unused0s;
     /// always empty
-    PascalArray<Vec2f> texcoords;
+    DynArray_Z<Vec2f> texcoords;
     /// always empty
-    PascalArray<Vec3f> normals;
+    DynArray_Z<Vec3f> normals;
     /// always empty
-    PascalArray<Strip> strips;
+    DynArray_Z<Strip> strips;
     // if (objectHeader.unknown0 & 2 != 0)
     // {
-    //     PascalArray<u32> unknown3s;
+    //     DynArray_Z<u32> unknown3s;
     // }
     // This condition is never true
     /// always empty
-    PascalArray<Unused4> unused4s;
-    PascalArray<Name_Z> material_names;
-    PascalArray<AABBCol> cylindre_cols;
-    PascalArray<CollisionFace> unknown7s;
+    DynArray_Z<Unused4> unused4s;
+    DynArray_Z<Name_Z> material_names;
+    DynArray_Z<AABBCol> cylindre_cols;
+    DynArray_Z<CollisionFace> unknown7s;
     /// always empty
-    PascalArray<Unused8> unused8s;
+    DynArray_Z<Unused8> unused8s;
     MeshBuffers mesh_buffers;
     /// 0x007b3800
     /// related to the Col structs
     /// game crashes on collision with static body if empty while MorphTargetDesc exists
     /// no effect if same size but 0ed out data
     /// all overlap with various vertices in the last vertex buffer
-    PascalArray<ShortVecWeird> unknown12s;
+    DynArray_Z<ShortVecWeird> unknown12s;
 };
 
 Mesh_Z mesh_z @ 0x0;
