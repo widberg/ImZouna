@@ -60,6 +60,12 @@ To run the validate script you will need to build the PatternLanguage project's 
 |------|------|-------------|
 | validate | [`scripts/validate.py`](scripts/validate.py) | Runs the patterns against all files in a directory recursively |
 
+### Pattern Libraries
+
+| Name | Path | Description |
+|------|------|-------------|
+| fuel | [`includes/fuel.hexpat`](includes/fuel.hexpat) | FUEL Library |
+
 ### Magic files
 
 | Name | Path | Description |
