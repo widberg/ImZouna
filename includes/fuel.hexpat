@@ -34,20 +34,21 @@ fn all_eq(ref auto arr, auto val) {
 struct PascalString {
     u32 size;
     char data[size];
-} [[sealed, format("format_wrapped_string"), transform("format_wrapped_string")]];
+} [[sealed, format("format_data"), transform("format_data")]];
 
 struct PascalStringNULL {
     u32 size;
     char data[size - 1];
     char zero;
-} [[sealed, format("format_wrapped_string"), transform("format_wrapped_string")]];
+    std::assert(zero == 0, "zero != 0");
+} [[sealed, format("format_data"), transform("format_data")]];
 
 struct FixedStringNULL<auto Size> {
     char data[Size];
-} [[sealed, static, format("format_wrapped_string"), transform("format_wrapped_string")]];
+} [[sealed, static, format("format_data"), transform("format_data")]];
 
-fn format_wrapped_string(ref auto string) {
-    return string.data;
+fn format_data(ref auto x) {
+    return x.data;
 };
 
 struct PascalArrayBase<T, U> {
@@ -55,6 +56,10 @@ struct PascalArrayBase<T, U> {
     if (size != 0) { // ImHex does not handle 0 sized arrays properly in Rtc_Z
         T data[size] [[inline]];
     }
+} [[format("format_pascal_array"), transform("format_data")]];
+
+fn format_pascal_array(ref auto arr) {
+    return "[" + arr.size + "]";
 };
 
 using PascalArray<T> = PascalArrayBase<T, u32>;
@@ -78,6 +83,13 @@ struct OptionalBase<T, U> {
     if (is_some != 0) {
         T data [[inline]];
     }
+} [[format("format_option")]];
+
+fn format_option(ref auto option) {
+    if (option.is_some == 0) {
+        return "None";
+    }
+    return std::core::formatted_value(option.data);
 };
 
 using Optional<T> = OptionalBase<T, u8>;
@@ -86,21 +98,21 @@ using OptionalU32<T> = OptionalBase<T, u32>;
 struct NumeratorFloat<T, auto U> {
     T numerator;
     usize denominator = U;
-} [[format("format_numerator_float"), transform("format_numerator_float")]];
+} [[format("format_numerator_float"), transform("format_numerator_float")]]; // Can't be static and use local variables
 
 fn format_numerator_float(ref auto nf) {
     return float(nf.numerator) / nf.denominator;
 };
 
 struct Vec<T, auto U> {
-    T components[U] [[inline]];
-} [[static, format("format_vec")]];
+    T data[U] [[inline]];
+} [[static, format("format_vec"), transform("format_data")]];
 
 fn format_vec(ref auto vec) {
     str o = "(";
-    for (usize i = 0, i < std::core::member_count(vec.components), i = i + 1) {
-        o = o + std::string::to_string(vec.components[i]);
-        if (i + 1 != std::core::member_count(vec.components)) {
+    for (usize i = 0, i < std::core::member_count(vec), i = i + 1) {
+        o = o + std::string::to_string(vec[i]);
+        if (i + 1 != std::core::member_count(vec)) {
             o = o + ", ";
         }
     }
@@ -209,13 +221,13 @@ struct KeyTgtTpl_Z<T> : Key_Z {
     T value;
     T tangent_in;
     T tangent_out;
-    u8 pad[(sizeof(value) * 3) % 4];
+    u8 pad[(sizeof(value) * 3) % 4] [[hidden]];
     std::assert(all_eq(pad, 0xFF), "!all_eq(pad, 0xFF)");
 };
 
 struct KeyLinearTpl_Z<T> : Key_Z {
     T value;
-    u8 pad[sizeof(value) % 4];
+    u8 pad[sizeof(value) % 4] [[hidden]];
     std::assert(all_eq(pad, 0xFF), "!all_eq(pad, 0xFF)");
 };
 
