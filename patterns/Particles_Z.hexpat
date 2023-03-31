@@ -2,27 +2,43 @@
 
 #include <fuel.hexpat>
 
-struct ParticlesElement {
-        u16 unknown00;
-        u16 unknown01;
-        f32 unknown1;
-        f32 unknown2;
-        f32 unknown3;
-        f32 unknown4;
-        f32 unknown5;
-        f32 unknown6;
-        f32 unknown7;
-        f32 unknown8;
-        f32 unknown9;
-        f32 unknown10;
-        f32 unknown11;
-        f32 unknown12;
-        f32 unknown13;
-        f32 unknown14;
-        f32 unknown15;
-        f32 unknown16;
-        f32 unknown17;
-        u32 flags;
+bitfield ParticlesEmitter_Z_Flags {
+    FL_PARTICLES_LOOP : 1;
+    FL_PARTICLES_LOCK_H : 1;
+    FL_PARTICLES_LOCK_V : 1;
+    FL_PARTICLES_USE_TOTAL : 1;
+    FL_PARTICLES_NOEMIT : 1;
+    FL_PARTICLES_ORIENTED : 1;
+    FL_PARTICLES_NODEREL : 1;
+    FL_PARTICLES_BOUNDARY_ONLY : 1;
+    FL_PARTICLES_FLIP_H : 1;
+    FL_PARTICLES_FLIP_V : 1;
+    FL_PARTICLES_SIZEX_ONLY : 1;
+    FL_PARTICLES_LIGHT : 1;
+    FL_PARTICLES_SCREEN : 1;
+    FL_PARTICLES_SCREENXY : 1;
+    FL_PARTICLES_ACCURATE : 1;
+    FL_PARTICLES_LAST : 1;
+    padding : 16;
+};
+
+struct ParticlesEmitter_Z {
+        u16 max_quantity;
+        u16 p_cloud_type;
+        Vec3f p_cloud_size;
+        Vec3f p_cloud_offset;
+        f32 off_axis;
+        f32 off_axis_variation;
+        f32 off_plane;
+        f32 off_plane_variation;
+        f32 velocity;
+        f32 velocity_variation;
+        f32 emitter_speed;
+        f32 emitter_speed_variation;
+        f32 loop_period;
+        f32 life;
+        f32 life_variation;
+        ParticlesEmitter_Z_Flags flags;
         KeyframerVec2fLinear_Z unknown60;
         KeyframerVec4fLinear_Z unknown61;
         KeyframerVec4fLinear_Z unknown62;
@@ -34,7 +50,7 @@ struct ParticlesElement {
 };
 
 struct Particles_Z : Object_Z {
-    PascalArray<ParticlesElement> elements;
+    PascalArray<ParticlesEmitter_Z> particles_emitters;
     PascalArray<Mat4f> mats;
     f32 unknown2;
     u16 unknown3;
