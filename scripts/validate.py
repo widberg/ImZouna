@@ -56,7 +56,7 @@ def worker():
         while True:
             path = q.get()
             print(path.absolute())
-            process = subprocess.Popen([ImFUELdir / 'build/cli/plcli.exe', 'run', '-v', '-I', ImFUELdir / 'patterns', '-I', ImFUELdir / 'ImHex-Patterns/includes', path.absolute(), ImFUELdir / f'patterns/{os.path.splitext(path)[1][1:]}.hexpat'], stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+            process = subprocess.Popen([ImFUELdir / 'build/cli/plcli.exe', 'run', '-v', '-I', ImFUELdir / 'includes', '-I', ImFUELdir / 'ImHex-Patterns/includes', path.absolute(), ImFUELdir / f'patterns/{os.path.splitext(path)[1][1:]}.hexpat'], stderr=subprocess.PIPE, stdout=subprocess.PIPE)
             stdout, stderr = process.communicate()
             exit_code = process.wait()
             if exit_code != 0:
