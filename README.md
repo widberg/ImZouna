@@ -4,22 +4,6 @@
 
 <sup>This repository is a relative of the main [FMTK repository](https://github.com/widberg/fmtk).</sup>
 
-## Getting Started
-
-### Checkout
-
-```sh
-git clone https://github.com/widberg/ImFUEL.git --recurse-submodules --shallow-submodules
-```
-
-### Usage
-
-Add the `ImFUEL` directory to ImHex `Help -> Settings -> Folders -> +`.
-
-### Validate
-
-To run the validate script you will need to build the PatternLanguage project's `plcli` tool by following the instructions for your system [here](https://github.com/WerWolv/ImHex/tree/master/dist/compiling). Note that those instructions are for compiling ImHex but they work on the PatternLanguage project too. The script expects to find the tool at `ImFUEL/build/cli/plcli`.
-
 ## Table of Contents
 
 ### Hex Patterns
@@ -79,3 +63,19 @@ To run the validate script you will need to build the PatternLanguage project's 
 | Name | Path | Description |
 |------|------|-------------|
 | FUEL | [`magic/fuel_magic`](magic/fuel_magic) | Identifies common file types used in FUEL |
+
+## Getting Started
+
+### Checkout
+
+```sh
+git clone https://github.com/widberg/ImFUEL.git --recurse-submodules --shallow-submodules
+```
+
+### Usage
+
+Add the `ImFUEL` directory to ImHex `Help -> Settings -> Folders -> +`.
+
+### Validate
+
+To run the validate script you will need to build the PatternLanguage project's `plcli` tool by following the instructions for your system [here](https://github.com/WerWolv/ImHex/tree/master/dist/compiling). Note that those instructions are for compiling ImHex but they work on the PatternLanguage project too. The script expects to find the tool at `ImFUEL/build/cli/plcli`.
