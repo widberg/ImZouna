@@ -7,7 +7,7 @@ struct Rect {
     i32 y1;
     i32 x2;
     i32 y2;
-} [[static]];
+};
 
 struct Node_Z : ResourceObject_Z {
     /// Name of the parent Node_Z
@@ -61,7 +61,7 @@ struct Node_Z : ResourceObject_Z {
     /// Set to -4 on load
     i16 negative_four;
     Mat4f worldTransformMat4;
-} [[static]];
+};
 
 Node_Z node_z @ 0x0;
 

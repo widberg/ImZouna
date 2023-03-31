@@ -4,11 +4,11 @@
 
 struct Unknown2 {
     u8 data[32];
-} [[static]];
+};
 
 struct Unknown3 {
     u8 data[32];
-} [[static]];
+};
 
 struct Patch_Z {
     u16 flag;
@@ -21,32 +21,32 @@ struct Patch_Z {
     u16 unknown3s[17];
     u16 surface_indices_index;
     Name_Z material_anim_name;
-} [[static]];
+};
 
 struct Edge_Z {
     u16 P[2];
     u16 T[2];
-} [[static]];
+};
 
 bitfield ShouldDrawBitfield { // 16 bits
     index_in_draw_info_array : 3;
     shift_amount_for_bit : 5;
     other : 8;
-} [[static]];
+};
 
 struct Unknown12 {
     u8 data[32];
-} [[static]];
+};
 
 struct SeadVoxel_Z {
     u16 element_entry;
     u16 num_element;
-} [[static]];
+};
 
 struct Unknown15 {
     f32 data[48];
     u32 unknown0s[4];
-} [[static]];
+};
 
 struct SeadIndex_Z {
     PascalArray<SeadVoxel_Z> sead_voxels;

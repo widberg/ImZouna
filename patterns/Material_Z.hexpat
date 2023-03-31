@@ -54,7 +54,7 @@ struct Material_Z : ResourceObject_Z { // 172
     Name_Z s_normal_local_bitmap_name;
     /// Always 0?
     Name_Z unknown_bitmap_name1;
-} [[static]];
+};
 
 Material_Z material_z @ 0x0;
 

@@ -8,7 +8,7 @@ struct Omni_Z : Object_Z {
     Mat4f trs_mat;
     Name_Z material_anim_name0;
     Name_Z material_anim_name1;
-} [[static]];
+};
 
 Omni_Z omni_z @ 0x0;
 

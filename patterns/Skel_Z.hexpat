@@ -63,7 +63,7 @@ struct Skel_Z : ResourceObject_Z {
     PascalArray<Bone> bones;
     PascalArray<Name_Z> material_names;
     PascalArray<Name_Z> mesh_data_names;
-    PascalArray<PascalArray<Name_Z> > animation_node_names_arrays;  // ImHex needs a space between >>
+    PascalArray<PascalArray<Name_Z>> animation_node_names_arrays;
     PascalArray<Name_Z> some_names;
     PascalArray<SphereColBone> sphere_col_bones0;
     PascalArray<SphereColBone> sphere_col_bones1;

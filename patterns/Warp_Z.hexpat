@@ -12,7 +12,7 @@ struct Warp_Z : ResourceObject_Z {
     f32 radius;
     std::assert(radius == 50, "radius != 50");
     Vec2f texcoords[4];
-} [[static]];
+};
 
 Warp_Z warp_z @ 0x0;
 

@@ -10,11 +10,11 @@ struct Unknown {
     u16 unknown4;
     u16 unknown5;
     f32 f32s[12];
-} [[static]];
+};
 
 struct Unknown1 {
     Unknown unknowns[4];
-} [[static]];
+};
 
 struct SplineGraph_Z : Object_Z {
     /// size equals unknown7s.size, unknown8s.size
@@ -36,10 +36,10 @@ struct SplineGraph_Z : Object_Z {
     PascalArray<u32> unknown7s;
     /// size equals unknown0s.size, unknown8s.size
     /// filled with 0s
-    PascalArray<PascalArray<u8> > unknown8s; // ImHex needs a space between >>
+    PascalArray<PascalArray<u8>> unknown8s;
     /// size equals unknown1Count
     /// filled with 0s
-    PascalArray<PascalArray<u8> > unknown9s; // ImHex needs a space between >>
+    PascalArray<PascalArray<u8>> unknown9s;
 };
 
 SplineGraph_Z spline_graph_z @ 0x0;

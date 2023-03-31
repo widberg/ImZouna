@@ -11,7 +11,7 @@ struct Camera_Z : Object_Z {
     std::assert(zero == 0, "zero != 0");
     /// Target?
     Name_Z node_name;
-} [[static]];
+};
 
 Camera_Z camera_z @ 0x0;
 

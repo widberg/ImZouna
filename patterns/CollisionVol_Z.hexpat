@@ -12,7 +12,7 @@ struct CollisionVol_Z : Object_Z {
     Name_Z volume_type;
     u32 zero;
     std::assert(zero == 0, "zero != 0");
-} [[static]];
+};
 
 CollisionVol_Z collision_vol_z @ 0x0;
 

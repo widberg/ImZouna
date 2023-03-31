@@ -5,7 +5,7 @@
 struct Point {
     be i32 encoded_vec2f_data0;
     i8 encoded_vec2f_data1;
-} [[static, sealed, format("format_point"), transform("format_point")]];
+} [[sealed, format("format_point"), transform("format_point")]];
 
 fn format_point(ref auto point) {
     i32 a = point.encoded_vec2f_data0;

@@ -1,8 +1,8 @@
 #pragma once
 #pragma endian little
 #pragma bitfield_order right_to_left
-#pragma array_limit 500000 // GwRoad_Z needs a lot of array members
-#pragma pattern_limit 10000000
+#pragma array_limit 0
+#pragma pattern_limit 0
 
 #include <type/types/rust.pat>
 #include <std/mem.pat>
@@ -45,7 +45,7 @@ struct PascalStringNULL {
 
 struct FixedStringNULL<auto Size> {
     char data[Size];
-} [[sealed, static, format("format_data"), transform("format_data")]];
+} [[sealed, format("format_data"), transform("format_data")]];
 
 fn format_data(ref auto x) {
     return x.data;
@@ -76,7 +76,7 @@ struct Pair<T, U> {
     U value;
 };
 
-using Map<T, U> = PascalArray<Pair<T, U> >; // ImHex needs a space between >>
+using Map<T, U> = PascalArray<Pair<T, U>>;
 
 struct OptionalBase<T, U> {
     U is_some [[hidden]];
@@ -98,7 +98,7 @@ using OptionalU32<T> = OptionalBase<T, u32>;
 struct NumeratorFloat<T, auto U> {
     T numerator;
     usize denominator = U;
-} [[format("format_numerator_float"), transform("format_numerator_float")]]; // Can't be static and use local variables
+} [[format("format_numerator_float"), transform("format_numerator_float")]];
 
 fn format_numerator_float(ref auto nf) {
     return float(nf.numerator) / nf.denominator;
@@ -106,7 +106,7 @@ fn format_numerator_float(ref auto nf) {
 
 struct Vec<T, auto U> {
     T data[U] [[inline]];
-} [[static, format("format_vec"), transform("format_data")]];
+} [[format("format_vec"), transform("format_data")]];
 
 fn format_vec(ref auto vec) {
     str o = "(";
@@ -136,12 +136,12 @@ using Quati16 = Vec<i16, 4>;
 struct Mat3f {
     /// left to right top to bottom. Row major.
     Vec3f data[3] [[inline]];
-} [[static]];
+};
 
 struct Mat4f {
     /// left to right top to bottom. Row major.
     Vec4f data[4] [[inline]];
-} [[static]];
+};
 
 using RGB = Vec3f;
 using RGBA = Vec4f;
@@ -149,7 +149,7 @@ using RGBA = Vec4f;
 struct Sphere_Z {
     Vec3f center;
     f32 radius;
-} [[static]];
+};
 
 using Name_Z = u32;
 
@@ -172,7 +172,7 @@ struct Message_Z {
     u32 c;
     f32 parameter;
     Name_Z message_name;
-} [[static]];
+};
 
 struct DPCObjectHeader {
     u32 data_size;
@@ -181,13 +181,13 @@ struct DPCObjectHeader {
     u32 compressed_size;
     Name_Z class_name;
     Name_Z name;
-} [[static]];
+};
 
 struct BaseObject_Z : DPCObjectHeader {};
 
 struct ResourceObject_Z : BaseObject_Z {
     Name_Z link_name;
-} [[static]];
+};
 
 struct Object_Z : ResourceObject_Z {
     /// The associated data object for this object or 0 if there is none
@@ -211,11 +211,11 @@ struct Object_Z : ResourceObject_Z {
     ///   * 16
     ///   * 26
     u16 type;
-} [[static]];
+};
 
 struct Key_Z {
     f32 time;
-} [[static]];
+};
 
 struct KeyTgtTpl_Z<T> : Key_Z {
     T value;
@@ -253,7 +253,7 @@ using QuatComp = Vec<NumeratorFloat<i16, 2000>, 4>;
 
 using KeyFlag_Z = KeyLinearTpl_Z<u32>;
 using KeyHdl_Z = KeyLinearTpl_Z<Name_Z>;
-using KeyMessage_Z = KeyLinearTpl_Z<PascalArray<Message_Z> >;
+using KeyMessage_Z = KeyLinearTpl_Z<PascalArray<Message_Z>>;
 using KeyFloat_Z = KeyTgtTpl_Z<f32>;
 using KeyFloatComp_Z = KeyTgtTpl_Z<i16>;
 using KeyFloatLinear_Z = KeyLinearTpl_Z<f32>;

@@ -48,6 +48,9 @@ def get_paths_with_extension(working_directory, extension):
     return Path(working_directory).rglob(f'*.{extension}')
 
 ImFUELdir = Path(__file__).parent.parent.absolute()
+plcli_path = ImFUELdir / 'build/cli/plcli'
+if os.name == 'nt':
+    plcli_path = plcli_path.with_suffix('.exe')
 q = Queue()
 faileds = []
 
@@ -56,7 +59,7 @@ def worker():
         while True:
             path = q.get()
             print(path.absolute())
-            process = subprocess.Popen([ImFUELdir / 'build/cli/plcli.exe', 'run', '-v', '-I', ImFUELdir / 'includes', '-I', ImFUELdir / 'ImHex-Patterns/includes', path.absolute(), ImFUELdir / f'patterns/{os.path.splitext(path)[1][1:]}.hexpat'], stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+            process = subprocess.Popen([plcli_path, 'run', '-v', '-I', ImFUELdir / 'includes', '-I', ImFUELdir / 'ImHex-Patterns/includes', path.absolute(), ImFUELdir / f'patterns/{os.path.splitext(path)[1][1:]}.hexpat'], stderr=subprocess.PIPE, stdout=subprocess.PIPE)
             stdout, stderr = process.communicate()
             exit_code = process.wait()
             if exit_code != 0:
@@ -67,12 +70,15 @@ def worker():
         os._exit(0)
 
 def main():
+    global plcli_path
     total = 0
     parser = argparse.ArgumentParser()
     parser.add_argument('-C', help='Working directory', type=str, default='.')
     parser.add_argument('-j', help='Number of parallel tests', type=int, default=1)
     parser.add_argument('--tests', help='Names of tests to run', type=str, nargs='+', default=extensions)
+    parser.add_argument('--plcli', help='Path to plcli executable', type=str, nargs='+', default=plcli_path)
     args = parser.parse_args()
+    plcli_path = args.plcli
     t0 = time.time()
     for i in range(args.j):
         Thread(target=worker, daemon=True).start()

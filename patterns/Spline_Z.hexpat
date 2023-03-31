@@ -6,7 +6,7 @@ struct SplineSubsection {
     Vec3f point1;
     Vec3f point2;
     f32 length;
-} [[static]];
+};
 
 struct SplineSection {
     u16 P[2];
@@ -14,7 +14,7 @@ struct SplineSection {
     u32 flags;
     f32 length;
     SplineSubsection spline_subsections[8];
-} [[static]];
+};
 
 struct Spline_Z : Object_Z {
     PascalArray<Vec3f> vertices;

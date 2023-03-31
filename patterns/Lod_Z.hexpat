@@ -25,9 +25,9 @@ struct Lod_Z : Object_Z {
     /// Always 0
     u32 zero;
     /// Optional map of ids to animation crc32s
-    OptionalU32<Map<u32, Name_Z> > animation_entries; // ImHex needs a space between >>
+    OptionalU32<Map<u32, Name_Z>> animation_entries;
     /// Optional map of ids to sound crc32s
-    OptionalU32<Map<u32, Name_Z> > sound_entries; // ImHex needs a space between >>
+    OptionalU32<Map<u32, Name_Z>> sound_entries;
     Name_Z user_define_name;
 };
 
