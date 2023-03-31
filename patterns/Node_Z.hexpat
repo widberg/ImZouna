@@ -1,3 +1,5 @@
+#pragma MIME application/x-node-z
+
 #include <fuel.hexpat>
 
 struct Rect {

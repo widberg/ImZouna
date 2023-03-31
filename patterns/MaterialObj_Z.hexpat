@@ -1,3 +1,5 @@
+#pragma MIME application/x-material-obj-z
+
 #include <fuel.hexpat>
 
 struct MaterialObj_Z : ResourceObject_Z {

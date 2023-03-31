@@ -1,9 +1,21 @@
+#pragma MIME application/x-gw-road-z
+
 #include <fuel.hexpat>
 
 struct Point {
-    /// see decode_vec2f_data below
-    u8 encodedVec2fData[5];
-} [[static]];
+    be i32 encoded_vec2f_data0;
+    i8 encoded_vec2f_data1;
+} [[static, sealed, format("format_point"), transform("format_point")]];
+
+fn format_point(ref auto point) {
+    i32 a = point.encoded_vec2f_data0;
+    i32 x = a >> 12;
+    i32 y = s32((point.encoded_vec2f_data1 | (a << 8)) << 12) >> 12;
+    Vec2f vec2f;
+    vec2f.components[0] = float(x) / 4.0;
+    vec2f.components[1] = float(y) / 4.0;
+    return vec2f;
+};
 
 struct Road {
     u8 type;

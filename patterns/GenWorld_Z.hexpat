@@ -1,3 +1,5 @@
+#pragma MIME application/x-gen-world-z
+
 #include <fuel.hexpat>
 
 struct Category {

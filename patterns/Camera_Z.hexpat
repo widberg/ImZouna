@@ -1,3 +1,5 @@
+#pragma MIME application/x-camera-z
+
 #include <fuel.hexpat>
 
 struct Camera_Z : Object_Z {

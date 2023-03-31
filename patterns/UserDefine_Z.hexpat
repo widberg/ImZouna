@@ -1,3 +1,5 @@
+#pragma MIME application/x-user-define-z
+
 #include <fuel.hexpat>
 
 struct UserDefine_Z : ResourceObject_Z {

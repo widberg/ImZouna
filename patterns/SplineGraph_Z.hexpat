@@ -1,3 +1,5 @@
+#pragma MIME application/x-spline-graph-z
+
 #include <fuel.hexpat>
 
 struct Unknown {

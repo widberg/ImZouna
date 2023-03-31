@@ -1,3 +1,5 @@
+#pragma MIME application/x-omni-z
+
 #include <fuel.hexpat>
 
 struct Omni_Z : Object_Z {

@@ -1,3 +1,5 @@
+#pragma MIME application/x-particles-z
+
 #include <fuel.hexpat>
 
 struct ParticlesElement {

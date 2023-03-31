@@ -1,3 +1,5 @@
+#pragma MIME application/x-spline-z
+
 #include <fuel.hexpat>
 
 struct SplineSubsection {

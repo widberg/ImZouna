@@ -1,3 +1,5 @@
+#pragma MIME application/x-sound-z
+
 #include <fuel.hexpat>
 
 struct Sound_Z_LinkHeader : ResourceObject_Z {

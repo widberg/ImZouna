@@ -1,3 +1,5 @@
+#pragma MIME application/x-light-data-z
+
 #include <fuel.hexpat>
 
 struct LightData_Z : ResourceObject_Z {

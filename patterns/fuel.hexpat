@@ -3,11 +3,33 @@
 #pragma bitfield_order right_to_left
 #pragma array_limit 500000 // GwRoad_Z needs a lot of array members
 #pragma pattern_limit 10000000
-// ImHex doesn't do a great job following diagnostic line numbers into headers
 
 #include <type/types/rust.pat>
 #include <std/mem.pat>
 #include <std/sys.pat>
+#include <std/string.pat>
+#include <std/core.pat>
+
+// ImHex feature
+// Nested struct definitions
+
+// ImHex feature
+// for loops in struct
+
+// ImHex bug
+// doesn't do a great job following diagnostic line numbers into headers
+
+// ImHex bug
+// Array of 0 size still overruns end of file
+
+fn all_eq(ref auto arr, auto val) {
+    for (usize i = 0, i < std::core::member_count(arr), i = i + 1) {
+        if (arr[i] != val) {
+            return false;
+        }
+    }
+    return true;
+};
 
 struct PascalString {
     u32 size;
@@ -30,7 +52,7 @@ fn format_wrapped_string(ref auto string) {
 
 struct PascalArrayBase<T, U> {
     U size [[hidden]];
-    if (size != 0) { // ImHex does not handle 0 sized arrays properly
+    if (size != 0) { // ImHex does not handle 0 sized arrays properly in Rtc_Z
         T data[size] [[inline]];
     }
 };
@@ -61,15 +83,24 @@ struct OptionalBase<T, U> {
 using Optional<T> = OptionalBase<T, u8>;
 using OptionalU32<T> = OptionalBase<T, u32>;
 
-struct Vec<T, auto Components> {
-    T components[Components] [[inline]];
+struct NumeratorFloat<T, auto U> {
+    T numerator;
+    usize denominator = U;
+} [[format("format_numerator_float"), transform("format_numerator_float")]];
+
+fn format_numerator_float(ref auto nf) {
+    return float(nf.numerator) / nf.denominator;
+};
+
+struct Vec<T, auto U> {
+    T components[U] [[inline]];
 } [[static, format("format_vec")]];
 
 fn format_vec(ref auto vec) {
     str o = "(";
-    for (usize i = 0, i < vec.components.size, i = i + 1) {
-        o = o + std::to_string(vec.components[i]);
-        if (i + 1 != vec.components.size) {
+    for (usize i = 0, i < std::core::member_count(vec.components), i = i + 1) {
+        o = o + std::string::to_string(vec.components[i]);
+        if (i + 1 != std::core::member_count(vec.components)) {
             o = o + ", ";
         }
     }
@@ -178,27 +209,26 @@ struct KeyTgtTpl_Z<T> : Key_Z {
     T value;
     T tangent_in;
     T tangent_out;
-};
-
-struct KeyTgtTpl_ZPadded<T> : KeyTgtTpl_Z<T> {
-    u16 pad;
+    u8 pad[(sizeof(value) * 3) % 4];
+    std::assert(all_eq(pad, 0xFF), "!all_eq(pad, 0xFF)");
 };
 
 struct KeyLinearTpl_Z<T> : Key_Z {
     T value;
-};
-
-struct KeyLinearTpl_ZPadded<T> : KeyLinearTpl_Z<T> {
-    u16 pad;
+    u8 pad[sizeof(value) % 4];
+    std::assert(all_eq(pad, 0xFF), "!all_eq(pad, 0xFF)");
 };
 
 struct Keyframer_Z {};
 
+enum KeyframerInterpolationType : u16 {
+    FL_KEYFRAMER_SMOOTH = 0x01,
+    FL_KEYFRAMER_LINEAR = 0x02,
+    FL_KEYFRAMER_SQUARE = 0x03
+};
+
 struct KeyframerTpl_Z<TKey> : Keyframer_Z {
-    /// FL_KEYFRAMER_SMOOTH 0x01 Smooth interpolation
-    /// FL_KEYFRAMER_LINEAR 0x02 Linear interpolation
-    /// FL_KEYFRAMER_SQUARE 0x03 Square interpolation
-    u16 flags;
+    KeyframerInterpolationType interpolation_type;
     PascalArray<TKey> keyframes;
 };
 
@@ -206,27 +236,30 @@ struct KeyframerNoFlagsTpl_Z<TKey> : Keyframer_Z {
     PascalArray<TKey> keyframes;
 };
 
+using Vec3Comp = Vec<NumeratorFloat<i16, 4096>, 3>;
+using QuatComp = Vec<NumeratorFloat<i16, 2000>, 4>;
+
 using KeyFlag_Z = KeyLinearTpl_Z<u32>;
 using KeyHdl_Z = KeyLinearTpl_Z<Name_Z>;
 using KeyMessage_Z = KeyLinearTpl_Z<PascalArray<Message_Z> >;
 using KeyFloat_Z = KeyTgtTpl_Z<f32>;
-using KeyFloatComp_Z = KeyTgtTpl_ZPadded<i16>;
+using KeyFloatComp_Z = KeyTgtTpl_Z<i16>;
 using KeyFloatLinear_Z = KeyLinearTpl_Z<f32>;
-using KeyFloatLinearComp_Z = KeyLinearTpl_ZPadded<i16>;
+using KeyFloatLinearComp_Z = KeyLinearTpl_Z<i16>;
 using KeyU32Linear_Z = KeyLinearTpl_Z<u32>;
 using KeyVec2f_Z = KeyTgtTpl_Z<Vec2f>;
 using KeyVec2fComp_Z = KeyTgtTpl_Z<Vec2i16>;
 using KeyVec2fLinear_Z = KeyLinearTpl_Z<Vec2f>;
 using KeyVec2fLinearComp_Z = KeyLinearTpl_Z<Vec2i16>;
 using KeyVec3f_Z = KeyTgtTpl_Z<Vec3f>;
-using KeyVec3fComp_Z = KeyTgtTpl_ZPadded<Vec3i16>;
+using KeyVec3fComp_Z = KeyTgtTpl_Z<Vec3Comp>;
 using KeyVec3fLinear_Z = KeyLinearTpl_Z<Vec3f>;
-using KeyVec3fLinearComp_Z = KeyLinearTpl_ZPadded<Vec3i16>;
+using KeyVec3fLinearComp_Z = KeyLinearTpl_Z<Vec3Comp>;
 using KeyVec4f_Z = KeyTgtTpl_Z<Vec4f>;
 using KeyVec4fComp_Z = KeyTgtTpl_Z<Vec4i16>;
 using KeyVec4fLinear_Z = KeyLinearTpl_Z<Vec4f>;
 using KeyVec4fLinearComp_Z = KeyLinearTpl_Z<Vec4i16>;
-using KeyRot_Z = KeyLinearTpl_Z<Quati16>;
+using KeyRot_Z = KeyLinearTpl_Z<QuatComp>;
 using KeyBezierRot_Z = KeyTgtTpl_Z<Vec3f>;
 
 using KeyframerFlag_Z = KeyframerNoFlagsTpl_Z<KeyFlag_Z>;
@@ -251,12 +284,3 @@ using KeyframerVec4fLinear_Z = KeyframerTpl_Z<KeyVec4fLinear_Z>;
 using KeyframerVec4fLinearComp_Z = KeyframerTpl_Z<KeyVec4fLinearComp_Z>;
 using KeyframerRot_Z = KeyframerNoFlagsTpl_Z<KeyRot_Z>;
 using KeyframerBezierRot_Z  = KeyframerNoFlagsTpl_Z<KeyBezierRot_Z>;
-
-fn all_eq(ref auto arr, auto size, auto val) {
-    for (usize i = 0, i < size, i = i + 1) {
-        if (arr[i] != val) {
-            return false;
-        }
-    }
-    return true;
-};

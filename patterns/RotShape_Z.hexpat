@@ -1,3 +1,5 @@
+#pragma MIME application/x-rot-shape-z
+
 #include <fuel.hexpat>
 
 struct RotShape_Z : Object_Z {

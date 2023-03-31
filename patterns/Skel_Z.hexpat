@@ -1,3 +1,5 @@
+#pragma MIME application/x-skel-z
+
 #include <fuel.hexpat>
 
 struct Bone {

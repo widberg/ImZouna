@@ -1,3 +1,5 @@
+#pragma MIME application/x-world-z
+
 #include <fuel.hexpat>
 
 struct Unknown2 {

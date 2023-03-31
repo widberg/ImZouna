@@ -1,3 +1,5 @@
+#pragma MIME application/x-rtc-z
+
 #include <fuel.hexpat>
 
 struct RtcAnimationNode {

@@ -1,0 +1,141 @@
+# A libmagic database containing definitions for files used by FUEL
+
+# Animation_Z
+0x10 lelong 0x46107D89 Animation_Z
+!:mime application/x-animation-z
+
+# Binary_Z
+0x10 lelong 0x86B29C80 Binary_Z
+!:mime application/x-binary-z
+
+# Bitmap_Z
+0x10 lelong 0x57B1F99E Bitmap_Z
+!:mime application/x-bitmap-z
+
+# Camera_Z
+0x10 lelong 0xFCC62509 Camera_Z
+!:mime application/x-camera-z
+
+# CollisionVol_Z
+0x10 lelong 0x8EF49632 CollisionVol_Z
+!:mime application/x-collision-vol-z
+
+# Fonts_Z
+0x10 lelong 0x5B8D8B5E Fonts_Z
+!:mime application/x-fonts-z
+
+# GameObj_Z
+0x10 lelong 0xF42D99BD GameObj_Z
+!:mime application/x-game-obj-z
+
+# GenWorld_Z
+0x10 lelong 0x31FA94AE GenWorld_Z
+!:mime application/x-gen-world-z
+
+# GwRoad_Z
+0x10 lelong 0xE53AC75F GwRoad_Z
+!:mime application/x-gw-road-z
+
+# LightData_Z
+0x10 lelong 0x329378EA LightData_Z
+!:mime application/x-light-data-z
+
+# Lod_Z
+0x10 lelong 0x73DC6A13 Lod_Z
+!:mime application/x-lod-z
+
+# LodData_Z
+0x10 lelong 0xCB651EC3 LodData_Z
+!:mime application/x-lod-data-z
+
+# Material_Z
+0x10 lelong 0x8362982B Material_Z
+!:mime application/x-material-z
+
+# MaterialAnim_Z
+0x10 lelong 0xE48C96A6 MaterialAnim_Z
+!:mime application/x-material-anim-z
+
+# MaterialObj_Z
+0x10 lelong 0x32A7DC67 MaterialObj_Z
+!:mime application/x-material-obj-z
+
+# Mesh_Z
+0x10 lelong 0x52B12EB5 Mesh_Z
+!:mime application/x-mesh-z
+
+# MeshData_Z
+0x10 lelong 0xD8220A84 MeshData_Z
+!:mime application/x-mesh-data-z
+
+# Node_Z
+0x10 lelong 0x85D02528 Node_Z
+!:mime application/x-node-z
+
+# Omni_Z
+0x10 lelong 0x20C0683D Omni_Z
+!:mime application/x-omni-z
+
+# Particles_Z
+0x10 lelong 0xC56963DE Particles_Z
+!:mime application/x-particles-z
+
+# ParticlesData_Z
+0x10 lelong 0x38E481D7 ParticlesData_Z
+!:mime application/x-particles-data-z
+
+# RotShape_Z
+0x10 lelong 0x33A508E6 RotShape_Z
+!:mime application/x-rot-shape-z
+
+# RotShapeData_Z
+0x10 lelong 0x60E9F5C0 RotShapeData_Z
+!:mime application/x-rot-shape-data-z
+
+# Rtc_Z
+0x10 lelong 0x2A11CEE8 Rtc_Z
+!:mime application/x-rtc-z
+
+# Skel_Z
+0x10 lelong 0xD73B85EC Skel_Z
+!:mime application/x-skel-z
+
+# Skin_Z
+0x10 lelong 0x53415807 Skin_Z
+!:mime application/x-skin-z
+
+# Sound_Z
+0x10 lelong 0x329ECCE8 Sound_Z
+!:mime application/x-sound-z
+
+# Spline_Z
+0x10 lelong 0x43A9B06F Spline_Z
+!:mime application/x-spline-z
+
+# SplineGraph_Z
+0x10 lelong 0x71E0C01C SplineGraph_Z
+!:mime application/x-spline-graph-z
+
+# Surface_Z
+0x10 lelong 0x65B38A8D Surface_Z
+!:mime application/x-surface-z
+
+# SurfaceDatas_Z
+0x10 lelong 0xDF6328C1 SurfaceDatas_Z
+!:mime application/x-surface-datas-z
+
+# UserDefine_Z
+0x10 lelong 0x52F79F96 UserDefine_Z
+!:mime application/x-user-define-z
+
+# Warp_Z
+0x10 lelong 0x4274C167 Warp_Z
+!:mime application/x-warp-z
+
+# World_Z
+0x10 lelong 0x39B67ECB World_Z
+!:mime application/x-world-z
+
+# WorldRef_Z
+0x10 lelong 0xAD3B9375 WorldRef_Z
+!:mime application/x-world-ref-z

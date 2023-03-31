@@ -1,3 +1,5 @@
+#pragma MIME application/x-binary-z
+
 #include <fuel.hexpat>
 
 struct Binary_Z : ResourceObject_Z {

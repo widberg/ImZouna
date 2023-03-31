@@ -1,3 +1,5 @@
+#pragma MIME application/x-surface-datas-z
+
 #include <fuel.hexpat>
 
 struct SurfaceDatas_Z : ResourceObject_Z {

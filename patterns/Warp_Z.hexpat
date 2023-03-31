@@ -1,3 +1,5 @@
+#pragma MIME application/x-warp-z
+
 #include <fuel.hexpat>
 
 struct Warp_Z : ResourceObject_Z {

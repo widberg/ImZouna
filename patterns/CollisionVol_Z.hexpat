@@ -1,3 +1,5 @@
+#pragma MIME application/x-collision-vol-z
+
 #include <fuel.hexpat>
 
 struct CollisionVol_Z : Object_Z {
@@ -6,7 +8,7 @@ struct CollisionVol_Z : Object_Z {
     Mat4f local_transform;
     Mat4f local_transform_inverse;
     u32 zeros[28];
-    std::assert(all_eq(zeros, 28, 0x0), "!all_eq(zeros, 28, 0x0)");
+    std::assert(all_eq(zeros, 0x0), "!all_eq(zeros, 0x0)");
     Name_Z volume_type;
     u32 zero;
     std::assert(zero == 0, "zero != 0");

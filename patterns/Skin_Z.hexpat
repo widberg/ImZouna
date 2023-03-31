@@ -1,3 +1,5 @@
+#pragma MIME application/x-skin-z
+
 #include <fuel.hexpat>
 
 struct SkinSubsection {
@@ -5,7 +7,6 @@ struct SkinSubsection {
     Name_Z animation_node_name1;
     Name_Z animation_node_name2;
     Name_Z animation_node_name3;
-    /// names.size == data_count
     Name_Z names[21];
 };
 
@@ -14,23 +15,21 @@ struct SkinSection {
 };
 
 struct Skin_Z : Object_Z {
-    /// equals skinSections.size
     PascalArray<Name_Z> mesh_names;
-    /// always 0
     u32 zero0;
-    /// always 0
+    std::assert(zero0 == 0, "zero0 != 0");
     u32 zero1;
-    /// always 0
+    std::assert(zero1 == 0, "zero1 != 0");
     u32 zero2;
-    /// always 0
+    std::assert(zero2 == 0, "zero2 != 0");
     u32 zero3;
-    /// always 1.5
+    std::assert(zero3 == 0, "zero3 != 0");
     f32 one_and_a_half;
-    /// always 21
+    std::assert(one_and_a_half == 1.5, "one_and_a_half != 1.5");
     u32 data_count;
     std::assert(data_count == 21, "data_count != 21");
-    /// skinSections.size = meshCRC32s.size
     PascalArray<SkinSection> skin_sections;
+    std::assert(skin_sections.size == mesh_names.size, "skin_sections.size != mesh_names.size");
 };
 
 Skin_Z skin_z @ 0x0;

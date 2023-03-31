@@ -1,3 +1,5 @@
+#pragma MIME application/x-world-ref-z
+
 #include <fuel.hexpat>
 
 struct UUIDPair {

@@ -1,3 +1,5 @@
+#pragma MIME application/x-bitmap-z
+
 #include <fuel.hexpat>
 
 struct Bitmap_Z_LinkHeader : ResourceObject_Z {

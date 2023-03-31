@@ -1,3 +1,5 @@
+#pragma MIME application/x-mesh-z
+
 #include <fuel.hexpat>
 
 struct DynPoint {
@@ -219,12 +221,7 @@ struct AABBMorphTrigger {
 };
 
 struct DisplacementVector {
-        /// multiply by 0.0009765625 = 0.5^10
-        i16 x;
-        /// multiply by 0.0009765625 = 0.5^10
-        i16 y;
-        /// multiply by 0.0009765625 = 0.5^10
-        i16 z;
+        Vec<NumeratorFloat<i16, 1024>, 3> displacement;
         /// current struct's Unknown15 index
         u16 unknown15_self_index;
 };
@@ -277,9 +274,7 @@ struct MeshBuffers {
 };
 
 struct ShortVecWeird {
-    i16 x;
-    i16 y;
-    i16 z;
+    Vec<NumeratorFloat<i16, 1024>, 3> weird;
 };
 
 struct Mesh_Z : Mesh_Z_LinkHeader {
@@ -307,7 +302,6 @@ struct Mesh_Z : Mesh_Z_LinkHeader {
     PascalArray<Unused8> unused8s;
     MeshBuffers mesh_buffers;
     /// 0x007b3800
-    /// multiply every element by 0.0009765625 = 0.5^10
     /// related to the Col structs
     /// game crashes on collision with static body if empty while MorphTargetDesc exists
     /// no effect if same size but 0ed out data

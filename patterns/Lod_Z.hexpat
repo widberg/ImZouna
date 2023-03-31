@@ -1,3 +1,5 @@
+#pragma MIME application/x-lod-z
+
 #include <fuel.hexpat>
 
 struct SphereColNode {

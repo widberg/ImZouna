@@ -1,3 +1,5 @@
+#pragma MIME application/x-mesh-data-z
+
 #include <fuel.hexpat>
 
 struct MeshData_Z : ResourceObject_Z {

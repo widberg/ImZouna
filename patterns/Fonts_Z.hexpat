@@ -1,3 +1,5 @@
+#pragma MIME application/x-fonts-z
+
 #include <fuel.hexpat>
 
 struct Character {

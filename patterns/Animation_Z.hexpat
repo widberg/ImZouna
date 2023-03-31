@@ -1,3 +1,5 @@
+#pragma MIME application/x-animation-z
+
 #include <fuel.hexpat>
 
 struct AnimationNode {

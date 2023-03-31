@@ -1,3 +1,5 @@
+#pragma MIME application/x-surface-z
+
 #include <fuel.hexpat>
 
 struct Unknown2 {

@@ -1,14 +1,17 @@
+#pragma MIME application/x-game-obj-z
+
 #include <fuel.hexpat>
 
 struct Prefab {
     /// String contents of the child
     /// NULL terminated
     PascalStringNULL string;
-    /// bool 0/1
     /// 0 when the str is PIPO or empty or other values
     /// 1 when its a vehicle name or something
+    /// 2 when its spawned in by automesh
     /// maybe related to when the object is physical?
     u32 in_world;
+    std::assert(in_world == 0 || in_world == 1 || in_world == 2, "in_world != 0,1,2");
     /// Child objects in the hierarchy
     PascalArray<Name_Z> names;
 };
