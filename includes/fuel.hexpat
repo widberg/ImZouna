@@ -47,7 +47,7 @@ fn magnitude(ref auto vec) {
 };
 
 fn is_normalized(ref auto vec) {
-    return std::math::abs(magnitude(vec) - 1) < 0.1;
+    return std::math::abs(magnitude(vec) - 1) < 0.001;
 };
 
 fn is_normalized_or_zero(ref auto vec) {

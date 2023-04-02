@@ -166,11 +166,11 @@ struct VertexLayout12 {
 struct VertexLayout36 {
     Vec3f position;
     VertexVec3u8 tangent;
-    std::assert(is_normalized_or_zero(tangent), "VertexLayout36 !is_normalized_or_zero(tangent)"+std::string::to_string(magnitude(tangent)));
+    std::assert(is_normalized_or_zero(tangent), "VertexLayout36 !is_normalized_or_zero(tangent)");
     u8 pad0;
     std::assert(pad0 == 1 || pad0 == 255, "VertexLayout36 pad0 != 1,255");
     VertexVec3u8 normal;
-    std::assert(is_normalized_or_zero(normal), "VertexLayout36 !is_normalized_or_zero(normal)"+std::string::to_string(magnitude(normal)));
+    std::assert(is_normalized_or_zero(normal), "VertexLayout36 !is_normalized_or_zero(normal)");
     u8 pad1;
     std::assert(pad1 == 0 || pad1 == 1 || pad1 == 255, "VertexLayout36 pad1 != 0,1,255");
     Vec2f uv;
@@ -180,11 +180,11 @@ struct VertexLayout36 {
 struct VertexLayout48 {
     Vec3f position;
     VertexVec3u8 tangent;
-    std::assert(is_normalized_or_zero(tangent), "VertexLayout48 !is_normalized_or_zero(tangent)"+std::string::to_string(magnitude(tangent)));
+    std::assert(is_normalized_or_zero(tangent), "VertexLayout48 !is_normalized_or_zero(tangent)");
     u8 pad0;
     std::assert(pad0 == 1 || pad0 == 255, "VertexLayout48 pad0 != 1,255");
     VertexVec3u8 normal;
-    std::assert(is_normalized_or_zero(normal), "VertexLayout48 !is_normalized_or_zero(normal)"+std::string::to_string(magnitude(normal)));
+    std::assert(is_normalized_or_zero(normal), "VertexLayout48 !is_normalized_or_zero(normal)");
     u8 pad1;
     std::assert(pad1 == 1 || pad1 == 255, "VertexLayout48 pad1 != 1,255");
     Vec2f uv;
@@ -200,11 +200,11 @@ fn format_vertex_blend_index(ref auto vbi) {
 struct VertexLayout60 {
     Vec3f position;
     VertexVec3u8 tangent;
-    std::assert(is_normalized_or_zero(tangent), "VertexLayout60 !is_normalized_or_zero(tangent)"+std::string::to_string(magnitude(tangent)));
+    std::assert(is_normalized_or_zero(tangent), "VertexLayout60 !is_normalized_or_zero(tangent)");
     u8 pad0;
     std::assert(pad0 == 1 || pad0 == 255, "VertexLayout60 pad0 != 1,255");
     VertexVec3u8 normal;
-    std::assert(is_normalized_or_zero(normal), "VertexLayout60 !is_normalized_or_zero(normal)"+std::string::to_string(magnitude(normal)));
+    std::assert(is_normalized_or_zero(normal), "VertexLayout60 !is_normalized_or_zero(normal)");
     u8 pad1;
     std::assert(pad1 == 1 || pad1 == 255, "VertexLayout60 pad1 != 1,255");
     Vec2f uv;
