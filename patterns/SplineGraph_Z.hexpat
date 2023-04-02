@@ -17,29 +17,28 @@ struct Unknown1 {
 };
 
 struct SplineGraph_Z : Object_Z {
-    /// size equals unknown7s.size, unknown8s.size
+    std::assert(type == 25, "type != 25");
     DynArray_Z<Vec3f> vecs;
-    /// size equals unknown9.size
     DynArray_Z<Unknown1> unknown1s;
-    /// [0, 1]
     f32 unknown2;
-    /// [0, 1]
+    std::assert(unknown2 >= 0 && unknown2 <= 1, "unknown2 < 0 || unknown2 > 1");
     f32 unknown3;
-    /// [0, 1]
+    std::assert(unknown3 >= 0 && unknown3 <= 1, "unknown3 < 0 || unknown3 > 1");
     f32 unknown4;
-    /// [0, 1]
+    std::assert(unknown4 >= 0 && unknown4 <= 1, "unknown4 < 0 || unknown4 > 1");
     f32 unknown5;
-    /// [0, 1]
+    std::assert(unknown5 >= 0 && unknown5 <= 1, "unknown5 < 0 || unknown5 > 1");
     f32 unknown6;
-    /// size equals unknown0s.size, unknown8s.size
-    /// filled with 0s
+    std::assert(unknown6 >= 0 && unknown6 <= 1, "unknown6 < 0 || unknown6 > 1");
     DynArray_Z<u32> unknown7s;
-    /// size equals unknown0s.size, unknown8s.size
-    /// filled with 0s
+    std::assert(unknown7s.size == vecs.size, "unknown7s.size != vecs.size");
+    std::assert(all_eq(unknown7s.data, 0), "!all_eq(unknown7s.data, 0)");
     DynArray_Z<DynArray_Z<u8>> unknown8s;
-    /// size equals unknown1Count
-    /// filled with 0s
+    std::assert(unknown8s.size == unknown7s.size, "unknown8s.size != unknown7s.size");
+    std::assert(all_empty(unknown8s.data), "!all_empty(unknown8s.data)");
     DynArray_Z<DynArray_Z<u8>> unknown9s;
+    std::assert(unknown9s.size == unknown1s.size, "unknown9s.size != unknown1s.size");
+    std::assert(all_empty(unknown9s.data), "!all_empty(unknown9s.data)");
 };
 
 SplineGraph_Z spline_graph_z @ 0x0;

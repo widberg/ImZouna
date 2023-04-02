@@ -54,6 +54,7 @@ struct Region {
 };
 
 struct GenWorld_Z : Object_Z {
+    std::assert(type == 22, "type != 2");
     Name_Z node_name;
     Name_Z user_define_name;
     Name_Z gw_road_name;

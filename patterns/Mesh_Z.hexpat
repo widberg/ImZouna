@@ -86,11 +86,7 @@ struct DynBox {
 struct Mesh_Z_LinkHeader : Object_Z {
     /// all the material crc32s followed by the mesh data crc32
     DynArray_Z<Name_Z> crc32s;
-    /// how close the camera is allowed to get to the mesh on each axis before it pops out
-    /// if close.x or close.z are 0 then the mesh will never pop out
-    /// close.y = Usually 1.5
-    /// the close.y value is never used, instead the allowable close.y is calculated from close.x and close.z
-    Vec3f closeX;
+    FadeDistances fade;
     /// May be referenced in UserDefines
     /// LOCAL_LOOKAT is required on vehicle chassis
     DynArray_Z<DynPoint> dyn_points;
@@ -155,27 +151,92 @@ struct Unused8 {
     u32 unused7;
 };
 
+using VertexVecComponent = u8 [[format("format_vertex_vec_component"), transform("format_vertex_vec_component")]];
+
+fn format_vertex_vec_component(ref auto vvc) {
+    return (vvc / 255.0) * 2 - 1;
+};
+
+using VertexVec3u8 = Vec<VertexVecComponent, 3>;
+
+struct VertexLayout12 {
+    Vec3f position;
+};
+
+struct VertexLayout36 {
+    Vec3f position;
+    VertexVec3u8 tangent;
+    std::assert(is_normalized_or_zero(tangent), "VertexLayout36 !is_normalized_or_zero(tangent)"+std::string::to_string(magnitude(tangent)));
+    u8 pad0;
+    std::assert(pad0 == 1 || pad0 == 255, "VertexLayout36 pad0 != 1,255");
+    VertexVec3u8 normal;
+    std::assert(is_normalized_or_zero(normal), "VertexLayout36 !is_normalized_or_zero(normal)"+std::string::to_string(magnitude(normal)));
+    u8 pad1;
+    std::assert(pad1 == 0 || pad1 == 1 || pad1 == 255, "VertexLayout36 pad1 != 0,1,255");
+    Vec2f uv;
+    Vec2f luv;
+};
+
+struct VertexLayout48 {
+    Vec3f position;
+    VertexVec3u8 tangent;
+    std::assert(is_normalized_or_zero(tangent), "VertexLayout48 !is_normalized_or_zero(tangent)"+std::string::to_string(magnitude(tangent)));
+    u8 pad0;
+    std::assert(pad0 == 1 || pad0 == 255, "VertexLayout48 pad0 != 1,255");
+    VertexVec3u8 normal;
+    std::assert(is_normalized_or_zero(normal), "VertexLayout48 !is_normalized_or_zero(normal)"+std::string::to_string(magnitude(normal)));
+    u8 pad1;
+    std::assert(pad1 == 1 || pad1 == 255, "VertexLayout48 pad1 != 1,255");
+    Vec2f uv;
+    f32 unk[5];
+};
+
+using VertexBlendIndex = f32 [[format("format_vertex_blend_index"), transform("format_vertex_blend_index")]];
+
+fn format_vertex_blend_index(ref auto vbi) {
+    return u32(vbi / 6.0);
+};
+
+struct VertexLayout60 {
+    Vec3f position;
+    VertexVec3u8 tangent;
+    std::assert(is_normalized_or_zero(tangent), "VertexLayout60 !is_normalized_or_zero(tangent)"+std::string::to_string(magnitude(tangent)));
+    u8 pad0;
+    std::assert(pad0 == 1 || pad0 == 255, "VertexLayout60 pad0 != 1,255");
+    VertexVec3u8 normal;
+    std::assert(is_normalized_or_zero(normal), "VertexLayout60 !is_normalized_or_zero(normal)"+std::string::to_string(magnitude(normal)));
+    u8 pad1;
+    std::assert(pad1 == 1 || pad1 == 255, "VertexLayout60 pad1 != 1,255");
+    Vec2f uv;
+    /// divide by 6 and truncate
+    VertexBlendIndex blend_indices[4];
+    f32 blend_weights[4];
+};
+
 struct VertexBufferExt {
     u32 vertex_count;
     u32 vertex_size;
+    std::assert(vertex_size == 12 || vertex_size == 36 || vertex_size == 48 || vertex_size == 60, "vertex_size != 12,32,48,60");
     u32 sub_mesh_id;
-    u8 data[vertex_count * vertex_size];
+    match (vertex_size) {
+        (12): VertexLayout12 vertices[vertex_count];
+        (36): VertexLayout36 vertices[vertex_count];
+        (48): VertexLayout48 vertices[vertex_count];
+        (60): VertexLayout60 vertices[vertex_count];
+    }
 };
 
 struct IndexBufferExt {
     u32 index_count;
-    u32 subMeshID;
+    u32 sub_mesh_id;
     u16 data[index_count];
 };
 
 struct WeirdQuad {
-    Vec3f vertex0;
-    Vec3f vertex1;
-    Vec3f vertex2;
     /// Vertices that make up the quad face
     /// duplicated in unknown12s for some reason
-    Vec3f vertex3;
-    Vec3f facing;
+    Vec3f vertices[4];
+    Vec3f normal;
 };
 
 struct Unused1 {
@@ -278,28 +339,29 @@ struct ShortVecWeird {
 };
 
 struct Mesh_Z : Mesh_Z_LinkHeader {
-    /// always empty
+    std::assert(type == 6, "type != 6");
     DynArray_Z<Vec3f> strip_vertices;
-    /// always empty
+    std::assert(strip_vertices.size == 0, "strip_vertices.size != 0");
     DynArray_Z<Unused0> unused0s;
-    /// always empty
+    std::assert(unused0s.size == 0, "unused0s.size != 0");
     DynArray_Z<Vec2f> texcoords;
-    /// always empty
+    std::assert(texcoords.size == 0, "texcoords.size != 0");
     DynArray_Z<Vec3f> normals;
-    /// always empty
+    std::assert(normals.size == 0, "normals.size != 0");
     DynArray_Z<Strip> strips;
+    std::assert(strips.size == 0, "strips.size != 0");
     // if (objectHeader.unknown0 & 2 != 0)
     // {
     //     DynArray_Z<u32> unknown3s;
     // }
     // This condition is never true
-    /// always empty
     DynArray_Z<Unused4> unused4s;
+    std::assert(unused4s.size == 0, "unused4s.size != 0");
     DynArray_Z<Name_Z> material_names;
     DynArray_Z<AABBCol> cylindre_cols;
     DynArray_Z<CollisionFace> unknown7s;
-    /// always empty
     DynArray_Z<Unused8> unused8s;
+    std::assert(unused8s.size == 0, "unused8s.size != 0");
     MeshBuffers mesh_buffers;
     /// 0x007b3800
     /// related to the Col structs

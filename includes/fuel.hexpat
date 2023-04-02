@@ -5,6 +5,7 @@
 #pragma pattern_limit 0
 
 #include <type/types/rust.pat>
+#include <std/math.pat>
 #include <std/mem.pat>
 #include <std/sys.pat>
 #include <std/string.pat>
@@ -26,6 +27,32 @@ fn all_eq(ref auto arr, auto val) {
         }
     }
     return true;
+};
+
+fn all_empty(ref auto arr) {
+    for (usize i = 0, i < std::core::member_count(arr), i = i + 1) {
+        if (arr[i].size != 0) {
+            return false;
+        }
+    }
+    return true;
+};
+
+fn magnitude(ref auto vec) {
+    f32 acc = 0;
+    for (usize i = 0, i < std::core::member_count(vec), i = i + 1) {
+        acc = acc + vec[i] * vec[i];
+    }
+    return std::math::sqrt(acc);
+};
+
+fn is_normalized(ref auto vec) {
+    return std::math::abs(magnitude(vec) - 1) < 0.1;
+};
+
+fn is_normalized_or_zero(ref auto vec) {
+    f32 magnitude = magnitude(vec);
+    return (magnitude == 0 || std::math::abs(magnitude - 1) < 0.1);
 };
 
 struct PascalString {
@@ -86,7 +113,7 @@ fn format_option(ref auto option) {
     if (option.is_some == 0) {
         return "None";
     }
-    return std::core::formatted_value(option.data);
+    return std::string::to_string(option.data);
 };
 
 using Optional<T> = OptionalBase<T, u8>;
@@ -120,6 +147,7 @@ using Vec2f = Vec<f32, 2>;
 using Vec2i16 = Vec<i16, 2>;
 
 using Vec3f = Vec<f32, 3>;
+using Vec3u8 = Vec<u8, 3>;
 using Vec3i16 = Vec<i16, 3>;
 using Vec3i32 = Vec<i32, 3>;
 using Vec3u32 = Vec<u32, 3>;
@@ -245,13 +273,18 @@ struct Object_Z : ResourceObject_Z {
     /// 0x4 - set in a mesh but never checked
     /// Sometimes a valid float
     ObjectFlags flags;
-    /// Possible values:
-    ///   * 6 - Mesh_Z
-    ///   * 12
-    ///   * 13
-    ///   * 16
-    ///   * 26
     u16 type;
+};
+
+/// how close the camera is allowed to get to the mesh before it pops out
+/// if close.x or close.fade_close are 0 then the mesh will never pop out
+/// close.y = Usually 1.5
+/// the close.y value is never used, instead the allowable close.y is calculated from close.x and close.fade_close
+struct FadeDistances {
+    f32 x;
+    f32 y;
+    /// The distance at which the object will fade as the camera gets closer
+    f32 fade_close;
 };
 
 struct Key_Z {

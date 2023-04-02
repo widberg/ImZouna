@@ -3,6 +3,7 @@
 #include <fuel.hexpat>
 
 struct Omni_Z : Object_Z {
+    std::assert(type == 16, "type != 16");
     Mat4f scale_matrix;
     Mat4f translation_matrix;
     Mat4f trs_mat;

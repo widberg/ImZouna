@@ -56,6 +56,7 @@ struct SeadIndex_Z {
 };
 
 struct Surface_Z : Object_Z {
+    std::assert(type == 1, "type != 1");
     DynArray_Z<Vec3f> vertices;
     DynArray_Z<Vec4f> vec4fs;
     DynArray_Z<Unknown2> unknown2s;

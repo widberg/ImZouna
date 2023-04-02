@@ -15,6 +15,7 @@ struct SkinSection {
 };
 
 struct Skin_Z : Object_Z {
+    std::assert(type == 3, "type != 3");
     DynArray_Z<Name_Z> mesh_names;
     u32 zero0;
     std::assert(zero0 == 0, "zero0 != 0");

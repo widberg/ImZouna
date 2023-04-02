@@ -3,6 +3,7 @@
 #include <fuel.hexpat>
 
 struct RotShape_Z : Object_Z {
+    std::assert(type == 4, "type != 4");
     DynArray_Z<Vec3f> verticies;
     /// Always 0?
     f32 one;
