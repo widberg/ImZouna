@@ -74,7 +74,7 @@ git clone https://github.com/widberg/ImFUEL.git --recurse-submodules --shallow-s
 
 ### Usage
 
-Add the `ImFUEL` directory to ImHex `Help -> Settings -> Folders -> +`.
+Add the `ImFUEL` directory to ImHex `Help -> Settings -> Folders -> +`. Install the "Std" and "Type" ImHex libraries from `Help -> Content Store -> Libraries`.
 
 ### Validate
 
