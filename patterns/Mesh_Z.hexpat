@@ -233,10 +233,11 @@ struct IndexBufferExt {
     u16 data[index_count];
 };
 
-struct WeirdQuad {
+struct Quad {
     /// duplicated in short_vec_weirds for some reason
     Vec3f vertices[4];
     Vec3f normal;
+    std::assert(is_normalized_or_zero(normal), "Quad !is_normalized_or_zero(normal)");
 };
 
 struct Unused1 {
@@ -249,22 +250,27 @@ struct Unused1 {
     u32 unused6;
 };
 
+bitfield VertexGroupFlags {
+    padding : 2;
+    VISIBLE : 1;
+    padding : 16;
+    MORPH : 1;
+    padding : 11;
+};
+
 struct VertexGroup {
     u32 vertex_buffer_index;
     u32 index_buffer_index;
-    u32 zero;
-    std::assert(zero == 0, "zero != 0");
-    u32 unknown0;
-    /// 0x00000004 - visible
-    /// 0x00080000 - has morph
-    u32 flags;
+    RangeBeginSizeU32 quad_range;
+    VertexGroupFlags flags;
     RangeBeginEnd vertex_buffer_range;
     u32 vertex_count;
     u32 index_buffer_index_begin;
     u32 face_count;
-    u32 zero2;
-    std::assert(zero2 == 0, "zero2 != 0");
-    u32 unknown1;
+    u32 zero;
+    std::assert(zero == 0, "zero != 0");
+    u32 vertex_buffer_range_begin_or_zero;
+    std::assert(vertex_buffer_range_begin_or_zero == 0 || vertex_buffer_range_begin_or_zero == vertex_buffer_range.begin, "vertex_buffer_range_begin_or_zero != 0 && vertex_buffer_range_begin_or_zero != vertex_buffer_range.begin");
     u16 vertex_size;
     i16 material_index;
     DynArray_Z<Unused1> unused1s;
@@ -282,8 +288,8 @@ struct AABBMorphTrigger {
 
 struct DisplacementVector {
         Vec<NumeratorFloat<i16, 1024>, 3> displacement;
-        /// current struct's displacement_vectors index
         u16 displacement_vectors_self_index;
+        std::assert(displacement_vectors_self_index == std::core::array_index(), "displacement_vectors_self_index != std::core::array_index()");
 };
 
 struct MorphTargetDesc {
@@ -295,6 +301,8 @@ struct MorphTargetDesc {
     /// Must be the same size as the base vertex buffer
     /// Editing this buffer doesn't seem to do anything
     /// Fully deformed positions? Not offsets?
+    /// Could have been in the editor but not needed in the game
+    /// One less than this is the visible mesh
     u16 displacement_vertex_buffer_index;
     /// Must be the same size as the base vertex buffer
     /// maps vertices in the base vertex buffer to displacement vectors
@@ -324,8 +332,7 @@ struct MeshBuffers {
     /// If one of the buffers is required by the morpher and it is removed then the game will crash while loading
     DynArray_Z<VertexBufferExt> vertex_buffers;
     DynArray_Z<IndexBufferExt> index_buffers;
-    /// Occlusion test quad?
-    DynArray_Z<WeirdQuad> weird_quads;
+    DynArray_Z<Quad> quads;
     /// composes vertex and index buffer
     /// when removed the mesh disapears but the game still runs as expected
     /// in wireframe debug view the mesh is not there but that could be a result of no material

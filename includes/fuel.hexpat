@@ -88,12 +88,6 @@ fn format_dyn_array(ref auto arr) {
 using DynArray_Z<T> = DynArray_ZBase<T, u32>;
 using DynArray_ZU16<T> = DynArray_ZBase<T, u16>;
 
-struct AssociativeArray<T, U, V> {
-    DynArray_Z<T> values;
-    DynArray_Z<U> indices;
-    DynArray_Z<V> associated_values;
-};
-
 struct Pair<T, U> {
     T key;
     U value;
@@ -125,15 +119,24 @@ using OptionalU32<T> = OptionalBase<T, u32>;
 struct RangeBeginEndBase<T> {
     T begin;
     T end;
+} [[format("format_range_begin_end")]];
+
+fn format_range_begin_end(ref auto range) {
+    return "[" + std::string::to_string(range.begin) + ", " + std::string::to_string(range.end) + ")";
 };
 
 struct RangeBeginSizeBase<T> {
     T begin;
     T size;
+} [[format("format_range_begin_size")]];
+
+fn format_range_begin_size(ref auto range) {
+    return "[" + std::string::to_string(range.begin) + ", " + std::string::to_string(range.begin + range.size) + ")";
 };
 
 using RangeBeginEnd = RangeBeginEndBase<u16>;
 using RangeBeginSize = RangeBeginSizeBase<u16>;
+using RangeBeginSizeU32 = RangeBeginSizeBase<u32>;
 
 struct NumeratorFloat<T, auto U> {
     T numerator;
