@@ -3,7 +3,7 @@
 #include <fuel.hexpat>
 
 struct CollisionVol_Z : Object_Z {
-    std::assert(type == 14, "type != 14");
+    std::assert(type == ObjectType::CollisionVol_Z, "type != ObjectType::CollisionVol_Z");
     u32 one;
     std::assert(one == 1, "one != 1");
     Mat4f local_transform;

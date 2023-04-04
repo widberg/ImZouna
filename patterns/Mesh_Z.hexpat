@@ -84,8 +84,8 @@ struct DynBox {
 };
 
 struct Mesh_Z_LinkHeader : Object_Z {
-    /// all the material crc32s followed by the mesh data crc32
-    DynArray_Z<Name_Z> crc32s;
+    /// all the material names followed by the mesh data crc32
+    DynArray_Z<Name_Z> names;
     FadeDistances fade;
     /// May be referenced in UserDefines
     /// LOCAL_LOOKAT is required on vehicle chassis
@@ -117,23 +117,19 @@ struct Unused4 {
     DynArray_Z<Unused00> unused0s;
 };
 
-struct AABBCol {
+struct CollisionAABB {
     Vec3f min;
-    u16 cylindre_cols_index_begin;
     /// range of AABBs contained directly by this one
-    u16 cylindre_cols_index_end;
+    RangeBeginEnd collision_aabb_range;
     Vec3f max;
-    u16 unknown7s_index;
     /// 0 if this AABB only contains other AABB and no faces
     /// range of CollisionFaces contained directly by this AABB
-    u16 unknown7s_indices_count;
+    RangeBeginSize collision_faces_range;
 };
 
 struct CollisionFace {
-    u16 unknown12_index0;
-    u16 unknown12_index1;
     /// Indices that make up the tri face
-    u16 unknown12_index2;
+    u16 short_vec_weirds_indices[3];
     /// 0/1
     /// not winding order
     /// double sided?
@@ -234,7 +230,7 @@ struct IndexBufferExt {
 
 struct WeirdQuad {
     /// Vertices that make up the quad face
-    /// duplicated in unknown12s for some reason
+    /// duplicated in short_vec_weirds for some reason
     Vec3f vertices[4];
     Vec3f normal;
 };
@@ -253,17 +249,18 @@ struct VertexGroup {
     u32 vertex_buffer_index;
     u32 index_buffer_index;
     u32 zero;
-    u32 zero1;
+    std::assert(zero == 0, "zero != 0");
+    u32 unknown0;
     /// 0x00000004 - visible
     /// 0x00080000 - has morph
     u32 flags;
-    u16 vertex_buffer_index_begin;
-    u16 vertex_buffer_index_end;
+    RangeBeginEnd vertex_buffer_range;
     u32 vertex_count;
     u32 index_buffer_index_begin;
     u32 face_count;
     u32 zero2;
-    u32 zero3;
+    std::assert(zero2 == 0, "zero2 != 0");
+    u32 unknown1;
     u16 vertex_size;
     u16 material_index;
     DynArray_Z<Unused1> unused1s;
@@ -271,20 +268,18 @@ struct VertexGroup {
 
 struct AABBMorphTrigger {
     Vec3f min;
-    u16 unknown16_index_begin;
     /// range of AABBMorphTriggers contained directly by this one
-    u16 unknown16_index_end;
+    RangeBeginEnd aabb_morph_triggers_range;
     Vec3f max;
-    u16 pair_index;
-    /// 0 if this AABBMorphTrigger only contains other AABBMorphTriggers and no pairs
-    /// range of pairs contained by this AABBMorphTrigger
-    u16 pairs_indices_count;
+    /// 0 if this AABBMorphTrigger only contains other AABBMorphTriggers and no maps
+    /// range of map contained by this AABBMorphTrigger
+    RangeBeginSize map_index_range;
 };
 
 struct DisplacementVector {
         Vec<NumeratorFloat<i16, 1024>, 3> displacement;
-        /// current struct's Unknown15 index
-        u16 unknown15_self_index;
+        /// current struct's displacement_vectors index
+        u16 displacement_vectors_self_index;
 };
 
 struct MorphTargetDesc {
@@ -297,23 +292,23 @@ struct MorphTargetDesc {
     u16 displacement_vertex_buffer_index;
     /// Must be the same size as the base vertex buffer
     /// maps vertices in the base vertex buffer to displacement vectors
-    DynArray_Z<u16> unknown15_indicies;
+    DynArray_Z<u16> displacement_vectors_indicies;
     /// much larger than any of the vertex buffers
     /// zeroing this array will make it so the deformation never happens
     /// This array contains displacements
-    DynArray_Z<DisplacementVector> unknown15s;
+    DynArray_Z<DisplacementVector> displacement_vectors;
 };
 
 struct Morpher {
     /// removing this has no effect
     /// relatively small
-    DynArray_Z<AABBMorphTrigger> unknown16s;
-    /// Mapping from unknown12sIndex to unknown15sIndicesIndex
+    DynArray_Z<AABBMorphTrigger> aabb_morph_triggers;
+    /// Mapping from short_vec_weirds_index to displacement_vectors_indices_index
     /// removing this causes the game to crash when a collision with a static body occurs while MorphTargetDesc exists
-    /// one element smaller than unknown12s
-    Map<u16, u16> map;
-    /// smaller than unknown15s but much larger than any vertex buffer or pairs
-    DynArray_Z<u16> unknown15sIndices;
+    /// one element smaller than short_vec_weirds
+    Map_Z<u16, u16> map;
+    /// smaller than displacement_vectors but much larger than any vertex buffer or map
+    DynArray_Z<u16> displacement_vectors_indices;
     /// always 0 or 1 but a loop is used to load it so it is a DynArray_Z and not an Option
     /// the game will run as normal when removed
     /// some pieces, as defined in VertexGroup, will be missing
@@ -322,15 +317,15 @@ struct Morpher {
 
 struct MeshBuffers {
     /// If one of the buffers is required by the morpher and it is removed then the game will crash while loading
-    DynArray_Z<VertexBufferExt> subMeshes;
+    DynArray_Z<VertexBufferExt> sub_meshes;
     DynArray_Z<IndexBufferExt> indices;
     /// Occlusion test quad?
-    DynArray_Z<WeirdQuad> unknown11s;
+    DynArray_Z<WeirdQuad> weird_quads;
     /// composes vertex and index buffer
     /// when removed the mesh disapears but the game still runs as expected
     /// in wireframe debug view the mesh is not there but that could be a result of no material
     /// does NOT contain collision data
-    DynArray_Z<VertexGroup> vertexGroups;
+    DynArray_Z<VertexGroup> vertex_groups;
     Morpher morpher;
 };
 
@@ -339,7 +334,7 @@ struct ShortVecWeird {
 };
 
 struct Mesh_Z : Mesh_Z_LinkHeader {
-    std::assert(type == 6, "type != 6");
+    std::assert(type == ObjectType::Mesh_Z, "type != ObjectType::Mesh_Z");
     DynArray_Z<Vec3f> strip_vertices;
     std::assert(strip_vertices.size == 0, "strip_vertices.size != 0");
     DynArray_Z<Unused0> unused0s;
@@ -358,8 +353,8 @@ struct Mesh_Z : Mesh_Z_LinkHeader {
     DynArray_Z<Unused4> unused4s;
     std::assert(unused4s.size == 0, "unused4s.size != 0");
     DynArray_Z<Name_Z> material_names;
-    DynArray_Z<AABBCol> cylindre_cols;
-    DynArray_Z<CollisionFace> unknown7s;
+    DynArray_Z<CollisionAABB> collision_aabbs;
+    DynArray_Z<CollisionFace> collision_faces;
     DynArray_Z<Unused8> unused8s;
     std::assert(unused8s.size == 0, "unused8s.size != 0");
     MeshBuffers mesh_buffers;
@@ -368,7 +363,7 @@ struct Mesh_Z : Mesh_Z_LinkHeader {
     /// game crashes on collision with static body if empty while MorphTargetDesc exists
     /// no effect if same size but 0ed out data
     /// all overlap with various vertices in the last vertex buffer
-    DynArray_Z<ShortVecWeird> unknown12s;
+    DynArray_Z<ShortVecWeird> short_vec_weirds;
 };
 
 Mesh_Z mesh_z @ 0x0;

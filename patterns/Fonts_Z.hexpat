@@ -14,7 +14,7 @@ struct Character {
 
 struct Fonts_Z : ResourceObject_Z {
     /// id may be ASCII or Unicode?
-    Map<u32, Character> characters;
+    Map_Z<u32, Character> characters;
     DynArray_Z<Name_Z> material_names;
 };
 

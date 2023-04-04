@@ -3,7 +3,7 @@
 #include <fuel.hexpat>
 
 struct Camera_Z : Object_Z {
-    std::assert(type == 7, "type != 7");
+    std::assert(type == ObjectType::Camera_Z, "type != ObjectType::Camera_Z");
     /// radians
     f32 angle_of_view;
     std::assert(angle_of_view == 0.8726646304130554, "angle_of_view != 0.8726646304130554");

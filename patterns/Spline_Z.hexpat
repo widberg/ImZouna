@@ -17,7 +17,7 @@ struct SplineSection {
 };
 
 struct Spline_Z : Object_Z {
-    std::assert(type == 2, "type != 2");
+    std::assert(type == ObjectType::Spline_Z, "type != ObjectType::Spline_Z");
     DynArray_Z<Vec3f> vertices;
     DynArray_Z<SplineSection> spline_sections;
     /// (1, 0, 0, 1)

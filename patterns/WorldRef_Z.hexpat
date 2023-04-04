@@ -10,7 +10,7 @@ struct UUIDPair {
 };
 
 struct WorldRef_Z : Object_Z {
-    std::assert(type == 26, "type != 26");
+    std::assert(type == ObjectType::WorldRef_Z, "type != ObjectType::WorldRef_Z");
     Name_Z node_name0;
     Name_Z warp_name;
     Name_Z gameObj_name;

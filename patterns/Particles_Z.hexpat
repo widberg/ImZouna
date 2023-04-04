@@ -50,7 +50,7 @@ struct ParticlesEmitter_Z {
 };
 
 struct Particles_Z : Object_Z {
-    std::assert(type == 18, "type != 18");
+    std::assert(type == ObjectType::Particles_Z, "type != ObjectType::Particles_Z");
     DynArray_Z<ParticlesEmitter_Z> particles_emitters;
     DynArray_Z<Mat4f> mats;
     f32 unknown2;

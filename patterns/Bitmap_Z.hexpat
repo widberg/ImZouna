@@ -2,16 +2,33 @@
 
 #include <fuel.hexpat>
 
+enum BitmapClass : u16 {
+    SINGLE = 0,
+    CUBEMAP = 2,
+};
+
+enum BmFormat_Z : u8 {
+    BM_MULTIPLE_BITMAPS = 0,
+    BM_A8L8 = 7,
+    BM_DXT1 = 14,
+    BM_DXT5 = 16,
+};
+
+enum BitmapClass2 : u8 {
+    CUBEMAP2 = 0,
+    SINGLE2 = 3,
+};
+
+enum BmTransp : u8 {
+    BM_NO_TRANSP = 0,
+    BM_TRANSP_ONE = 1,
+    BM_TRANSP = 2,
+    BM_CUBEMAP = 255,
+};
+
 struct Bitmap_Z_LinkHeader : ResourceObject_Z {
-    /// 0 for one image
-    /// 2 for 6 image cubemap
-    /// Always 0 except for 1 image in SHARED where it's 2
-    /// used as a loop count
-    /// 0, 1, 2
-    /// 2 - 6
-    /// !2 - 1
-    /// only 0 and 2 dont lead to a fail return
-    u16 multiple_images;
+    BitmapClass bitmap_class;
+    std::assert(std::core::is_valid_enum(bitmap_class), "!std::core::is_valid_enum(bitmap_class)");
     u32 width;
     u32 height;
     /// 0 in LWYOMING.DPC
@@ -29,53 +46,36 @@ struct Bitmap_Z_LinkHeader : ResourceObject_Z {
     ///   * 0x4 something
     ///   * 0x1 unused
     /// If u1 & 0x4 == 0, then some bools are set in the renderer
-    u8 render_flags;
+    u8 flags;
     /// Unused?
     /// Whether a bitmap is a diffuse, normal, specular, etc...
     u8 bitmap_type;
-    /// Padding?
-    /// Always 0
-    u16 zero;
+    u16 pad;
+    std::assert(pad == 0, "pad != 0");
     /// lower is higher layer
     /// > 0 doesnt get drawn
     /// so transparent textures show up on top
     /// gets added to something in the renderer
     /// usually 0
     /// sometimes -1 or -2
-    /// x + y + u7
+    /// x + y + layer
     /// result of addition is often -1.0
     f32 layer;
-    /// Unused?
-    /// 14 - DXT1
-    /// 16 - DXT5
-    /// 0 - multiple input files
-    /// always matchs dxtVersion1 except for the cube map
-    u8 input_dxt_version;
+    BmFormat_Z format0;
+    std::assert(std::core::is_valid_enum(format0), "!std::core::is_valid_enum(format0)"+std::string::to_string(u8(format0)));
     u8 mip_map_count;
-    /// Unused?
-    /// Always 4
     u8 four;
-    /// Unused?
-    /// 3 - normal
-    /// 0 - multiple input images
-    /// Always 3 except for the SHARED cubmap where it is 0
-    u8 input_unused3;
-    /// 14 - DXT1
-    /// 16 - DXT5
-    /// used as a loop count
-    u8 dxt_version;
-    /// material related
-    /// 0, 1, 2
-    /// If 1 material RdrFlag is ORed with 0x40
-    /// If 2 material RdrFlag is ORed with 0x20
-    /// Else nothing
-    /// material RdrFlag Masked with 0x1f
-    /// 0xFF for the cube map texture
-    u8 rdr_related;
+    std::assert(four == 4, "four != 4");
+    BitmapClass2 bitmap_class2;
+    std::assert(std::core::is_valid_enum(bitmap_class2), "!std::core::is_valid_enum(bitmap_class2)");
+    BmFormat_Z format1;
+    std::assert(std::core::is_valid_enum(format1), "!std::core::is_valid_enum(format1)");
+    std::assert(format1 == format0 || bitmap_class == BitmapClass::CUBEMAP, "format1 != format0 || bitmap_class != BitmapClass::CUBEMAP");
+    BmTransp transparency;
+    std::assert(std::core::is_valid_enum(transparency), "!std::core::is_valid_enum(transparency)");
 };
 
 struct Bitmap_Z : Bitmap_Z_LinkHeader {
-    /// DXT1 or DXT5 compressed image data based on dxtVersion0
     u8 data[data_size - class_object_size];
 };
 

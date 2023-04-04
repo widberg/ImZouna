@@ -18,7 +18,7 @@
 // for loops in struct
 
 // ImHex bug
-// doesn't do a great job following diagnostic line numbers into headers
+// doesn't do a great job following diagnostics into headers
 
 fn all_eq(ref auto arr, auto val) {
     for (usize i = 0, i < std::core::member_count(arr), i = i + 1) {
@@ -100,7 +100,7 @@ struct Pair<T, U> {
     U value;
 };
 
-using Map<T, U> = DynArray_Z<Pair<T, U>>;
+using Map_Z<T, U> = DynArray_Z<Pair<T, U>>;
 
 struct OptionalBase<T, U> {
     U is_some [[hidden]];
@@ -118,6 +118,19 @@ fn format_option(ref auto option) {
 
 using Optional<T> = OptionalBase<T, u8>;
 using OptionalU32<T> = OptionalBase<T, u32>;
+
+struct RangeBeginEndBase<T> {
+    T begin;
+    T end;
+};
+
+struct RangeBeginSizeBase<T> {
+    T begin;
+    T size;
+};
+
+using RangeBeginEnd = RangeBeginEndBase<u16>;
+using RangeBeginSize = RangeBeginSizeBase<u16>;
 
 struct NumeratorFloat<T, auto U> {
     T numerator;
@@ -257,6 +270,22 @@ bitfield ObjectFlags {
     padding : 15;
 };
 
+enum ObjectType : u16 {
+    Surface_Z = 1,
+    Spline_Z = 2,
+    Skin_Z = 3,
+    RotShape_Z = 4,
+    Lod_Z = 5,
+    Mesh_Z = 6,
+    Camera_Z = 7,
+    CollisionVol_Z = 14,
+    Omni_Z = 16,
+    Particles_Z = 18,
+    GenWorld_Z = 22,
+    SplineGraph_Z = 25,
+    WorldRef_Z = 26,
+};
+
 struct Object_Z : ResourceObject_Z {
     /// The associated data object for this object or 0 if there is none
     /// Skel_Z is the corresponding data for Skin_Zs
@@ -273,7 +302,7 @@ struct Object_Z : ResourceObject_Z {
     /// 0x4 - set in a mesh but never checked
     /// Sometimes a valid float
     ObjectFlags flags;
-    u16 type;
+    ObjectType type;
 };
 
 /// how close the camera is allowed to get to the mesh before it pops out

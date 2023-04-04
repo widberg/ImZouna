@@ -17,7 +17,7 @@ struct Unknown1 {
 };
 
 struct SplineGraph_Z : Object_Z {
-    std::assert(type == 25, "type != 25");
+    std::assert(type == ObjectType::SplineGraph_Z, "type != ObjectType::SplineGraph_Z");
     DynArray_Z<Vec3f> vecs;
     DynArray_Z<Unknown1> unknown1s;
     f32 unknown2;

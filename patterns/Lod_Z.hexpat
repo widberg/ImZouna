@@ -15,7 +15,7 @@ struct BoxCol {
 };
 
 struct Lod_Z : Object_Z {
-    std::assert(type == 5, "type != 5");
+    std::assert(type == ObjectType::Lod_Z, "type != ObjectType::Lod_Z");
     DynArray_Z<SphereColNode> sphereColNodes;
     DynArray_Z<BoxCol> boxCols;
     FadeDistances fade;
@@ -23,8 +23,8 @@ struct Lod_Z : Object_Z {
     DynArray_Z<Name_Z> skin_or_mesh_names;
     u32 zero;
     std::assert(zero == 0, "zero != 0");
-    OptionalU32<Map<u32, Name_Z>> animation_entries;
-    OptionalU32<Map<u32, Name_Z>> sound_entries;
+    OptionalU32<Map_Z<u32, Name_Z>> animation_entries;
+    OptionalU32<Map_Z<u32, Name_Z>> sound_entries;
     Name_Z user_define_name;
 };
 

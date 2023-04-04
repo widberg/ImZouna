@@ -54,7 +54,7 @@ struct Region {
 };
 
 struct GenWorld_Z : Object_Z {
-    std::assert(type == 22, "type != 2");
+    std::assert(type == ObjectType::GenWorld_Z, "type != ObjectType::GenWorld_Z");
     Name_Z node_name;
     Name_Z user_define_name;
     Name_Z gw_road_name;
@@ -67,13 +67,13 @@ struct GenWorld_Z : Object_Z {
     ///   * TREES
     ///   * BUSHES
     ///   * ROCKS - Appears in an object but empty and the game ignores it
-    Map<PascalStringNULL, Category> categories;
+    Map_Z<PascalStringNULL, Category> categories;
     DynArray_Z<Unknown8> unknown8s;
     DynArray_Z<Mat4f> mats;
     DynArray_Z<Unused10> unused10s;
     DynArray_Z<Vec2f> coords;
     DynArray_Z<CoordsLineSegment> coordsLineSegments;
-    Map<FixedStringNULL<31>, Region> regions;
+    Map_Z<FixedStringNULL<31>, Region> regions;
 };
 
 GenWorld_Z gen_world_z @ 0x0;
