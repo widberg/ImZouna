@@ -155,36 +155,22 @@ fn format_vertex_vec_component(ref auto vvc) {
 
 using VertexVec3u8 = Vec<VertexVecComponent, 3>;
 
-struct VertexLayout12 {
+struct VertexLayoutPosition {
     Vec3f position;
 };
 
-struct VertexLayout36 {
+struct VertexLayoutNoBlend {
     Vec3f position;
     VertexVec3u8 tangent;
-    std::assert(is_normalized_or_zero(tangent), "VertexLayout36 !is_normalized_or_zero(tangent)");
-    u8 pad0;
-    std::assert(pad0 == 1 || pad0 == 255, "VertexLayout36 pad0 != 1,255");
+    std::assert(is_normalized_or_zero(tangent), "VertexLayoutNoBlend !is_normalized_or_zero(tangent)");
+    u8 pad0 [[hidden]];
+    std::assert(pad0 == 1 || pad0 == 255, "VertexLayoutNoBlend pad0 != 1,255");
     VertexVec3u8 normal;
-    std::assert(is_normalized_or_zero(normal), "VertexLayout36 !is_normalized_or_zero(normal)");
-    u8 pad1;
-    std::assert(pad1 == 0 || pad1 == 1 || pad1 == 255, "VertexLayout36 pad1 != 0,1,255");
+    std::assert(is_normalized_or_zero(normal), "VertexLayoutNoBlend !is_normalized_or_zero(normal)");
+    u8 pad1 [[hidden]];
+    std::assert(pad1 == 0 || pad1 == 1 || pad1 == 255, "VertexLayoutNoBlend pad1 != 0,1,255");
     Vec2f uv;
     Vec2f luv;
-};
-
-struct VertexLayout48 {
-    Vec3f position;
-    VertexVec3u8 tangent;
-    std::assert(is_normalized_or_zero(tangent), "VertexLayout48 !is_normalized_or_zero(tangent)");
-    u8 pad0;
-    std::assert(pad0 == 1 || pad0 == 255, "VertexLayout48 pad0 != 1,255");
-    VertexVec3u8 normal;
-    std::assert(is_normalized_or_zero(normal), "VertexLayout48 !is_normalized_or_zero(normal)");
-    u8 pad1;
-    std::assert(pad1 == 1 || pad1 == 255, "VertexLayout48 pad1 != 1,255");
-    Vec2f uv;
-    f32 unk[5];
 };
 
 using VertexBlendIndex = f32 [[format("format_vertex_blend_index"), transform("format_vertex_blend_index")]];
@@ -193,18 +179,35 @@ fn format_vertex_blend_index(ref auto vbi) {
     return u32(vbi / 6.0);
 };
 
-struct VertexLayout60 {
+struct VertexLayout1Blend {
     Vec3f position;
     VertexVec3u8 tangent;
-    std::assert(is_normalized_or_zero(tangent), "VertexLayout60 !is_normalized_or_zero(tangent)");
-    u8 pad0;
-    std::assert(pad0 == 1 || pad0 == 255, "VertexLayout60 pad0 != 1,255");
+    std::assert(is_normalized_or_zero(tangent), "VertexLayout1Blend !is_normalized_or_zero(tangent)");
+    u8 pad0 [[hidden]];
+    std::assert(pad0 == 1 || pad0 == 255, "VertexLayout1Blend pad0 != 1,255");
     VertexVec3u8 normal;
-    std::assert(is_normalized_or_zero(normal), "VertexLayout60 !is_normalized_or_zero(normal)");
-    u8 pad1;
-    std::assert(pad1 == 1 || pad1 == 255, "VertexLayout60 pad1 != 1,255");
+    std::assert(is_normalized_or_zero(normal), "VertexLayout1Blend !is_normalized_or_zero(normal)");
+    u8 pad1 [[hidden]];
+    std::assert(pad1 == 1 || pad1 == 255, "VertexLayout1Blend pad1 != 1,255");
     Vec2f uv;
-    /// divide by 6 and truncate
+    VertexBlendIndex blend_index;
+    i32 pad2[3] [[hidden]];
+    std::assert(all_eq(pad2, -1), "VertexLayout1Blend !all_eq(pad2, -1)");
+    f32 blend_weight;
+    std::assert(blend_weight == 0 || blend_weight == 1, "VertexLayout1Blend blend_weight != 0,1");
+};
+
+struct VertexLayout4Blend {
+    Vec3f position;
+    VertexVec3u8 tangent;
+    std::assert(is_normalized_or_zero(tangent), "VertexLayout4Blend !is_normalized_or_zero(tangent)");
+    u8 pad0 [[hidden]];
+    std::assert(pad0 == 1 || pad0 == 255, "VertexLayout4Blend pad0 != 1,255");
+    VertexVec3u8 normal;
+    std::assert(is_normalized_or_zero(normal), "VertexLayout4Blend !is_normalized_or_zero(normal)");
+    u8 pad1 [[hidden]];
+    std::assert(pad1 == 1 || pad1 == 255, "VertexLayout4Blend pad1 != 1,255");
+    Vec2f uv;
     VertexBlendIndex blend_indices[4];
     f32 blend_weights[4];
 };
@@ -213,23 +216,24 @@ struct VertexBufferExt {
     u32 vertex_count;
     u32 vertex_size;
     std::assert(vertex_size == 12 || vertex_size == 36 || vertex_size == 48 || vertex_size == 60, "vertex_size != 12,32,48,60");
-    u32 sub_mesh_id;
+    u32 vertex_buffer_id;
+    std::assert(vertex_buffer_id == 4 || vertex_buffer_id == 34 || vertex_buffer_id == 162, "vertex_buffer_id != 4,34,162"+std::string::to_string(vertex_buffer_id));
     match (vertex_size) {
-        (12): VertexLayout12 vertices[vertex_count];
-        (36): VertexLayout36 vertices[vertex_count];
-        (48): VertexLayout48 vertices[vertex_count];
-        (60): VertexLayout60 vertices[vertex_count];
+        (12): VertexLayoutPosition vertices[vertex_count];
+        (36): VertexLayoutNoBlend vertices[vertex_count];
+        (48): VertexLayout1Blend vertices[vertex_count];
+        (60): VertexLayout4Blend vertices[vertex_count];
     }
 };
 
 struct IndexBufferExt {
     u32 index_count;
-    u32 sub_mesh_id;
+    u32 index_buffer_id;
+    std::assert(index_buffer_id == 4 || index_buffer_id == 34 || index_buffer_id == 162, "index_buffer_id != 4,34,162"+std::string::to_string(index_buffer_id));
     u16 data[index_count];
 };
 
 struct WeirdQuad {
-    /// Vertices that make up the quad face
     /// duplicated in short_vec_weirds for some reason
     Vec3f vertices[4];
     Vec3f normal;
@@ -262,7 +266,7 @@ struct VertexGroup {
     std::assert(zero2 == 0, "zero2 != 0");
     u32 unknown1;
     u16 vertex_size;
-    u16 material_index;
+    i16 material_index;
     DynArray_Z<Unused1> unused1s;
 };
 
@@ -284,18 +288,19 @@ struct DisplacementVector {
 
 struct MorphTargetDesc {
     PascalString name;
-    /// The vertexBufferId of the vertex buffer containing the visible mesh vertices
+    /// The vertex_buffer_id of the vertex buffer containing the visible mesh vertices
     u32 base_vertex_buffer_id;
+    std::assert(base_vertex_buffer_id == 162, "base_vertex_buffer_id != 162"+std::string::to_string(base_vertex_buffer_id));
     /// The index of the vertex buffer containing the displacement vectors
     /// Must be the same size as the base vertex buffer
-    /// Editing this buffer doesnt seem to do anything
+    /// Editing this buffer doesn't seem to do anything
+    /// Fully deformed positions? Not offsets?
     u16 displacement_vertex_buffer_index;
     /// Must be the same size as the base vertex buffer
     /// maps vertices in the base vertex buffer to displacement vectors
     DynArray_Z<u16> displacement_vectors_indicies;
-    /// much larger than any of the vertex buffers
     /// zeroing this array will make it so the deformation never happens
-    /// This array contains displacements
+    /// This array contains displacements (offsets)
     DynArray_Z<DisplacementVector> displacement_vectors;
 };
 
@@ -317,8 +322,8 @@ struct Morpher {
 
 struct MeshBuffers {
     /// If one of the buffers is required by the morpher and it is removed then the game will crash while loading
-    DynArray_Z<VertexBufferExt> sub_meshes;
-    DynArray_Z<IndexBufferExt> indices;
+    DynArray_Z<VertexBufferExt> vertex_buffers;
+    DynArray_Z<IndexBufferExt> index_buffers;
     /// Occlusion test quad?
     DynArray_Z<WeirdQuad> weird_quads;
     /// composes vertex and index buffer
@@ -329,9 +334,7 @@ struct MeshBuffers {
     Morpher morpher;
 };
 
-struct ShortVecWeird {
-    Vec<NumeratorFloat<i16, 1024>, 3> weird;
-};
+using ShortVecWeird = Vec<NumeratorFloat<i16, 1024>, 3>;
 
 struct Mesh_Z : Mesh_Z_LinkHeader {
     std::assert(type == ObjectType::Mesh_Z, "type != ObjectType::Mesh_Z");
@@ -359,7 +362,7 @@ struct Mesh_Z : Mesh_Z_LinkHeader {
     std::assert(unused8s.size == 0, "unused8s.size != 0");
     MeshBuffers mesh_buffers;
     /// 0x007b3800
-    /// related to the Col structs
+    /// related to the Collision structs
     /// game crashes on collision with static body if empty while MorphTargetDesc exists
     /// no effect if same size but 0ed out data
     /// all overlap with various vertices in the last vertex buffer

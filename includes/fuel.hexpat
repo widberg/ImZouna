@@ -1,6 +1,5 @@
 #pragma once
 #pragma endian little
-#pragma bitfield_order right_to_left
 #pragma array_limit 0
 #pragma pattern_limit 0
 
@@ -80,10 +79,10 @@ fn format_data(ref auto x) {
 struct DynArray_ZBase<T, U> {
     U size [[hidden]];
     T data[size] [[inline]];
-} [[format("format_pascal_array"), transform("format_data")]];
+} [[format("format_dyn_array"), transform("format_data")]];
 
-fn format_pascal_array(ref auto arr) {
-    return "[" + arr.size + "]";
+fn format_dyn_array(ref auto arr) {
+    return "[" + std::string::to_string(arr.size) + "]";
 };
 
 using DynArray_Z<T> = DynArray_ZBase<T, u32>;
@@ -98,6 +97,10 @@ struct AssociativeArray<T, U, V> {
 struct Pair<T, U> {
     T key;
     U value;
+} [[format("format_pair")]];
+
+fn format_pair(ref auto pair) {
+    return std::string::to_string(pair.key) + " : " + std::string::to_string(pair.value);
 };
 
 using Map_Z<T, U> = DynArray_Z<Pair<T, U>>;
@@ -147,9 +150,9 @@ struct Vec<T, auto U> {
 
 fn format_vec(ref auto vec) {
     str o = "(";
-    for (usize i = 0, i < std::core::member_count(vec), i = i + 1) {
-        o = o + std::string::to_string(vec[i]);
-        if (i + 1 != std::core::member_count(vec)) {
+    for (usize i = 0, i < std::core::member_count(vec.data), i = i + 1) {
+        o = o + std::string::to_string(vec.data[i]);
+        if (i + 1 != std::core::member_count(vec.data)) {
             o = o + ", ";
         }
     }
