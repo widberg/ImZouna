@@ -54,6 +54,15 @@ fn is_normalized_or_zero(ref auto vec) {
     return (magnitude == 0 || std::math::abs(magnitude - 1) < 0.1);
 };
 
+fn is_normalized_component_wise(ref auto vec) {
+    for (usize i = 0, i < std::core::member_count(vec), i = i + 1) {
+        if (vec[i] < 0 || vec[i] > 1) {
+            return false;
+        }
+    }
+    return true;
+};
+
 struct PascalString {
     u32 size;
     char data[size];
@@ -122,7 +131,7 @@ struct RangeBeginEndBase<T> {
 } [[format("format_range_begin_end")]];
 
 fn format_range_begin_end(ref auto range) {
-    return "[" + std::string::to_string(range.begin) + ", " + std::string::to_string(range.end) + ")";
+    return "[" + std::string::to_string(range.begin) + ", " + std::string::to_string(range.end) + "]";
 };
 
 struct RangeBeginSizeBase<T> {
@@ -131,7 +140,7 @@ struct RangeBeginSizeBase<T> {
 } [[format("format_range_begin_size")]];
 
 fn format_range_begin_size(ref auto range) {
-    return "[" + std::string::to_string(range.begin) + ", " + std::string::to_string(range.begin + range.size) + ")";
+    return "[" + std::string::to_string(range.begin) + ", " + std::string::to_string(range.begin + range.size - 1) + "]";
 };
 
 using RangeBeginEnd = RangeBeginEndBase<u16>;
@@ -215,6 +224,15 @@ struct Message_Z {
     ///   * 10295924
     u32 c;
     f32 parameter;
+    /// Rtc values:
+    /// CAMERA
+    /// PURSUIT
+    /// NEAR
+    /// FAR
+    /// NEXT_DUMMY - Maybe some variation of this
+    /// P0
+    /// P1
+    /// DUMMY
     Name_Z message_name;
 };
 

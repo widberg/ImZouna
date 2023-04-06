@@ -272,6 +272,7 @@ struct VertexGroup {
     u32 vertex_buffer_range_begin_or_zero;
     std::assert(vertex_buffer_range_begin_or_zero == 0 || vertex_buffer_range_begin_or_zero == vertex_buffer_range.begin, "vertex_buffer_range_begin_or_zero != 0 && vertex_buffer_range_begin_or_zero != vertex_buffer_range.begin");
     u16 vertex_size;
+    /// Sometimes -1
     i16 material_index;
     DynArray_Z<Unused1> unused1s;
 };
