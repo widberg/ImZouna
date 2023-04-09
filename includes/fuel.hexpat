@@ -140,7 +140,7 @@ struct RangeBeginSizeBase<T> {
 } [[format("format_range_begin_size")]];
 
 fn format_range_begin_size(ref auto range) {
-    return "[" + std::string::to_string(range.begin) + ", " + std::string::to_string(range.begin + range.size - 1) + "]";
+    return "[" + std::string::to_string(range.begin) + ", " + std::string::to_string(range.begin + range.size) + ")";
 };
 
 using RangeBeginEnd = RangeBeginEndBase<u16>;
