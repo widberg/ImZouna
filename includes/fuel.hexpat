@@ -49,6 +49,16 @@ fn is_normalized(ref auto vec) {
     return std::math::abs(magnitude(vec) - 1) < 0.001;
 };
 
+fn all_normalized(ref auto arr) {
+    for (usize i = 0, i < std::core::member_count(arr), i = i + 1) {
+        if (!is_normalized(arr[i])) {
+            std::print(std::string::to_string(magnitude(arr[i].data)));
+            return false;
+        }
+    }
+    return true;
+};
+
 fn is_normalized_or_zero(ref auto vec) {
     f32 magnitude = magnitude(vec);
     return (magnitude == 0 || std::math::abs(magnitude - 1) < 0.1);
@@ -423,3 +433,85 @@ using KeyframerVec4fLinear_Z = KeyframerTpl_Z<KeyVec4fLinear_Z>;
 using KeyframerVec4fLinearComp_Z = KeyframerTpl_Z<KeyVec4fLinearComp_Z>;
 using KeyframerRot_Z = KeyframerNoFlagsTpl_Z<KeyRot_Z>;
 using KeyframerBezierRot_Z  = KeyframerNoFlagsTpl_Z<KeyBezierRot_Z>;
+
+/// Used by Lod_Z and Mesh_Z
+struct DynSphere {
+    Sphere_Z sphere;
+    /// 0x10000000 - 
+    /// 0x08000000 - 
+    /// 0x04000000 - 
+    /// 0x01000000 - 
+    /// 0x00010000 - 
+    /// 0x00000007 - 
+    u32 flags;
+    /// Observed values:
+    ///   * LOCAL_LOOKAT - 3243480878
+    ///   * LOCAL_ATTACH - 3355622209
+    ///   * LOCAL_LIMIT - 3448189790
+    ///   * DYN_POINT1 - 1178470142
+    ///   * DYN_POINT2 - 1266491431
+    ///   * DYN_POINT3 - 1337736592
+    ///   * DYN_POINT4 - 1375432085
+    ///   * DYN_POINT5 - 1429893154
+    ///   * DYN_POINT6 - 1484347131
+    ///   * DYN_POINT7 - 1555581772
+    ///   * DYN_POINT8 - 4092384112
+    ///   * DYN_POINT9 - 1614211910
+    ///   * DYN_POINT10 - 1631719061
+    ///   * DYN_POINT11 - 1703088930
+    ///   * DYN_POINT12 - 1757427195
+    ///   * DYN_POINT13 - 1812015180
+    ///   * DYN_POINT14 - 1917220937
+    ///   * DYN_POINT15 - 1988584958
+    ///   * DYN_POINT16 - 2076459815
+    Name_Z dyn_sphere_name;
+};
+
+/// Used by Lod_Z and Mesh_Z
+struct DynBox {
+    Mat4f mat;
+    /// 0x10000000 - 
+    /// 0x08000000 - 
+    /// 0x04000000 - 
+    /// 0x01000000 - 
+    /// 0x00010000 - 
+    /// 0x00000007 - 
+    u32 flags;
+    /// Observed values:
+    ///   * SFX_FIRE1 - 4217370453
+    ///   * SFX_EXHAUST1 - 342724588
+    ///   * SFX_EXHAUST2 - 422488373
+    ///   * SFX_EXHAUST3 - 502248578
+    ///   * SFX_EXHAUST4 - 61400199
+    ///   * SFX_EXHAUST5 - 124385584
+    ///   * SFX_EXHAUST6 - 170581993
+    ///   * SFX_EXHAUST7 - 250331742
+    ///   * SFX_EXHAUST8 - 916750307
+    ///   * SFX_EXHAUST9 - 845505108
+    ///   * SFX_EXHAUST10 - 612613378
+    ///   * SFX_EXHAUST11 - 541237429
+    ///   * SFX_EXHAUST12 - 755074668
+    ///   * SFX_EXHAUST13 - 700488667
+    ///   * SFX_EXHAUST14 - 931646430
+    ///   * SFX_EXHAUST15 - 860280425
+    ///   * SFX_EXHAUST16 - 1040576688
+    ///   * DURL - 2234468230
+    ///   * DYN_DAMAGE - 917337438
+    ///   * DYN_XFILTER - 3491467995
+    ///   * DYN_YFILTER - 1699973321
+    ///   * DYN_ZFILTER - 354920422
+    ///   * DYN_TENSION - 1676256635
+    ///   * DYN_VCOL - 1062800321
+    ///   * DYN_WINDPOW - 795155901
+    ///   * DYN_EXTPOW - 318847781
+    ///   * DYN_MVRATIO - 3678433905
+    ///   * DYN_VISCOSITY - 3134916619
+    ///   * DYN_STATICROTATION - 1081475432
+    ///   * DYN_R - 320233663
+    ///   * DYN_L - 1669929925
+    ///   * DYN_BR - 2360085526
+    ///   * DYN_FR - 2821249261
+    ///   * DYN_BL - 4231231340
+    ///   * DYN_FL - 3635913623
+    Name_Z dyn_box_name;
+};

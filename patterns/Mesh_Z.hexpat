@@ -2,94 +2,13 @@
 
 #include <fuel.hexpat>
 
-struct DynPoint {
-    /// point.radius unused?
-    Sphere_Z point;
-    /// 0x10000000 - 
-    /// 0x08000000 - 
-    /// 0x04000000 - 
-    /// 0x01000000 - 
-    /// 0x00010000 - 
-    /// 0x00000007 - 
-    u32 flags;
-    /// Observed values:
-    ///   * LOCAL_LOOKAT - 3243480878
-    ///   * LOCAL_ATTACH - 3355622209
-    ///   * LOCAL_LIMIT - 3448189790
-    ///   * DYN_POINT1 - 1178470142
-    ///   * DYN_POINT2 - 1266491431
-    ///   * DYN_POINT3 - 1337736592
-    ///   * DYN_POINT4 - 1375432085
-    ///   * DYN_POINT5 - 1429893154
-    ///   * DYN_POINT6 - 1484347131
-    ///   * DYN_POINT7 - 1555581772
-    ///   * DYN_POINT8 - 4092384112
-    ///   * DYN_POINT9 - 1614211910
-    ///   * DYN_POINT10 - 1631719061
-    ///   * DYN_POINT11 - 1703088930
-    ///   * DYN_POINT12 - 1757427195
-    ///   * DYN_POINT13 - 1812015180
-    ///   * DYN_POINT14 - 1917220937
-    ///   * DYN_POINT15 - 1988584958
-    ///   * DYN_POINT16 - 2076459815
-    Name_Z dyn_point_name;
-};
-
-struct DynBox {
-    Mat4f mat;
-    /// 0x10000000 - 
-    /// 0x08000000 - 
-    /// 0x04000000 - 
-    /// 0x01000000 - 
-    /// 0x00010000 - 
-    /// 0x00000007 - 
-    u32 flags;
-    /// Observed values:
-    ///   * SFX_FIRE1 - 4217370453
-    ///   * SFX_EXHAUST1 - 342724588
-    ///   * SFX_EXHAUST2 - 422488373
-    ///   * SFX_EXHAUST3 - 502248578
-    ///   * SFX_EXHAUST4 - 61400199
-    ///   * SFX_EXHAUST5 - 124385584
-    ///   * SFX_EXHAUST6 - 170581993
-    ///   * SFX_EXHAUST7 - 250331742
-    ///   * SFX_EXHAUST8 - 916750307
-    ///   * SFX_EXHAUST9 - 845505108
-    ///   * SFX_EXHAUST10 - 612613378
-    ///   * SFX_EXHAUST11 - 541237429
-    ///   * SFX_EXHAUST12 - 755074668
-    ///   * SFX_EXHAUST13 - 700488667
-    ///   * SFX_EXHAUST14 - 931646430
-    ///   * SFX_EXHAUST15 - 860280425
-    ///   * SFX_EXHAUST16 - 1040576688
-    ///   * DURL - 2234468230
-    ///   * DYN_DAMAGE - 917337438
-    ///   * DYN_XFILTER - 3491467995
-    ///   * DYN_YFILTER - 1699973321
-    ///   * DYN_ZFILTER - 354920422
-    ///   * DYN_TENSION - 1676256635
-    ///   * DYN_VCOL - 1062800321
-    ///   * DYN_WINDPOW - 795155901
-    ///   * DYN_EXTPOW - 318847781
-    ///   * DYN_MVRATIO - 3678433905
-    ///   * DYN_VISCOSITY - 3134916619
-    ///   * DYN_STATICROTATION - 1081475432
-    ///   * DYN_R - 320233663
-    ///   * DYN_L - 1669929925
-    ///   * DYN_BR - 2360085526
-    ///   * DYN_FR - 2821249261
-    ///   * DYN_BL - 4231231340
-    ///   * DYN_FL - 3635913623
-    Name_Z dyn_box_name;
-};
-
 struct Mesh_Z_LinkHeader : Object_Z {
     /// all the material names followed by the mesh data crc32
     DynArray_Z<Name_Z> names;
     FadeDistances fade;
     /// May be referenced in UserDefines
     /// LOCAL_LOOKAT is required on vehicle chassis
-    DynArray_Z<DynPoint> dyn_points;
+    DynArray_Z<DynSphere> dyn_spheres;
     /// read only when spawning model into the world
     DynArray_Z<DynBox> dyn_boxes;
 };
@@ -130,10 +49,8 @@ struct CollisionAABB {
 struct CollisionFace {
     /// Indices that make up the tri face
     u16 short_vec_weirds_indices[3];
-    /// 0/1
-    /// not winding order
-    /// double sided?
-    u16 option;
+    /// 0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 15, 22
+    u16 surface_type;
 };
 
 struct Unused8 {
@@ -147,13 +64,13 @@ struct Unused8 {
     u32 unused7;
 };
 
-using VertexVecComponent = u8 [[format("format_vertex_vec_component"), transform("format_vertex_vec_component")]];
+using VertexVectorComponent = u8 [[format("format_vertex_vector_component"), transform("format_vertex_vector_component")]];
 
-fn format_vertex_vec_component(ref auto vvc) {
+fn format_vertex_vector_component(ref auto vvc) {
     return (vvc / 255.0) * 2 - 1;
 };
 
-using VertexVec3u8 = Vec<VertexVecComponent, 3>;
+using VertexVector3u8 = Vec<VertexVectorComponent, 3>;
 
 struct VertexLayoutPosition {
     Vec3f position;
@@ -161,11 +78,11 @@ struct VertexLayoutPosition {
 
 struct VertexLayoutNoBlend {
     Vec3f position;
-    VertexVec3u8 tangent;
+    VertexVector3u8 tangent;
     std::assert(is_normalized_or_zero(tangent), "VertexLayoutNoBlend !is_normalized_or_zero(tangent)");
     u8 pad0 [[hidden]];
     std::assert(pad0 == 1 || pad0 == 255, "VertexLayoutNoBlend pad0 != 1,255");
-    VertexVec3u8 normal;
+    VertexVector3u8 normal;
     std::assert(is_normalized_or_zero(normal), "VertexLayoutNoBlend !is_normalized_or_zero(normal)");
     u8 pad1 [[hidden]];
     std::assert(pad1 == 0 || pad1 == 1 || pad1 == 255, "VertexLayoutNoBlend pad1 != 0,1,255");
@@ -181,11 +98,11 @@ fn format_vertex_blend_index(ref auto vbi) {
 
 struct VertexLayout1Blend {
     Vec3f position;
-    VertexVec3u8 tangent;
+    VertexVector3u8 tangent;
     std::assert(is_normalized_or_zero(tangent), "VertexLayout1Blend !is_normalized_or_zero(tangent)");
     u8 pad0 [[hidden]];
     std::assert(pad0 == 1 || pad0 == 255, "VertexLayout1Blend pad0 != 1,255");
-    VertexVec3u8 normal;
+    VertexVector3u8 normal;
     std::assert(is_normalized_or_zero(normal), "VertexLayout1Blend !is_normalized_or_zero(normal)");
     u8 pad1 [[hidden]];
     std::assert(pad1 == 1 || pad1 == 255, "VertexLayout1Blend pad1 != 1,255");
@@ -199,11 +116,11 @@ struct VertexLayout1Blend {
 
 struct VertexLayout4Blend {
     Vec3f position;
-    VertexVec3u8 tangent;
+    VertexVector3u8 tangent;
     std::assert(is_normalized_or_zero(tangent), "VertexLayout4Blend !is_normalized_or_zero(tangent)");
     u8 pad0 [[hidden]];
     std::assert(pad0 == 1 || pad0 == 255, "VertexLayout4Blend pad0 != 1,255");
-    VertexVec3u8 normal;
+    VertexVector3u8 normal;
     std::assert(is_normalized_or_zero(normal), "VertexLayout4Blend !is_normalized_or_zero(normal)");
     u8 pad1 [[hidden]];
     std::assert(pad1 == 1 || pad1 == 255, "VertexLayout4Blend pad1 != 1,255");
@@ -287,8 +204,10 @@ struct AABBMorphTrigger {
     RangeBeginSize map_index_range;
 };
 
+using DisplacementVectorComponent = NumeratorFloat<i16, 1024>;
+
 struct DisplacementVector {
-        Vec<NumeratorFloat<i16, 1024>, 3> displacement;
+        Vec<DisplacementVectorComponent, 3> displacement;
         u16 displacement_vectors_self_index;
         std::assert(displacement_vectors_self_index == std::core::array_index(), "displacement_vectors_self_index != std::core::array_index()");
 };

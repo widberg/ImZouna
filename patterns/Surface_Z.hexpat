@@ -2,11 +2,11 @@
 
 #include <fuel.hexpat>
 
-struct Unknown2 {
+struct Unused2 {
     u8 data[32];
 };
 
-struct Unknown3 {
+struct Unused3 {
     u8 data[32];
 };
 
@@ -34,40 +34,44 @@ bitfield ShouldDrawBitfield { // 16 bits
     other : 8;
 };
 
-struct Unknown12 {
+struct Unused12 {
     u8 data[32];
 };
 
 struct SeadVoxel_Z {
-    u16 element_entry;
-    u16 num_element;
+    RangeBeginSize patches_indices_range;
 };
 
 struct Unknown15 {
     f32 data[48];
-    u32 unknown0s[4];
+    u32 sead_voxel_count;
+    u32 patch_count_related;
+    u32 unknown0s[2];
 };
 
 struct SeadIndex_Z {
     DynArray_Z<SeadVoxel_Z> sead_voxels;
-    DynArray_Z<u16> elements;
+    DynArray_Z<u16> patches_indices;
     Unknown15 unknown15;
-    u32 repeated_patch_count;
+    u32 patch_count;
 };
 
 struct Surface_Z : Object_Z {
     std::assert(type == ObjectType::Surface_Z, "type != ObjectType::Surface_Z");
     DynArray_Z<Vec3f> vertices;
     DynArray_Z<Vec4f> vec4fs;
-    DynArray_Z<Unknown2> unknown2s;
-    DynArray_Z<Unknown3> unknown3s;
+    DynArray_Z<Unused2> unused2s;
+    std::assert(unused2s.size == 0, "unused2s.size != 0");
+    DynArray_Z<Unused3> unused3s;
+    std::assert(unused3s.size == 0, "unused3s.size != 0");
     DynArray_Z<Patch_Z> patches;
     DynArray_Z<Edge_Z> edges;
     DynArray_Z<Vec3f> normals;
     DynArray_Z<Vec3f> vertex9s;
     DynArray_Z<Vec2f> vertex10s;
     DynArray_Z<ShouldDrawBitfield> should_draw_relateds;
-    DynArray_Z<Unknown12> unknown12s;
+    DynArray_Z<Unused12> unused12s;
+    std::assert(unused12s.size == 0, "unused12s.size != 0");
     Optional<SeadIndex_Z> sead_index;
 };
 

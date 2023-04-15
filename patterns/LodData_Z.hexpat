@@ -51,6 +51,7 @@ struct LodData_Z : ObjectDatas_Z {
     DynArray_Z<Name_Z> mesh_data_names;
     /// always 0
     u32 zero;
+    std::assert(zero == 0, "zero != 0");
     Optional<Extended> extended;
 };
 

@@ -7,7 +7,7 @@ struct SkinSubsection {
     Name_Z animation_node_name1;
     Name_Z animation_node_name2;
     Name_Z animation_node_name3;
-    Name_Z names[21];
+    Name_Z names[parent.parent.parent.parent.data_count];
 };
 
 struct SkinSection {
