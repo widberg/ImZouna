@@ -3,19 +3,19 @@
 #include <fuel.hexpat>
 
 struct MaterialAnim_Z : ResourceObject_Z {
-    KeyframerHdl_Z unknown0;
-    KeyframerVec2fLinear_Z unknown1;
-    KeyframerVec2fLinear_Z unknown2;
-    KeyframerFloatLinearComp_Z unknown3;
-    KeyframerVec3fLinear_Z unknown4;
-    KeyframerVec3fLinear_Z unknown5;
-    KeyframerFloatLinearComp_Z unknown6;
-    KeyframerVec4fLinear_Z unknown7;
-    KeyframerVec4fLinear_Z unknown8;
-    KeyframerFlag_Z unknown9;
-    KeyframerFlag_Z unknown10;
-    Name_Z materialCRC32;
-    f32 unknownFloat;
+    KeyframerHdl_Z bitmap_name_keyframer;
+    KeyframerVec2fLinear_Z scroll_keyframer;
+    KeyframerVec2fLinear_Z scale_keyframer;
+    KeyframerFloatLinearComp_Z rotation_keyframer;
+    KeyframerVec3fLinear_Z diffuse_keyframer;
+    KeyframerVec3fLinear_Z emission_keyframer;
+    KeyframerFloatLinearComp_Z alpha_keyframer;
+    KeyframerVec4fLinear_Z vec4f_keyframer0;
+    KeyframerVec4fLinear_Z vec4f_keyframer1;
+    KeyframerFlag_Z flag_keyframer0;
+    KeyframerFlag_Z flag_keyframer1;
+    Name_Z base_material_name;
+    f32 duration;
     u8 unknown15;
 };
 
