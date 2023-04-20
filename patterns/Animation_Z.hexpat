@@ -53,14 +53,14 @@ struct Unknown14 {
 };
 
 struct Animation_Z : ResourceObject_Z {
-    f32 a;
-    f32 b;
+    f32 duration;
+    f32 blending;
     u16 c;
     u16 d;
-    AnimationNode animationNode;
-    AnimationMaterial animationMaterial;
-    AnimationMesh animationMesh;
-    AnimationMorph animationMorph;
+    AnimationNode animation_node;
+    AnimationMaterial animation_material;
+    AnimationMesh animation_mesh;
+    AnimationMorph animation_morph;
     DynArray_Z<Unknown12> unknown12s;
     DynArray_Z<Unknown13> unknown13s;
     DynArray_Z<Unknown14> unknown14s;
