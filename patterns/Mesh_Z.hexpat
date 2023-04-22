@@ -80,12 +80,12 @@ struct VertexLayoutNoBlend {
     Vec3f position;
     VertexVector3u8 tangent;
     std::assert(is_normalized_or_zero(tangent), "VertexLayoutNoBlend !is_normalized_or_zero(tangent)");
-    u8 pad0 [[hidden]];
-    std::assert(pad0 == 1 || pad0 == 255, "VertexLayoutNoBlend pad0 != 1,255");
+    VertexVectorComponent tangent_w;
+    std::assert(tangent_w == -1 || tangent_w == format_vertex_vector_component(1) || tangent_w == 1, "VertexLayoutNoBlend tangent_w != -1,format_vertex_vector_component(1),1");
     VertexVector3u8 normal;
     std::assert(is_normalized_or_zero(normal), "VertexLayoutNoBlend !is_normalized_or_zero(normal)");
-    u8 pad1 [[hidden]];
-    std::assert(pad1 == 0 || pad1 == 1 || pad1 == 255, "VertexLayoutNoBlend pad1 != 0,1,255");
+    VertexVectorComponent normal_w;
+    std::assert(normal_w == -1 || normal_w == format_vertex_vector_component(1) || normal_w == 1, "VertexLayoutNoBlend normal_w != -1,format_vertex_vector_component(1),1");
     Vec2f uv;
     Vec2f luv;
 };
@@ -100,12 +100,12 @@ struct VertexLayout1Blend {
     Vec3f position;
     VertexVector3u8 tangent;
     std::assert(is_normalized_or_zero(tangent), "VertexLayout1Blend !is_normalized_or_zero(tangent)");
-    u8 pad0 [[hidden]];
-    std::assert(pad0 == 1 || pad0 == 255, "VertexLayout1Blend pad0 != 1,255");
+    VertexVectorComponent tangent_w;
+    std::assert(tangent_w == -1 || tangent_w == format_vertex_vector_component(1) || tangent_w == 1, "VertexLayout1Blend tangent_w != -1,format_vertex_vector_component(1),1");
     VertexVector3u8 normal;
     std::assert(is_normalized_or_zero(normal), "VertexLayout1Blend !is_normalized_or_zero(normal)");
-    u8 pad1 [[hidden]];
-    std::assert(pad1 == 1 || pad1 == 255, "VertexLayout1Blend pad1 != 1,255");
+    VertexVectorComponent normal_w;
+    std::assert(normal_w == -1 || normal_w == format_vertex_vector_component(1) || normal_w == 1, "VertexLayout1Blend normal_w != -1,format_vertex_vector_component(1),1");
     Vec2f uv;
     VertexBlendIndex blend_index;
     i32 pad2[3] [[hidden]];
@@ -118,35 +118,61 @@ struct VertexLayout4Blend {
     Vec3f position;
     VertexVector3u8 tangent;
     std::assert(is_normalized_or_zero(tangent), "VertexLayout4Blend !is_normalized_or_zero(tangent)");
-    u8 pad0 [[hidden]];
-    std::assert(pad0 == 1 || pad0 == 255, "VertexLayout4Blend pad0 != 1,255");
+    VertexVectorComponent tangent_w;
+    std::assert(tangent_w == -1 || tangent_w == format_vertex_vector_component(1) || tangent_w == 1, "VertexLayout4Blend tangent_w != -1,format_vertex_vector_component(1),1");
     VertexVector3u8 normal;
     std::assert(is_normalized_or_zero(normal), "VertexLayout4Blend !is_normalized_or_zero(normal)");
-    u8 pad1 [[hidden]];
-    std::assert(pad1 == 1 || pad1 == 255, "VertexLayout4Blend pad1 != 1,255");
+    VertexVectorComponent normal_w;
+    std::assert(normal_w == -1 || normal_w == format_vertex_vector_component(1) || normal_w == 1, "VertexLayout4Blend normal_w != -1,format_vertex_vector_component(1),1");
     Vec2f uv;
     VertexBlendIndex blend_indices[4];
     f32 blend_weights[4];
 };
 
+/// Only one should be set
+/// Least significant bit set takes effect
+/// Defaults to D3DPOOL_FORCE_DWORD if none are set
+bitfield D3DPOOL {
+    D3DPOOL_DEFAULT : 1;
+    D3DPOOL_MANAGED : 1;
+    D3DPOOL_SYSTEMMEM : 1;
+    D3DPOOL_SCRATCH : 1;
+};
+
+/// Multiple can be set
+bitfield D3DUSAGE {
+    D3DUSAGE_DYNAMIC : 1;
+    D3DUSAGE_WRITEONLY : 1;
+    padding : 1;
+    /// Sometimes set but never tested
+    UNKNOWN : 1;
+    padding : 24;
+};
+
+bitfield D3DFlags {
+    D3DPOOL d3d_pool;
+    D3DUSAGE d3d_usage;
+    std::assert((d3d_pool.D3DPOOL_SYSTEMMEM == 1) || (d3d_pool.D3DPOOL_MANAGED == 1 && d3d_usage.D3DUSAGE_WRITEONLY == 1) || (d3d_pool.D3DPOOL_MANAGED == 1 && d3d_usage.D3DUSAGE_WRITEONLY == 1 && d3d_usage.UNKNOWN == 1), "flags != 4,34,162");
+};
+
 struct VertexBufferExt {
     u32 vertex_count;
     u32 vertex_size;
-    std::assert(vertex_size == 12 || vertex_size == 36 || vertex_size == 48 || vertex_size == 60, "vertex_size != 12,32,48,60");
-    u32 vertex_buffer_id;
-    std::assert(vertex_buffer_id == 4 || vertex_buffer_id == 34 || vertex_buffer_id == 162, "vertex_buffer_id != 4,34,162"+std::string::to_string(vertex_buffer_id));
+    /// Should match the corresponding IndexBufferExt flags
+    D3DFlags flags;
     match (vertex_size) {
         (12): VertexLayoutPosition vertices[vertex_count];
         (36): VertexLayoutNoBlend vertices[vertex_count];
         (48): VertexLayout1Blend vertices[vertex_count];
         (60): VertexLayout4Blend vertices[vertex_count];
+        (_): std::assert(false, "vertex_size != 12,32,48,60");
     }
 };
 
 struct IndexBufferExt {
     u32 index_count;
-    u32 index_buffer_id;
-    std::assert(index_buffer_id == 4 || index_buffer_id == 34 || index_buffer_id == 162, "index_buffer_id != 4,34,162"+std::string::to_string(index_buffer_id));
+    /// Should match the corresponding VertexBufferExt flags
+    D3DFlags flags;
     u16 data[index_count];
 };
 
