@@ -139,3 +139,7 @@
 # WorldRef_Z
 0x10 lelong 0xAD3B9375 WorldRef_Z
 !:mime application/x-world-ref-z
+
+# DPC
+0x0 regex v[0-9.]+\ -\ Asobo\ Studio\ -\ Internal\ Cross\ Technology\0 DPC "%s"
+!:mime application/x-dpc

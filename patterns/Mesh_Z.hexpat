@@ -129,6 +129,14 @@ struct VertexLayout4Blend {
     f32 blend_weights[4];
 };
 
+/// The vertex layout corresponds to the number of bytes per vertex
+enum VertexLayout : u32 {
+    VertexLayoutPosition = 12,
+    VertexLayoutNoBlend = 36,
+    VertexLayout1Blend = 48,
+    VertexLayout4Blend = 60,
+};
+
 /// Only one should be set
 /// Least significant bit set takes effect
 /// Defaults to D3DPOOL_FORCE_DWORD if none are set
@@ -157,21 +165,19 @@ bitfield D3DFlags {
 
 struct VertexBufferExt {
     u32 vertex_count;
-    u32 vertex_size;
-    /// Should match the corresponding IndexBufferExt flags
+    VertexLayout vertex_layout;
+    std::assert(std::core::is_valid_enum(vertex_layout), "Invalid vertex_layout");
     D3DFlags flags;
-    match (vertex_size) {
-        (12): VertexLayoutPosition vertices[vertex_count];
-        (36): VertexLayoutNoBlend vertices[vertex_count];
-        (48): VertexLayout1Blend vertices[vertex_count];
-        (60): VertexLayout4Blend vertices[vertex_count];
-        (_): std::assert(false, "vertex_size != 12,32,48,60");
+    match (vertex_layout) {
+        (VertexLayout::VertexLayoutPosition): VertexLayoutPosition vertices[vertex_count];
+        (VertexLayout::VertexLayoutNoBlend): VertexLayoutNoBlend vertices[vertex_count];
+        (VertexLayout::VertexLayout1Blend): VertexLayout1Blend vertices[vertex_count];
+        (VertexLayout::VertexLayout4Blend): VertexLayout4Blend vertices[vertex_count];
     }
 };
 
 struct IndexBufferExt {
     u32 index_count;
-    /// Should match the corresponding VertexBufferExt flags
     D3DFlags flags;
     u16 data[index_count];
 };
@@ -204,9 +210,11 @@ bitfield VertexGroupFlags {
 struct VertexGroup {
     u32 vertex_buffer_index;
     u32 index_buffer_index;
+    std::assert(parent.parent.vertex_buffers.data[vertex_buffer_index].flags == parent.parent.index_buffers.data[index_buffer_index].flags, "vertex_buffers[vertex_buffer_index].flags != index_buffers[index_buffer_index].flags");
     RangeBeginSizeU32 quad_range;
     VertexGroupFlags flags;
     RangeBeginEnd vertex_buffer_range;
+    /// Not necessarily equal to vertex_buffer_range.end - vertex_buffer_range.begin + 1
     u32 vertex_count;
     u32 index_buffer_index_begin;
     u32 face_count;
@@ -214,7 +222,8 @@ struct VertexGroup {
     std::assert(zero == 0, "zero != 0");
     u32 vertex_buffer_range_begin_or_zero;
     std::assert(vertex_buffer_range_begin_or_zero == 0 || vertex_buffer_range_begin_or_zero == vertex_buffer_range.begin, "vertex_buffer_range_begin_or_zero != 0 && vertex_buffer_range_begin_or_zero != vertex_buffer_range.begin");
-    u16 vertex_size;
+    u16 vertex_layout;
+    std::assert(vertex_layout == parent.parent.vertex_buffers.data[vertex_buffer_index].vertex_layout, "vertex_layout == vertex_buffers[vertex_buffer_index].vertex_layout");
     /// Sometimes -1
     i16 material_index;
     DynArray_Z<Unused1> unused1s;

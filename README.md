@@ -15,6 +15,7 @@
 | Bitmap_Z | application/x-bitmap-z | [`patterns/Bitmap_Z.hexpat`](patterns/Bitmap_Z.hexpat) | Bitmap_Z |
 | Camera_Z | application/x-camera-z | [`patterns/Camera_Z.hexpat`](patterns/Camera_Z.hexpat) | Camera_Z |
 | CollisionVol_Z | application/x-collision-vol-z | [`patterns/CollisionVol_Z.hexpat`](patterns/CollisionVol_Z.hexpat) | CollisionVol_Z |
+| DPC | application/x-dpc | [`patterns/DPC.hexpat`](patterns/DPC.hexpat) | DPC |
 | Fonts_Z | application/x-fonts-z | [`patterns/Fonts_Z.hexpat`](patterns/Fonts_Z.hexpat) | Fonts_Z |
 | GameObj_Z | application/x-game-obj-z | [`patterns/GameObj_Z.hexpat`](patterns/GameObj_Z.hexpat) | GameObj_Z |
 | GenWorld_Z | application/x-gen-world-z | [`patterns/GenWorld_Z.hexpat`](patterns/GenWorld_Z.hexpat) | GenWorld_Z |
