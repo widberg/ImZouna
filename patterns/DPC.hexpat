@@ -3,12 +3,13 @@
 #include <fuel.hexpat>
 
 struct BlockDescription {
-    u32 block_type;
     u32 object_count;
     u32 padded_size;
     u32 data_size;
     u32 working_buffer_offset;
     u32 first_object_name;
+    u32 zero;
+    std::assert(zero == 0, "zero != ");
 };
 
 struct Header {
@@ -20,13 +21,14 @@ struct Header {
     u32 padded_size;
     u32 version_patch;
     u32 version_minor;
+    u32 version_major;
     BlockDescription block_descriptions[block_count];
     BlockDescription empty_block_descriptions[64 - block_count];
-    u32 zero;
     u32 pool_manifest_padded_size;
     u32 pool_manifest_offset;
     u32 pool_manifest_unused0;
     u32 pool_manifest_unused1;
+    std::assert(pool_manifest_unused0 == pool_manifest_unused1, "pool_manifest_unused0 != pool_manifest_unused1");
     u32 pool_object_decompression_buffer_capacity;
     u32 block_sector_padding_size;
     u32 pool_sector_padding_size;
@@ -42,6 +44,7 @@ struct ObjectHeader {
     u32 compressed_size;
     u32 class_name;
     u32 object_name;
+    std::assert(compressed_size == 0 || compressed_size <= float(decompressed_size) * 0.80, "20% minimum compression expectation violated");
 };
 
 struct BlockObject {
@@ -52,12 +55,6 @@ struct BlockObject {
 struct Block {
     BlockObject objects[parent.header.block_descriptions[std::core::array_index()].object_count];
     std::mem::AlignTo<2048>;
-};
-
-struct PoolManifestHeader {
-    u32 equals524288;
-    u32 equals2048;
-    u32 object_names_count_sum;
 };
 
 struct ReferenceRecord {
@@ -72,13 +69,21 @@ struct ReferenceRecord {
 };
 
 struct PoolManifest {
-    PoolManifestHeader pool_manifest_header;
+    u32 equals0x80000;
+    std::assert(equals0x80000 == 0x80000, "equals0x80000 != 0x80000");
+    u32 equals0x800;
+    std::assert(equals0x800 == 0x800, "equals0x800 != 0x800");
+    u32 object_names_count_sum;
     DynArray_Z<u32> object_names_indices;
     DynArray_Z<Name_Z> object_names;
     DynArray_Z<u32> reference_counts;
     DynArray_Z<u32> object_padded_size;
     DynArray_Z<u32> reference_records_indices;
     DynArray_Z<ReferenceRecord> reference_records;
+    std::assert(object_names.size == reference_counts.size, "object_names.size != reference_counts.size");
+    std::assert(reference_counts.size == object_padded_size.size, "reference_counts.size != object_padded_size.size");
+    std::assert(object_padded_size.size == reference_records_indices.size, "object_padded_size.size != reference_records_indices.size");
+    std::assert(reference_records_indices.size == reference_records.size, "reference_records_indices.size != reference_records.size");
     ReferenceRecord terminal;
 };
 
@@ -92,9 +97,49 @@ struct Pool {
     PoolObject pool_objects[pool_manifest.object_names_indices.size];
 };
 
+fn calculate_padded_size(u32 unpadded_size) {
+    return (unpadded_size + 0x7ff) & 0xfffff800;
+};
+
+fn calculate_padding_size(u32 unpadded_size) {
+    return calculate_padded_size(unpadded_size) - unpadded_size;
+};
+
+fn block_assert(ref auto header, ref auto block, u32 block_index) {
+    u32 object_count = header.block_descriptions[block_index].object_count;
+    u32 block_address = addressof(block);
+    u32 calculated_offset = 0;
+
+    for (u32 i = 0, i < object_count, i += 1) {
+        // if (block.objects[i].header.compressed_size != 0) {
+        //     u32 required_size = block.objects[i].header.decompressed_size;
+        //     u32 available_size = addressof(block.objects[i].data) - block_address;
+        //     if (required_size > available_size) {
+        //       calculated_offset = std::math::max(calculated_offset, calculate_padded_size(required_size - available_size));
+        //     }
+        // }
+        calculated_offset = std::math::max(calculated_offset, calculate_padded_size(block.objects[i].header.decompressed_size));
+    }
+
+    std::print("{} / 2048 = {}", calculated_offset, calculated_offset / 2048);
+
+    return true;
+};
+
+fn blocks_assert(ref auto header, ref auto blocks) {
+    for (u32 i = 0, i < std::core::member_count(blocks), i += 1) {
+        if (!block_assert(header, blocks[i], i)) {
+            return false;
+        }
+    }
+
+    return true;
+};
+
 struct DPC {
     Header header;
     Block blocks[header.block_count];
+    // std::assert(blocks_assert(header, blocks), "!blocks_assert(header, blocks)");
     if (header.pool_manifest_padded_size != 0) {
         Pool pool;
     }

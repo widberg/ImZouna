@@ -2,6 +2,7 @@
 #pragma endian little
 #pragma array_limit 0
 #pragma pattern_limit 0
+#pragma loop_limit 0
 
 #include <type/types/rust.pat>
 #include <std/math.pat>
