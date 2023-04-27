@@ -3,8 +3,7 @@
 #include <fuel.hexpat>
 
 struct SplineSubsection {
-    Vec3f point1;
-    Vec3f point2;
+    Vec3f P[2];
     f32 length;
 };
 

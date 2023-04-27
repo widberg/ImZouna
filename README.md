@@ -51,6 +51,7 @@
 
 | Name | Path | Description |
 |------|------|-------------|
+| jsonify | [`scripts/jsonify.py`](scripts/jsonify.py) | Generates a JSON file from a binary file |
 | validate | [`scripts/validate.py`](scripts/validate.py) | Runs the patterns against all files in a directory recursively |
 
 ### Pattern Libraries

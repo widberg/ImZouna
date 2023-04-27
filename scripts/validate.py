@@ -76,7 +76,7 @@ def main():
     parser.add_argument('-C', help='Working directory', type=str, default='.')
     parser.add_argument('-j', help='Number of parallel tests', type=int, default=1)
     parser.add_argument('--tests', help='Names of tests to run', type=str, nargs='+', default=extensions)
-    parser.add_argument('--plcli', help='Path to plcli executable', type=str, nargs='+', default=plcli_path)
+    parser.add_argument('--plcli', help='Path to plcli executable', type=str, default=plcli_path)
     args = parser.parse_args()
     plcli_path = args.plcli
     t0 = time.time()
