@@ -2,25 +2,36 @@
 
 #include <fuel.hexpat>
 
-struct SplineSubsection {
+struct SplineSegmentSubdivision {
+    /// Endpoints of the line segment
     Vec3f P[2];
+    /// Length of the line segment
+    /// Distance between P[0] and P[1]
     f32 length;
 };
 
-struct SplineSection {
+struct SplineSegment {
+    /// P and T contain indices into vertices
+    /// Control points { P[0], T[0], T[1], P[1] }
     u16 P[2];
     u16 T[2];
+    /// 0x10000000
+    /// 0x30000000
     u32 flags;
+    /// Length of the spline segment
     f32 length;
-    SplineSubsection spline_subsections[8];
+    /// Approximation of the spline segment divided into 8 line segments
+    /// P[0] of a subdivision will always be equal to P[1] of the previous subdivision if one exists
+    SplineSegmentSubdivision spline_segment_subdivisions[8];
 };
 
 struct Spline_Z : Object_Z {
     std::assert(type == ObjectType::Spline_Z, "type != ObjectType::Spline_Z");
     DynArray_Z<Vec3f> vertices;
-    DynArray_Z<SplineSection> spline_sections;
+    DynArray_Z<SplineSegment> spline_segments;
     /// (1, 0, 0, 1)
     Vec4f vec;
+    /// Length of the spline
     f32 length;
 };
 
