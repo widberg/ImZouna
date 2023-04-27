@@ -78,6 +78,6 @@ git clone https://github.com/widberg/ImFUEL.git --recurse-submodules --shallow-s
 
 Add the `ImFUEL` directory to ImHex `Help -> Settings -> Folders -> +`. Install the "Std" and "Type" ImHex libraries from `Help -> Content Store -> Libraries`.
 
-### Validate
+### Validate/JSONify
 
-To run the validate script you will need to build the PatternLanguage project's `plcli` tool by following the instructions for your system [here](https://github.com/WerWolv/ImHex/tree/master/dist/compiling). Note that those instructions are for compiling ImHex but they work on the PatternLanguage project too. The script expects to find the tool at `ImFUEL/build/cli/plcli`.
+To run the validate/JSONify script you will need to build the PatternLanguage project's `plcli` tool by following the instructions for your system [here](https://github.com/WerWolv/ImHex/tree/master/dist/compiling). Note that those instructions are for compiling ImHex but they work on the PatternLanguage project too. The script expects to find the tool at `ImFUEL/build/cli/plcli`.
