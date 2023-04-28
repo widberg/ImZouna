@@ -11,7 +11,7 @@ struct SplineSegmentSubdivision {
 };
 
 struct SplineSegment {
-    /// P and T contain indices into vertices
+    /// P and T contain indices into points
     /// Control points { P[0], T[0], T[1], P[1] }
     u16 P[2];
     u16 T[2];
@@ -27,7 +27,7 @@ struct SplineSegment {
 
 struct Spline_Z : Object_Z {
     std::assert(type == ObjectType::Spline_Z, "type != ObjectType::Spline_Z");
-    DynArray_Z<Vec3f> vertices;
+    DynArray_Z<Vec3f> points;
     DynArray_Z<SplineSegment> spline_segments;
     /// (1, 0, 0, 1)
     Vec4f vec;

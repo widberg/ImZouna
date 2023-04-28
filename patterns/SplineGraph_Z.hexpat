@@ -2,16 +2,26 @@
 
 #include <fuel.hexpat>
 
+struct SplineSegmentSubdivision {
+    /// Endpoints of the line segment
+    Vec3f P[2];
+    /// Length of the line segment
+    /// Distance between P[0] and P[1]
+    f32 length;
+};
+
 struct SplineSegment {
-    /// P and T contain indices into vertices
+    /// P and T contain indices into points
     /// Control points { P[0], T[0], T[1], P[1] }
     u16 P[2];
     u16 T[2];
-    u16 unknown;
-    std::assert(unknown == 0 || unknown == 2, "unknown != 0,2");
-    u16 equals4096;
-    std::assert(equals4096 == 4096, "equals4096 != 4096");
-    Vec3f f32s[19];
+    u32 flags;
+    std::assert(flags == 0x10000000 || flags == 0x10000002, "flags != 0x10000000,0x10000002");
+    /// Length of the spline segment
+    f32 length;
+    /// Approximation of the spline segment divided into 8 line segments
+    /// P[0] of a subdivision will always be equal to P[1] of the previous subdivision if one exists
+    SplineSegmentSubdivision spline_segment_subdivisions[8];
 };
 
 struct SplineGraph_Z : Object_Z {
