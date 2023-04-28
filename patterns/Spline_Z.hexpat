@@ -18,6 +18,7 @@ struct SplineSegment {
     /// 0x10000000
     /// 0x30000000
     u32 flags;
+    std::assert(flags == 0x10000000 || flags == 0x30000000, "flags != 0x10000000,0x30000000");
     /// Length of the spline segment
     f32 length;
     /// Approximation of the spline segment divided into 8 line segments
