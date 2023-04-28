@@ -2,7 +2,7 @@
 
 #include <fuel.hexpat>
 
-struct RotShape_Z : Object_Z {
+struct RotShape_Z : Points_Z {
     std::assert(type == ObjectType::RotShape_Z, "type != ObjectType::RotShape_Z");
     DynArray_Z<Vec3f> verticies;
     /// Always 0?

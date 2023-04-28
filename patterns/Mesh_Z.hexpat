@@ -2,7 +2,7 @@
 
 #include <fuel.hexpat>
 
-struct Mesh_Z_LinkHeader : Object_Z {
+struct Mesh_Z_LinkHeader : Points_Z {
     /// all the material names followed by the mesh data crc32
     DynArray_Z<Name_Z> names;
     FadeDistances fade;

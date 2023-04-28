@@ -15,7 +15,7 @@ struct Patch_Z {
     u16 index_in_unk_short_da;
     u16 edge_indices[4];
     u32 material_anim_index;
-    f32 data[12];
+    u32 data[12];
     Mat4f mat;
     u16 vec4fs_indices[4];
     u16 unknown3s[17];
@@ -43,7 +43,7 @@ struct SeadVoxel_Z {
 };
 
 struct Unknown15 {
-    f32 data[48];
+    u32 data[48];
     u32 sead_voxel_count;
     u32 patch_count_related;
     u32 unknown0s[2];
@@ -56,9 +56,9 @@ struct SeadIndex_Z {
     u32 patch_count;
 };
 
-struct Surface_Z : Object_Z {
+struct Surface_Z : Points_Z {
     std::assert(type == ObjectType::Surface_Z, "type != ObjectType::Surface_Z");
-    DynArray_Z<Vec3f> vertices;
+    DynArray_Z<Vec3f> points;
     DynArray_Z<Vec4f> vec4fs;
     DynArray_Z<Unused2> unused2s;
     std::assert(unused2s.size == 0, "unused2s.size != 0");
