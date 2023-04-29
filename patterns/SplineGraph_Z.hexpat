@@ -4,11 +4,11 @@
 
 struct SplineGraph_Z : Spline_Z {
     std::assert(type == ObjectType::SplineGraph_Z, "type != ObjectType::SplineGraph_Z");
-    std::assert(vec.data[0] >= 0.0 && vec.data[0] <= 1.0, "vec[0] < 0.0 || vec[0] > 1.0");
-    std::assert(vec.data[1] >= 0.0 && vec.data[1] <= 1.0, "vec[1] < 0.0 || vec[1] > 1.0");
-    std::assert(vec.data[2] >= 0.0 && vec.data[2] <= 1.0, "vec[2] < 0.0 || vec[2] > 1.0");
-    std::assert(vec.data[3] >= 0.0 && vec.data[3] <= 1.0, "vec[3] < 0.0 || vec[3] > 1.0");
-    std::assert(length == 0.0, "length == 0.0");
+    std::assert(vec.data[0] >= 0 && vec.data[0] <= 1, "vec[0] < 0 || vec[0] > 1");
+    std::assert(vec.data[1] >= 0 && vec.data[1] <= 1, "vec[1] < 0 || vec[1] > 1");
+    std::assert(vec.data[2] >= 0 && vec.data[2] <= 1, "vec[2] < 0 || vec[2] > 1");
+    std::assert(vec.data[3] >= 0 && vec.data[3] <= 1, "vec[3] < 0 || vec[3] > 1");
+    std::assert(length == 0, "length == 0");
     DynArray_Z<u32> unknown7s;
     std::assert(unknown7s.size == points.size, "unknown7s.size != points.size");
     std::assert(all_eq(unknown7s.data, 0), "!all_eq(unknown7s.data, 0)");
