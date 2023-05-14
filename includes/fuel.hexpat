@@ -306,6 +306,7 @@ bitfield ObjectFlags {
 };
 
 enum ObjectType : u16 {
+    Points_Z = 0,
     Surface_Z = 1,
     Spline_Z = 2,
     Skin_Z = 3,
@@ -313,11 +314,22 @@ enum ObjectType : u16 {
     Lod_Z = 5,
     Mesh_Z = 6,
     Camera_Z = 7,
+    SplineZone_Z = 9,
+    Occluder_Z = 10,
+    CameraZone_Z = 11,
     Light_Z = 12,
+    HFog_Z = 13,
     CollisionVol_Z = 14,
+    Emiter_Z = 15,
     Omni_Z = 16,
+    Graph_Z = 17,
     Particles_Z = 18,
+    Flare_Z = 19,
+    HField_Z = 20,
+    Tree_Z = 21,
     GenWorld_Z = 22,
+    Road_Z = 23,
+    GenWorldSurface_Z = 24,
     SplineGraph_Z = 25,
     WorldRef_Z = 26,
 };
