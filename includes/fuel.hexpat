@@ -313,6 +313,7 @@ enum ObjectType : u16 {
     Lod_Z = 5,
     Mesh_Z = 6,
     Camera_Z = 7,
+    Light_Z = 12,
     CollisionVol_Z = 14,
     Omni_Z = 16,
     Particles_Z = 18,
