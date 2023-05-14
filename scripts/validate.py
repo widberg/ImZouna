@@ -16,6 +16,7 @@ extensions = [
     'GameObj_Z',
     'GenWorld_Z',
     'GwRoad_Z',
+    'Light_Z',
     'LightData_Z',
     'Lod_Z',
     'LodData_Z',

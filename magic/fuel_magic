@@ -36,6 +36,10 @@
 0x10 lelong 0xE53AC75F GwRoad_Z
 !:mime application/x-gw-road-z
 
+# Light_Z
+0x10 lelong 0x7259FBDF Light_Z
+!:mime application/x-light-z
+
 # LightData_Z
 0x10 lelong 0x329378EA LightData_Z
 !:mime application/x-light-data-z
