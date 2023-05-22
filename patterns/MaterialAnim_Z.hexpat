@@ -2,6 +2,17 @@
 
 #include <fuel.hexpat>
 
+bitfield MaterialAnimFlags {
+    FLAG_0 : 1;
+    FLAG_1 : 1;
+    FLAG_2 : 1;
+    FLAG_3 : 1;
+    FLAG_4 : 1;
+    FLAG_5 : 1;
+    FLAG_6 : 1;
+    FLAG_7 : 1;
+};
+
 struct MaterialAnim_Z : ResourceObject_Z {
     KeyframerHdl_Z bitmap_name_keyframer;
     KeyframerVec2fLinear_Z scroll_keyframer;
@@ -16,7 +27,7 @@ struct MaterialAnim_Z : ResourceObject_Z {
     KeyframerFlag_Z flag_keyframer1;
     Name_Z base_material_name;
     f32 duration;
-    u8 unknown15;
+    MaterialAnimFlags flags;
 };
 
 MaterialAnim_Z material_anim_z @ 0x0;
