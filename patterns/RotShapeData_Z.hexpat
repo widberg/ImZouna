@@ -16,8 +16,10 @@ struct RotShapeData_Z : ObjectDatas_Z {
     std::assert(flags.FL_OBJECTDATAS_VP2_HIDE == 0, "flags.FL_OBJECTDATAS_VP2_HIDE != 0");
     std::assert(flags.FL_OBJECTDATAS_VP3_HIDE == 0, "flags.FL_OBJECTDATAS_VP3_HIDE != 0");
     std::assert(flags.FL_OBJECTDATAS_LAST == 0, "flags.FL_OBJECTDATAS_LAST != 0");
-    DynArray_Z<u16> shorts;
-    u8 pad[shorts.size * 28];
+    /// Same size as origins in the corresponding RotShape_Z
+    DynArray_Z<u16> zeros;
+    std::assert(all_eq(zeros, 0), "!all_eq(zeros, 0)");
+    u8 pad[zeros.size * 28];
     std::assert(all_eq(pad, 0xFF), "!all_eq(pad, 0xFF)");
 };
 
