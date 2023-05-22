@@ -3,11 +3,12 @@
 #include <fuel.hexpat>
 
 bitfield MaterialAnimFlags {
-    FLAG_0 : 1;
-    FLAG_1 : 1;
-    FLAG_2 : 1;
-    FLAG_3 : 1;
-    FLAG_4 : 1;
+    FL_MAT_PLAY : 1;
+    FL_MAT_PLAYED : 1;
+    FL_MAT_PLAYONCE : 1;
+    FL_MAT_NEVERAGAIN : 1;
+    FL_MAT_AUTOSTART : 1;
+    // FL_MAT_NOT_RESTART = FL_MAT_PLAYONCE | FL_MAT_PLAYED
     FLAG_5 : 1;
     FLAG_6 : 1;
     FLAG_7 : 1;
