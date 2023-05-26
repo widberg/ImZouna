@@ -5,11 +5,9 @@
 struct Character {
     /// Index in the material_names table of the material with this character
     u32 material_index;
-    f32 point;
     f32 height;
-    f32 y;
-    f32 x;
-    f32 width;
+    Vec2f top_left_corner;
+    Vec2f bottom_right_corner;
 };
 
 struct Fonts_Z : ResourceObject_Z {

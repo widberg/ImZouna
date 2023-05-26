@@ -34,7 +34,8 @@ struct Node_Z : ResourceObject_Z {
     Name_Z user_define_name;
     Name_Z light_data_name;
     /// Always? 0
-    Name_Z unused_name1;
+    /// Shadow map
+    Name_Z bitmap_name;
     /// Always? 0
     Name_Z unused_name2;
     /// Normalized

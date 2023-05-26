@@ -23,9 +23,9 @@ struct MaterialAnim_Z : ResourceObject_Z {
     KeyframerVec3fLinear_Z emission_keyframer;
     KeyframerFloatLinearComp_Z alpha_keyframer;
     KeyframerVec4fLinear_Z vec4f_keyframer0;
-    KeyframerVec4fLinear_Z vec4f_keyframer1;
-    KeyframerFlag_Z flag_keyframer0;
-    KeyframerFlag_Z flag_keyframer1;
+    KeyframerVec4fLinear_Z params_keyframer;
+    KeyframerFlag_Z render_flag_keyframer;
+    KeyframerFlag_Z object_flag_keyframer;
     Name_Z base_material_name;
     f32 duration;
     MaterialAnimFlags flags;
