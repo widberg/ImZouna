@@ -5,7 +5,9 @@
 struct Character {
     /// Index in the material_names table of the material with this character
     u32 material_index;
-    f32 height;
+    ///  Distance below the baseline to place this character
+    /// The higher the value the lower the character
+    f32 descent;
     Vec2f top_left_corner;
     Vec2f bottom_right_corner;
 };
