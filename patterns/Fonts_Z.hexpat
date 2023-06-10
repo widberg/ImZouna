@@ -12,10 +12,12 @@ struct Character {
     Vec2f bottom_right_corner;
 };
 
+/// ID is the UTF-8 representation of the character stored in reverse order with null bytes as padding
+/// See https://gist.github.com/widberg/64a19a2708aefd8861a0b268df54c3ed#file-zouna_utf8-py to convert between ids and UTF-8
+using CharacterID = u32;
+
 struct Fonts_Z : ResourceObject_Z {
-    /// ID is the UTF-8 representation of the character stored in reverse order with null bytes as padding
-    /// See https://gist.github.com/widberg/64a19a2708aefd8861a0b268df54c3ed#file-zouna_utf8-py to convert between ids and UTF-8
-    Map_Z<u32, Character> characters;
+    Map_Z<CharacterID, Character> characters;
     DynArray_Z<Name_Z> material_names;
 };
 
