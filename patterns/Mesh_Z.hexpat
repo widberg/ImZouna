@@ -66,7 +66,7 @@ struct Unused8 {
 
 using VertexVectorComponent = u8 [[format("format_vertex_vector_component"), transform("format_vertex_vector_component")]];
 
-fn format_vertex_vector_component(ref auto vvc) {
+fn format_vertex_vector_component(u8 vvc) {
     return (vvc / 255.0) * 2 - 1;
 };
 
