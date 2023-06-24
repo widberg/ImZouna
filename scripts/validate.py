@@ -12,6 +12,7 @@ extensions = [
     'Bitmap_Z',
     'Camera_Z',
     'CollisionVol_Z',
+    'DPC',
     'Fonts_Z',
     'GameObj_Z',
     'GenWorld_Z',

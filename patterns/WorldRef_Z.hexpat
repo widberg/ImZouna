@@ -26,7 +26,7 @@ struct WorldRef_Z : Object_Z {
     Vec3f pointA;
     Vec3f pointB;
     DynArray_Z<UUIDPair> uuid_pairs;
-    /// comma-separated list of TSC commands
+    /// semi-colon-separated list of TSC commands
     /// EX: "OpenBF WORLD\USA1_REGION_HUB_SALTLAKE_37923066;LoadWorldRef DB:>LEVELS>HUBS>QUARTIER_1>3DNODEGEOMETRY>HUB_SALTLAKE.TWORLDREF;CloseBF"
     PascalStringNULL init_script;
     DynArray_Z<Name_Z> node_name2;

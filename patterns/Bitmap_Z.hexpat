@@ -76,7 +76,7 @@ struct Bitmap_Z_LinkHeader : ResourceObject_Z {
 };
 
 struct Bitmap_Z : Bitmap_Z_LinkHeader {
-    u8 data[data_size - class_object_size];
+    u8 data[data_size - link_header_size];
 };
 
 Bitmap_Z bitmap_z @ 0x0;
