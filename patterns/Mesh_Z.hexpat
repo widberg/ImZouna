@@ -204,7 +204,7 @@ bitfield VertexGroupFlags {
     VISIBLE : 1;
     padding : 16;
     MORPH : 1;
-    padding : 11;
+    padding : 12;
 };
 
 struct VertexGroup {

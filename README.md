@@ -68,10 +68,14 @@
 
 ## Getting Started
 
+### Prerequisites
+
+* [ImHex](https://imhex.werwolv.net/) >= v1.31.0
+
 ### Checkout
 
 ```sh
-git clone https://github.com/widberg/ImFUEL.git --recurse-submodules --shallow-submodules
+git clone https://github.com/widberg/ImFUEL.git
 ```
 
 ### Usage
@@ -80,4 +84,4 @@ Add the `ImFUEL` directory to ImHex `Help -> Settings -> Folders -> +`. Install 
 
 ### Validate/JSONify
 
-To run the validate/JSONify script you will need to build the PatternLanguage project's `plcli` tool by following the instructions for your system [here](https://github.com/WerWolv/ImHex/tree/master/dist/compiling). Note that those instructions are for compiling ImHex but they work on the PatternLanguage project too. The script expects to find the tool at `ImFUEL/build/cli/plcli`.
+The scripts expect the ImHex executable to be in your `PATH` but you can manually specify the path to ImHex using the `--imhex` option. Run either script with the `--help` option for more information about that script.

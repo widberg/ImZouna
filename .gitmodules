@@ -1,6 +1,0 @@
-[submodule "PatternLanguage"]
-	path = PatternLanguage
-	url = https://github.com/WerWolv/PatternLanguage.git
-[submodule "ImHex-Patterns"]
-	path = ImHex-Patterns
-	url = https://github.com/WerWolv/ImHex-Patterns.git
