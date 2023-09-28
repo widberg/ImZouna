@@ -3,22 +3,23 @@
 #include <fuel.hexpat>
 
 struct Point {
-    be i32 encoded_vec2f_data0;
-    i8 encoded_vec2f_data1;
+    be i32 a;
+    u8 b;
 } [[sealed, format("format_point"), transform("format_point")]];
 
-fn format_point(ref auto point) {
-    i32 a = point.encoded_vec2f_data0;
-    i32 x = a >> 12;
-    i32 y = ((point.encoded_vec2f_data1 | (a << 8)) << 12) >> 12;
+fn format_point(ref auto p) {
+    i32 c = (p.b | (p.a << 8)) << 12;
+    i32 x = p.a >> 12;
+    i32 y = c >> 12;
     Vec2f vec2f;
-    vec2f[0] = x / 4.0;
-    vec2f[1] = y / 4.0;
+    vec2f.data[0] = x / 4.0;
+    vec2f.data[1] = y / 4.0;
     return vec2f;
 };
 
-struct Road {
-    u8 type;
+bitfield Road {
+    unsigned sub_type : 7;
+    bool short_cut : 1;
     DynArray_ZU16<Point> points;
 };
 
