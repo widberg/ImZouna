@@ -1,70 +1,121 @@
-# ImFUEL
+# ImZouna
 
-[ImHex](https://imhex.werwolv.net/) patterns for FUEL data structures.
+[ImHex](https://imhex.werwolv.net/) patterns for Zouna data structures.
 
 <sup>This repository is a relative of the main [FMTK repository](https://github.com/widberg/fmtk).</sup>
+
+See also: [zouna-templates-docs](https://github.com/SabeMP/zouna-templates-docs/tree/master)
 
 ## Table of Contents
 
 ### Hex Patterns
 
-| Name | MIME | Path | Description |
-|------|------|------|-------------|
-| Animation_Z | application/x-animation-z | [`patterns/Animation_Z.hexpat`](patterns/Animation_Z.hexpat) | Animation_Z |
-| Binary_Z | application/x-binary-z | [`patterns/Binary_Z.hexpat`](patterns/Binary_Z.hexpat) | Binary_Z |
-| Bitmap_Z | application/x-bitmap-z | [`patterns/Bitmap_Z.hexpat`](patterns/Bitmap_Z.hexpat) | Bitmap_Z |
-| Camera_Z | application/x-camera-z | [`patterns/Camera_Z.hexpat`](patterns/Camera_Z.hexpat) | Camera_Z |
-| CollisionVol_Z | application/x-collision-vol-z | [`patterns/CollisionVol_Z.hexpat`](patterns/CollisionVol_Z.hexpat) | CollisionVol_Z |
-| DPC | application/x-dpc | [`patterns/DPC.hexpat`](patterns/DPC.hexpat) | DPC |
-| Fonts_Z | application/x-fonts-z | [`patterns/Fonts_Z.hexpat`](patterns/Fonts_Z.hexpat) | Fonts_Z |
-| GameObj_Z | application/x-game-obj-z | [`patterns/GameObj_Z.hexpat`](patterns/GameObj_Z.hexpat) | GameObj_Z |
-| GenWorld_Z | application/x-gen-world-z | [`patterns/GenWorld_Z.hexpat`](patterns/GenWorld_Z.hexpat) | GenWorld_Z |
-| GwRoad_Z | application/x-gw-road-z | [`patterns/GwRoad_Z.hexpat`](patterns/GwRoad_Z.hexpat) | GwRoad_Z |
-| LightData_Z | application/x-light-data-z | [`patterns/LightData_Z.hexpat`](patterns/LightData_Z.hexpat) | LightData_Z |
-| Lod_Z | application/x-lod-z | [`patterns/Lod_Z.hexpat`](patterns/Lod_Z.hexpat) | Lod_Z |
-| LodData_Z | application/x-lod-data-z | [`patterns/LodData_Z.hexpat`](patterns/LodData_Z.hexpat) | LodData_Z |
-| Material_Z | application/x-material-z | [`patterns/Material_Z.hexpat`](patterns/Material_Z.hexpat) | Material_Z |
-| MaterialAnim_Z | application/x-material-anim-z | [`patterns/MaterialAnim_Z.hexpat`](patterns/MaterialAnim_Z.hexpat) | MaterialAnim_Z |
-| MaterialObj_Z | application/x-material-obj-z | [`patterns/MaterialObj_Z.hexpat`](patterns/MaterialObj_Z.hexpat) | MaterialObj_Z |
-| Mesh_Z | application/x-mesh-z | [`patterns/Mesh_Z.hexpat`](patterns/Mesh_Z.hexpat) | Mesh_Z |
-| MeshData_Z | application/x-mesh-data-z | [`patterns/MeshData_Z.hexpat`](patterns/MeshData_Z.hexpat) | MeshData_Z |
-| Node_Z | application/x-node-z | [`patterns/Node_Z.hexpat`](patterns/Node_Z.hexpat) | Node_Z |
-| Omni_Z | application/x-omni-z | [`patterns/Omni_Z.hexpat`](patterns/Omni_Z.hexpat) | Omni_Z |
-| Particles_Z | application/x-particles-z | [`patterns/Particles_Z.hexpat`](patterns/Particles_Z.hexpat) | Particles_Z |
-| ParticlesData_Z | application/x-particles-data-z | [`patterns/ParticlesData_Z.hexpat`](patterns/ParticlesData_Z.hexpat) | ParticlesData_Z |
-| RotShape_Z | application/x-rot-shape-z | [`patterns/RotShape_Z.hexpat`](patterns/RotShape_Z.hexpat) | RotShape_Z |
-| RotShapeData_Z | application/x-rot-shape-data-z | [`patterns/RotShapeData_Z.hexpat`](patterns/RotShapeData_Z.hexpat) | RotShapeData_Z |
-| Rtc_Z | application/x-rtc-z | [`patterns/Rtc_Z.hexpat`](patterns/Rtc_Z.hexpat) | Rtc_Z |
-| Skel_Z | application/x-skel-z | [`patterns/Skel_Z.hexpat`](patterns/Skel_Z.hexpat) | Skel_Z |
-| Skin_Z | application/x-skin-z | [`patterns/Skin_Z.hexpat`](patterns/Skin_Z.hexpat) | Skin_Z |
-| Sound_Z | application/x-sound-z | [`patterns/Sound_Z.hexpat`](patterns/Sound_Z.hexpat) | Sound_Z |
-| Spline_Z | application/x-spline-z | [`patterns/Spline_Z.hexpat`](patterns/Spline_Z.hexpat) | Spline_Z |
-| SplineGraph_Z | application/x-spline-graph-z | [`patterns/SplineGraph_Z.hexpat`](patterns/SplineGraph_Z.hexpat) | SplineGraph_Z |
-| Surface_Z | application/x-surface-z | [`patterns/Surface_Z.hexpat`](patterns/Surface_Z.hexpat) | Surface_Z |
-| SurfaceDatas_Z | application/x-surface-datas-z | [`patterns/SurfaceDatas_Z.hexpat`](patterns/SurfaceDatas_Z.hexpat) | SurfaceDatas_Z |
-| UserDefine_Z | application/x-user-define-z | [`patterns/UserDefine_Z.hexpat`](patterns/UserDefine_Z.hexpat) | UserDefine_Z |
-| Warp_Z | application/x-warp-z | [`patterns/Warp_Z.hexpat`](patterns/Warp_Z.hexpat) | Warp_Z |
-| World_Z | application/x-world-z | [`patterns/World_Z.hexpat`](patterns/World_Z.hexpat) | World_Z |
-| WorldRef_Z | application/x-world-ref-z | [`patterns/WorldRef_Z.hexpat`](patterns/WorldRef_Z.hexpat) | WorldRef_Z |
+#### BigFile
+
+| Year | Game                                                                            | Format                                                         |
+|------|---------------------------------------------------------------------------------|----------------------------------------------------------------|
+| 2002 | Jimmy Neutron: Boy Genius - BigSky                                              | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)       |
+|      | SpongeBob SquarePants: Revenge of the Flying Dutchman - BigSky                  | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)       |
+|      | Spirits & Spells (Castleween) (Mahou no Pumpkin) - Wanadoo                      | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)       |
+| 2003 | Super Farm - Asobo                                                              | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)       |
+| 2004 | Sitting Ducks - Asobo                                                           | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)       |
+|      | The Mummy: The Animated Series - Asobo                                          | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)       |
+| 2005 | CT Special Forces: Fire for Effect (Nemesis Strike) - Asobo                     | [`patterns/garfield/DPC.hexpat`](patterns/garfield/DPC.hexpat) |
+|      | Ratatouille (Prototype) - Asobo                                                 | [`patterns/garfield/DPC.hexpat`](patterns/garfield/DPC.hexpat) |
+| 2006 | Garfield: A Tail of Two Kitties (Garfield 2) - Asobo                            | [`patterns/garfield/DPC.hexpat`](patterns/garfield/DPC.hexpat) |
+|      | Championsheep Rally - Black Sheep                                               | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)       |
+| 2007 | Ratatouille - Asobo                                                             | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)         |
+|      | The Ugly Duckling and Me - Black Sheep                                          | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)       |
+|      | En Taxi avec Oui-Oui - Black Sheep                                              | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)       |
+| 2008 | WALL-E - Asobo                                                                  | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)         |
+|      | The Magic Roundabout - Black Sheep                                              | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)       |
+|      | Shaun White Snowboarding/Shaun White Snowboarding: Road Trip - Ubisoft Montreal |                                                                |
+|      | Warning: Code De La Route - Black Sheep                                         | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)       |
+| 2009 | FUEL - Asobo                                                                    | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)         |
+|      | Up - Asobo                                                                      | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)         |
+|      | Shaun White Snowboarding: World Stage - Ubisoft Montreal                        |                                                                |
+| 2010 | Toy Story 3 - Asobo                                                             | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)         |
+|      | Racket Sports/Racquet Sports/Racket Sports Party - Asobo                        | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)         |
+|      | Happy Neuron Academy - Black Sheep                                              | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)       |
+| 2012 | Kinect Rush: A Disney-Pixar Adventure - Asobo                                   | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat) |
+| 2013 | Super Farm (Re-release) - Asobo                                                 | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat) |
+| 2014 | Monopoly Plus/Monopoly Deal - Asobo                                             | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat) |
+| 2015 | The Mighty Quest for Epic Loot - Ubisoft Montreal                               |                                                                |
+| 2016 | Young Conker - Asobo                                                            | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat) |
+|      | Fragments - Asobo                                                               | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat) |
+| 2017 | Rush: A Disney-Pixar Adventure (Re-release) - Asobo                             | [`patterns/rush/DPC.hexpat`](patterns/rush/DPC.hexpat)         |
+|      | Monopoly Plus/Monopoly Deal/Monopoly for Nintendo Switch (Re-release) - Asobo   | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat) |
+| 2019 | A Plague Tale: Innocence - Asobo                                                | [`patterns/apti/DPC.hexpat`](patterns/apti/DPC.hexpat)         |
+| 2020 | Microsoft Flight Simulator - Asobo                                              | [`patterns/msfs/DPC.hexpat`](patterns/msfs/DPC.hexpat)         |
+| 2022 | A Plague Tale: Requiem - Asobo                                                  | [`patterns/aptr/DPC.hexpat`](patterns/aptr/DPC.hexpat)         |
+
+#### FUEL
+
+| Name            | MIME                           | Path                                                                           |
+|-----------------|--------------------------------|--------------------------------------------------------------------------------|
+| Animation_Z     | application/x-animation-z      | [`patterns/fuel/Animation_Z.hexpat`](patterns/fuel/Animation_Z.hexpat)         |
+| Binary_Z        | application/x-binary-z         | [`patterns/fuel/Binary_Z.hexpat`](patterns/fuel/Binary_Z.hexpat)               |
+| Bitmap_Z        | application/x-bitmap-z         | [`patterns/fuel/Bitmap_Z.hexpat`](patterns/fuel/Bitmap_Z.hexpat)               |
+| Camera_Z        | application/x-camera-z         | [`patterns/fuel/Camera_Z.hexpat`](patterns/fuel/Camera_Z.hexpat)               |
+| CollisionVol_Z  | application/x-collision-vol-z  | [`patterns/fuel/CollisionVol_Z.hexpat`](patterns/fuel/CollisionVol_Z.hexpat)   |
+| Fonts_Z         | application/x-fonts-z          | [`patterns/fuel/Fonts_Z.hexpat`](patterns/fuel/Fonts_Z.hexpat)                 |
+| GameObj_Z       | application/x-game-obj-z       | [`patterns/fuel/GameObj_Z.hexpat`](patterns/fuel/GameObj_Z.hexpat)             |
+| GenWorld_Z      | application/x-gen-world-z      | [`patterns/fuel/GenWorld_Z.hexpat`](patterns/fuel/GenWorld_Z.hexpat)           |
+| GwRoad_Z        | application/x-gw-road-z        | [`patterns/fuel/GwRoad_Z.hexpat`](patterns/fuel/GwRoad_Z.hexpat)               |
+| LightData_Z     | application/x-light-data-z     | [`patterns/fuel/LightData_Z.hexpat`](patterns/fuel/LightData_Z.hexpat)         |
+| Lod_Z           | application/x-lod-z            | [`patterns/fuel/Lod_Z.hexpat`](patterns/fuel/Lod_Z.hexpat)                     |
+| LodData_Z       | application/x-lod-data-z       | [`patterns/fuel/LodData_Z.hexpat`](patterns/fuel/LodData_Z.hexpat)             |
+| Material_Z      | application/x-material-z       | [`patterns/fuel/Material_Z.hexpat`](patterns/fuel/Material_Z.hexpat)           |
+| MaterialAnim_Z  | application/x-material-anim-z  | [`patterns/fuel/MaterialAnim_Z.hexpat`](patterns/fuel/MaterialAnim_Z.hexpat)   |
+| MaterialObj_Z   | application/x-material-obj-z   | [`patterns/fuel/MaterialObj_Z.hexpat`](patterns/fuel/MaterialObj_Z.hexpat)     |
+| Mesh_Z          | application/x-mesh-z           | [`patterns/fuel/Mesh_Z.hexpat`](patterns/fuel/Mesh_Z.hexpat)                   |
+| MeshData_Z      | application/x-mesh-data-z      | [`patterns/fuel/MeshData_Z.hexpat`](patterns/fuel/MeshData_Z.hexpat)           |
+| Node_Z          | application/x-node-z           | [`patterns/fuel/Node_Z.hexpat`](patterns/fuel/Node_Z.hexpat)                   |
+| Omni_Z          | application/x-omni-z           | [`patterns/fuel/Omni_Z.hexpat`](patterns/fuel/Omni_Z.hexpat)                   |
+| Particles_Z     | application/x-particles-z      | [`patterns/fuel/Particles_Z.hexpat`](patterns/fuel/Particles_Z.hexpat)         |
+| ParticlesData_Z | application/x-particles-data-z | [`patterns/fuel/ParticlesData_Z.hexpat`](patterns/fuel/ParticlesData_Z.hexpat) |
+| RotShape_Z      | application/x-rot-shape-z      | [`patterns/fuel/RotShape_Z.hexpat`](patterns/fuel/RotShape_Z.hexpat)           |
+| RotShapeData_Z  | application/x-rot-shape-data-z | [`patterns/fuel/RotShapeData_Z.hexpat`](patterns/fuel/RotShapeData_Z.hexpat)   |
+| Rtc_Z           | application/x-rtc-z            | [`patterns/fuel/Rtc_Z.hexpat`](patterns/fuel/Rtc_Z.hexpat)                     |
+| Skel_Z          | application/x-skel-z           | [`patterns/fuel/Skel_Z.hexpat`](patterns/fuel/Skel_Z.hexpat)                   |
+| Skin_Z          | application/x-skin-z           | [`patterns/fuel/Skin_Z.hexpat`](patterns/fuel/Skin_Z.hexpat)                   |
+| Sound_Z         | application/x-sound-z          | [`patterns/fuel/Sound_Z.hexpat`](patterns/fuel/Sound_Z.hexpat)                 |
+| Spline_Z        | application/x-spline-z         | [`patterns/fuel/Spline_Z.hexpat`](patterns/fuel/Spline_Z.hexpat)               |
+| SplineGraph_Z   | application/x-spline-graph-z   | [`patterns/fuel/SplineGraph_Z.hexpat`](patterns/fuel/SplineGraph_Z.hexpat)     |
+| Surface_Z       | application/x-surface-z        | [`patterns/fuel/Surface_Z.hexpat`](patterns/fuel/Surface_Z.hexpat)             |
+| SurfaceDatas_Z  | application/x-surface-datas-z  | [`patterns/fuel/SurfaceDatas_Z.hexpat`](patterns/fuel/SurfaceDatas_Z.hexpat)   |
+| UserDefine_Z    | application/x-user-define-z    | [`patterns/fuel/UserDefine_Z.hexpat`](patterns/fuel/UserDefine_Z.hexpat)       |
+| Warp_Z          | application/x-warp-z           | [`patterns/fuel/Warp_Z.hexpat`](patterns/fuel/Warp_Z.hexpat)                   |
+| World_Z         | application/x-world-z          | [`patterns/fuel/World_Z.hexpat`](patterns/fuel/World_Z.hexpat)                 |
+| WorldRef_Z      | application/x-world-ref-z      | [`patterns/fuel/WorldRef_Z.hexpat`](patterns/fuel/WorldRef_Z.hexpat)           |
 
 ### Scripts
 
-| Name | Path | Description |
-|------|------|-------------|
-| jsonify | [`scripts/jsonify.py`](scripts/jsonify.py) | Generates a JSON file from a binary file |
-| validate | [`scripts/validate.py`](scripts/validate.py) | Runs the patterns against all files in a directory recursively |
+| Name      | Path                                           | Description                                                    |
+|-----------|------------------------------------------------|----------------------------------------------------------------|
+| jsonify   | [`scripts/jsonify.py`](scripts/jsonify.py)     | Generates a JSON file from a binary file                       |
+| validate  | [`scripts/validate.py`](scripts/validate.py)   | Runs the patterns against all files in a directory recursively |
+| catalogue | [`scripts/catalogue.py`](scripts/catalogue.py) | Update the README with known BigFiles                          |
+| converge  | [`scripts/converge.py`](scripts/converge.py)   | Copy unique BigFiles for testing                               |
+| submit    | [`scripts/submit.py`](scripts/submit.py)       | Copy BigFiles from a game directory to the repository          |
 
 ### Pattern Libraries
 
 | Name | Path | Description |
 |------|------|-------------|
-| fuel | [`includes/fuel.hexpat`](includes/fuel.hexpat) | FUEL Library |
+| zouna | [`includes/zouna.hexpat`](includes/zouna.hexpat) | Zouna Library |
 
 ### Magic files
 
 | Name | Path | Description |
 |------|------|-------------|
-| FUEL | [`magic/fuel_magic`](magic/fuel_magic) | Identifies common file types used in FUEL |
+| Zouna | [`magic/zouna_magic`](magic/zouna_magic) | Identifies common file types used in Zouna |
+
+### BigFiles
+
+The `bigfiles` directory will contain the copied game BigFiles after running the submit script. The path of each BigFile will match the pattern `game_name / release_name / bigfile_version_number_normalized / path.relative_to(game_directory)`. The `game_name` component will be the name of the game. The `release_name` will be something like `PC_US` or `XB_JP`, this can be arbitrary but should be understandable. The `bigfile_version_number_normalized` will be the version number component of the version string at the beginning of the BigFile with the `.`s replaced by `_`. Finally, the remainder of the path will be the relative path to the BigFile from the root game directory.
+
+A list of BigFile paths and their hashes can be generated with the catalogue script and found in the [bigfile_hashes.csv file](bigfile_hashes.csv).
 
 ## Getting Started
 
@@ -75,12 +126,12 @@
 ### Checkout
 
 ```sh
-git clone https://github.com/widberg/ImFUEL.git
+git clone https://github.com/widberg/ImZouna.git
 ```
 
 ### Usage
 
-Add the `ImFUEL` directory to ImHex `Help -> Settings -> Folders -> +`. Install the "Std" and "Type" ImHex libraries from `Help -> Content Store -> Libraries`.
+Add the `ImZouna` directory to ImHex `Help -> Settings -> Folders -> +`. Install the "Std" and "Type" ImHex libraries from `Help -> Content Store -> Libraries`.
 
 ### Validate/JSONify
 

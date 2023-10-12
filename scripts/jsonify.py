@@ -35,7 +35,7 @@ def main():
             "-o",
             json_path.absolute(),
             "-p",
-            ImFUELdir / f"patterns/{os.path.splitext(binary_path)[1][1:]}.hexpat",
+            ImFUELdir / f"patterns/fuel/{os.path.splitext(binary_path)[1][1:]}.hexpat",
         ],
         stderr=subprocess.PIPE,
         stdout=subprocess.PIPE,

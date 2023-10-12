@@ -70,7 +70,7 @@ def worker():
                     "-I",
                     ImFUELdir / "includes",
                     path.absolute(),
-                    ImFUELdir / f"patterns/{os.path.splitext(path)[1][1:]}.hexpat",
+                    ImFUELdir / f"patterns/fuel/{os.path.splitext(path)[1][1:]}.hexpat",
                 ],
                 stderr=subprocess.PIPE,
                 stdout=subprocess.PIPE,
