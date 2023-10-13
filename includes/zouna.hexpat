@@ -1,5 +1,4 @@
 #pragma once
-#pragma endian little
 #pragma array_limit 0
 #pragma pattern_limit 0
 #pragma loop_limit 0
@@ -11,14 +10,23 @@
 #include <std/string.pat>
 #include <std/core.pat>
 
+u8 endian in;
+std::core::set_endian(endian);
+
 // ImHex feature
 // Nested struct definitions
 
 // ImHex feature
 // for loops in struct
 
+// ImHex feature
+// Select endianness of patterns from the UI without pragma
+
 // ImHex bug
 // doesn't do a great job following diagnostics into headers
+
+// ImHex bug
+// Hovering errors in the pattern editor crashes ImHex
 
 fn all_eq(ref auto arr, auto val) {
     for (usize i = 0, i < std::core::member_count(arr), i = i + 1) {
