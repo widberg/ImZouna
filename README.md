@@ -4,7 +4,7 @@
 
 <sup>This repository is a relative of the main [FMTK repository](https://github.com/widberg/fmtk).</sup>
 
-See also: [zouna-templates-docs](https://github.com/SabeMP/zouna-templates-docs/tree/master)
+See also: [zouna-templates-docs](https://github.com/SabeMP/zouna-templates-docs)
 
 ## Table of Contents
 
@@ -93,29 +93,23 @@ See also: [zouna-templates-docs](https://github.com/SabeMP/zouna-templates-docs/
 
 | Name      | Path                                           | Description                                                    |
 |-----------|------------------------------------------------|----------------------------------------------------------------|
-| jsonify   | [`scripts/jsonify.py`](scripts/jsonify.py)     | Generates a JSON file from a binary file                       |
-| validate  | [`scripts/validate.py`](scripts/validate.py)   | Runs the patterns against all files in a directory recursively |
 | catalogue | [`scripts/catalogue.py`](scripts/catalogue.py) | Update the README with known BigFiles                          |
 | converge  | [`scripts/converge.py`](scripts/converge.py)   | Copy unique BigFiles for testing                               |
+| jsonify   | [`scripts/jsonify.py`](scripts/jsonify.py)     | Generates a JSON file from a binary file                       |
 | submit    | [`scripts/submit.py`](scripts/submit.py)       | Copy BigFiles from a game directory to the repository          |
+| validate  | [`scripts/validate.py`](scripts/validate.py)   | Runs the patterns against all files in a directory recursively |
 
 ### Pattern Libraries
 
-| Name | Path | Description |
-|------|------|-------------|
+| Name  | Path                                             | Description   |
+|-------|--------------------------------------------------|---------------|
 | zouna | [`includes/zouna.hexpat`](includes/zouna.hexpat) | Zouna Library |
 
 ### Magic files
 
-| Name | Path | Description |
-|------|------|-------------|
+| Name  | Path                                     | Description                                |
+|-------|------------------------------------------|--------------------------------------------|
 | Zouna | [`magic/zouna_magic`](magic/zouna_magic) | Identifies common file types used in Zouna |
-
-### BigFiles
-
-The `bigfiles` directory will contain the copied game BigFiles after running the submit script. The path of each BigFile will match the pattern `game_name / release_name / bigfile_version_number_normalized / path.relative_to(game_directory)`. The `game_name` component will be the name of the game. The `release_name` will be something like `PC_US` or `XB_JP`, this can be arbitrary but should be understandable. The `bigfile_version_number_normalized` will be the version number component of the version string at the beginning of the BigFile with the `.`s replaced by `_`. Finally, the remainder of the path will be the relative path to the BigFile from the root game directory.
-
-A list of BigFile paths and their hashes can be generated with the catalogue script and found in the [bigfile_hashes.csv file](bigfile_hashes.csv).
 
 ## Getting Started
 
@@ -136,3 +130,11 @@ Add the `ImZouna` directory to ImHex `Help -> Settings -> Folders -> +`. Install
 ### Validate/JSONify
 
 The scripts expect the ImHex executable to be in your `PATH` but you can manually specify the path to ImHex using the `--imhex` option. Run either script with the `--help` option for more information about that script.
+
+### Submit
+
+The `bigfiles` directory will contain the copied game BigFiles after running the submit script. The path of each BigFile will match the pattern `game_name / release_name / bigfile_version_number_normalized / path.relative_to(game_directory)`. The `game_name` component will be the name of the game. The `release_name` will be something like `PC_US` or `XB_JP`, this can be arbitrary but should be understandable. The `bigfile_version_number_normalized` will be the version number component of the version string at the beginning of the BigFile with the `.`s replaced by `_`. Finally, the remainder of the path will be the relative path to the BigFile from the root game directory.
+
+### Catalogue
+
+A list of BigFile paths and their hashes can be generated with the `catalogue` script and found in the [bigfile_hashes.csv file](bigfile_hashes.csv).
