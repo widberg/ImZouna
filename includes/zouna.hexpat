@@ -20,7 +20,7 @@ std::core::set_endian(endian);
 // for loops in struct
 
 // ImHex feature
-// Select endianness of patterns from the UI without pragma
+// In variables of enum type show a drop down of variants in settings
 
 // ImHex bug
 // doesn't do a great job following diagnostics into headers

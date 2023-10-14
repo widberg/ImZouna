@@ -89,6 +89,12 @@ See also: [zouna-templates-docs](https://github.com/SabeMP/zouna-templates-docs)
 | World_Z         | application/x-world-z          | [`patterns/fuel/World_Z.hexpat`](patterns/fuel/World_Z.hexpat)                 |
 | WorldRef_Z      | application/x-world-ref-z      | [`patterns/fuel/WorldRef_Z.hexpat`](patterns/fuel/WorldRef_Z.hexpat)           |
 
+### A Plague Tale: Innocence
+
+| Name | MIME | Path                                                   |
+|------|------|--------------------------------------------------------|
+| psc  |      | [`patterns/apti/psc.hexpat`](patterns/apti/psc.hexpat) |
+
 ### Scripts
 
 | Name      | Path                                           | Description                                                    |
