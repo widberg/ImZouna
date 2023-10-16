@@ -100,6 +100,11 @@ struct FixedStringNULL<auto Size> {
     std::assert(all_eq(zeros, 0x0), "!all_eq(zeros, 0x0)");
 } [[sealed, format("format_data"), transform("format_data")]];
 
+struct StringUntilNULL {
+    char data[while (std::mem::read_unsigned($, 1) != 0x0)];
+    u8 zero;
+} [[sealed, format("format_data"), transform("format_data")]];
+
 fn format_data(ref auto x) {
     return x.data;
 };
