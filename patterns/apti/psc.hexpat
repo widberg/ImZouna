@@ -2,7 +2,7 @@ struct Psc {
     u32 decompressed_size;
     u32 compressed_size;
     if (compressed_size != 0) {
-        // https://gist.github.com/widberg/585a953791bc122eba1ad0c465c83b3d#file-unlzx-c
+        // LZ4_decompress_safe(data, decompressed_data, compressed_size, decompressed_size);
         u8 data[compressed_size];
     } else {
         u8 data[decompressed_size];
