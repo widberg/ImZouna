@@ -49,6 +49,14 @@ See also: [zouna-templates-docs](https://github.com/SabeMP/zouna-templates-docs)
 | 2020 | Microsoft Flight Simulator - Asobo                                              | [`patterns/msfs/DPC.hexpat`](patterns/msfs/DPC.hexpat)             |
 | 2022 | A Plague Tale: Requiem - Asobo                                                  | [`patterns/aptr/DPC.hexpat`](patterns/aptr/DPC.hexpat)             |
 
+#### Ratatouille
+
+| Name | MIME | Path                                                     |
+|------|------|----------------------------------------------------------|
+| AIF  |      | [`patterns/walle/AIF.hexpat`](patterns/walle/AIF.hexpat) |
+| SDX  |      | [`patterns/walle/SDX.hexpat`](patterns/walle/SDX.hexpat) |
+| VAI  |      | [`patterns/rat/VAI.hexpat`](patterns/rat/VAI.hexpat)     |
+
 #### WALL-E
 
 | Name | MIME | Path                                                     |

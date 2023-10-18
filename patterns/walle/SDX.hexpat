@@ -2,6 +2,8 @@
 // 2d1ef750dd43a20c1e3c8ba2ae0ef2c0/raw/473ddd97620f20c6c6e61df15bfdc89e2f06fd6b/
 // .vgmstream.txth
 
+// SDX/SGC/Whatever the fuck else extensions they use
+
 #include <zouna.hexpat>
 
 struct SoundData {
@@ -22,7 +24,7 @@ struct Sound {
 };
 
 struct Sdx {
-    u32; // 1002 when theres 1 sound and 1003 when theres more than 1?
+    u32 flags; // 1002 when theres 1 sound and 1003 when theres more than 1? 66539 in rat gc
     u32 sound_count;
     u32 zero0;
     u32 zero1;
