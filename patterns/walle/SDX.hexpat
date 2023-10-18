@@ -2,7 +2,7 @@
 // 2d1ef750dd43a20c1e3c8ba2ae0ef2c0/raw/473ddd97620f20c6c6e61df15bfdc89e2f06fd6b/
 // .vgmstream.txth
 
-// SDX/SGC/Whatever the fuck else extensions they use
+// SDX/SGC/SPS/Whatever the fuck else extensions they use
 
 #include <zouna.hexpat>
 
