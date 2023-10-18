@@ -53,6 +53,7 @@ See also: [zouna-templates-docs](https://github.com/SabeMP/zouna-templates-docs)
 
 | Name | MIME | Path                                                     |
 |------|------|----------------------------------------------------------|
+| AIF  |      | [`patterns/walle/AIF.hexpat`](patterns/walle/AIF.hexpat) |
 | SDX  |      | [`patterns/walle/SDX.hexpat`](patterns/walle/SDX.hexpat) |
 
 #### FUEL

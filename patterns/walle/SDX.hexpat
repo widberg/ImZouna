@@ -22,7 +22,7 @@ struct Sound {
 };
 
 struct Sdx {
-    u32;
+    u32; // 1002 when theres 1 sound and 1003 when theres more than 1?
     u32 sound_count;
     u32 zero0;
     u32 zero1;
