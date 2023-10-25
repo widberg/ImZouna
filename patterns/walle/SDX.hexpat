@@ -8,7 +8,7 @@
 
 struct SoundData {
     u8 header[parent.header_size];
-    // codec=MS_IMA
+    // codec=MS_IMA https://wiki.multimedia.cx/index.php/IMA_ADPCM
     // interleave=0x24
     // channels=1
     u8 data[parent.size - parent.header_size];
