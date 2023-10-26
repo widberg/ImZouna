@@ -42,6 +42,11 @@ def get_layout_file_path(bigfile_path):
 def get_new_layout_file_path(bigfile_path):
     return bigfile_path.with_suffix(".L" + bigfile_path.suffix[2:])
 
+def get_bfname_file_path(bigfile_path):
+    return bigfile_path.with_suffix(".BFName" + bigfile_path.suffix[3:])
+
+def get_bfdebug_file_path(bigfile_path):
+    return bigfile_path.with_suffix(".BFDebug" + bigfile_path.suffix[3:])
 
 GET_ASSOCIATED_FILE_PATHS = [
     get_jpg_file_path,
@@ -49,6 +54,8 @@ GET_ASSOCIATED_FILE_PATHS = [
     get_name_file_path,
     get_layout_file_path,
     get_new_layout_file_path,
+    get_bfname_file_path,
+    get_bfdebug_file_path,
 ]
 
 
