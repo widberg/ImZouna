@@ -20,6 +20,7 @@ BIGFILE_EXTENSIONS = [
     "DBR",
     "BFPC",
     "BFWii",
+    "BFPS2",
 ]
 
 def get_jpg_file_path(bigfile_path):
