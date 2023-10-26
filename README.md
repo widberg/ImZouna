@@ -29,18 +29,18 @@ See also: [zouna-templates-docs](https://github.com/SabeMP/zouna-templates-docs)
 |      | En Taxi avec Oui-Oui - Black Sheep                                              | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)           |
 | 2008 | WALL-E - Asobo                                                                  | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)             |
 |      | The Magic Roundabout - Black Sheep                                              | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)           |
-|      | Shaun White Snowboarding/Shaun White Snowboarding: Road Trip - Ubisoft Montreal | [`patterns/shaunwhite/DPC.hexpat`](patterns/shaunwhite/DPC.hexpat) |
+|      | Shaun White Snowboarding/Shaun White Snowboarding: Road Trip - Ubisoft Montreal | [`patterns/shaunwhite/BFWii.hexpat`](patterns/shaunwhite/BFWii.hexpat) |
 |      | Warning: Code De La Route - Black Sheep                                         | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)           |
 | 2009 | FUEL - Asobo                                                                    | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)             |
 |      | Up - Asobo                                                                      | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)             |
-|      | Shaun White Snowboarding: World Stage - Ubisoft Montreal                        | [`patterns/shaunwhite/DPC.hexpat`](patterns/shaunwhite/DPC.hexpat) |
+|      | Shaun White Snowboarding: World Stage - Ubisoft Montreal                        | [`patterns/shaunwhite/BFWii.hexpat`](patterns/shaunwhite/BFWii.hexpat) |
 | 2010 | Toy Story 3 - Asobo                                                             | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)             |
 |      | Racket Sports/Racquet Sports/Racket Sports Party - Asobo                        | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)             |
 |      | Happy Neuron Academy - Black Sheep                                              | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)           |
 | 2012 | Kinect Rush: A Disney-Pixar Adventure - Asobo                                   | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)     |
 | 2013 | Super Farm (Re-release) - Asobo                                                 | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)     |
 | 2014 | Monopoly Plus/Monopoly Deal - Asobo                                             | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)     |
-| 2015 | The Mighty Quest for Epic Loot - Ubisoft Montreal                               | [`patterns/shaunwhite/DPC.hexpat`](patterns/shaunwhite/DPC.hexpat) |
+| 2015 | The Mighty Quest for Epic Loot - Ubisoft Montreal                               | [`patterns/mqfel/BFPC.hexpat`](patterns/shaunwhite/BFPC.hexpat) |
 | 2016 | Young Conker - Asobo                                                            | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)     |
 |      | Fragments - Asobo                                                               | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)     |
 | 2017 | Rush: A Disney-Pixar Adventure (Re-release) - Asobo                             | [`patterns/rush/DPC.hexpat`](patterns/rush/DPC.hexpat)             |
