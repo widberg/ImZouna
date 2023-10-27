@@ -112,6 +112,12 @@ See also: [zouna-templates-docs](https://github.com/SabeMP/zouna-templates-docs)
 | psc      |      | [`patterns/apti/psc.hexpat`](patterns/apti/psc.hexpat)           |
 | psc_data |      | [`patterns/apti/psc_data.hexpat`](patterns/apti/psc_data.hexpat) |
 
+### Shaun White
+
+| Name     | MIME | Path                                                             |
+|----------|------|------------------------------------------------------------------|
+| CPS      |      | [`patterns/shaunwhite/CPS.hexpat`](patterns/shaunwhite/CPS.hexpat)           |
+
 ### Scripts
 
 | Name      | Path                                           | Description                                                    |
