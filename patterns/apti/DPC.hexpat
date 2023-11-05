@@ -3,26 +3,6 @@
 
 #include <zouna.hexpat>
 
-struct Resource {
-    u64 name;
-    u64 class_name;
-    u32 offset;
-    u64 compressed_size;
-    u64 decompressed_size;
-    if (compressed_size != 0) {
-        u8 compressed_data[compressed_size] @ offset * 2048;
-    } else {
-        u8 decompressed_data[decompressed_size] @ offset * 2048;
-    }
-};
-
-struct DataDescription {
-    u32 resource_count;
-    u64 padded_size;
-    u64 size;
-    u64 working_buffer_offset;
-};
-
 enum CompressionType : u32 {
     NONE = 0,
     LZ4 = 2,
@@ -46,6 +26,22 @@ struct DataResource {
     } else {
         u8 decompressed_data[decompressed_body_size];
     }
+};
+
+struct Resource {
+    u64 name;
+    u64 class_name;
+    u32 offset;
+    u64 size; // compressed or decompressed size depending on next value
+    u64 decompressed_size; // if not 0, then compressed
+    DataResource data_resource @ offset * 2048;
+};
+
+struct DataDescription {
+    u32 resource_count;
+    u64 padded_size;
+    u64 size;
+    u64 working_buffer_offset;
 };
 
 struct Data {

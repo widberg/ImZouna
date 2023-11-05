@@ -3,31 +3,9 @@
 
 #include <zouna.hexpat>
 
-struct Resource {
-    u64 name;
-    u64 class_name;
-    u32 offset;
-    u32 compressed_size;
-    u32;
-    u32;
-    u32 decompressed_size;
-    if (compressed_size != 0) {
-        u8 compressed_data[compressed_size] @ offset * 16;
-    } else {
-        u8 decompressed_data[decompressed_size] @ offset * 16;
-    }
-};
-
-struct DataDescription {
-    u32 resource_count;
-    u64 padded_size;
-    u64 size;
-    u64 working_buffer_offset;
-};
-
-enum CompressionType : u32 {
+enum CompressionType : u8 {
     NONE = 0,
-    LZ4 = 2,
+    LZ4 = 4,
 };
 
 struct DataResource {
@@ -37,12 +15,12 @@ struct DataResource {
     u32 size;
     u32 link_header_size;
     u32 decompressed_body_size;
+    u32 compressed_body_size;
+    u16 padding_size;
     CompressionType compression_type;
     std::assert(std::core::is_valid_enum(compression_type), "!std::core::is_valid_enum(compression_type)");
-    u32 compressed_body_size;
-    u32 zero;
-    std::assert(zero == 0, "zero != 0");
     u8 link_header[link_header_size];
+    u8 pad[padding_size];
     if (compressed_body_size != 0) {
         u8 compressed_data[compressed_body_size];
     } else {
@@ -50,9 +28,31 @@ struct DataResource {
     }
 };
 
+struct Resource {
+    u64 name;
+    u64 class_name;
+    u32 offset;
+    u32 compressed_size;
+    u32;
+    u32 decompressed_size;
+    u16;
+    u16;
+    DataResource data_resource @ offset * 16;
+};
+
+struct DataDescription {
+    u32 resource_count;
+    u64 padded_size;
+    u64 size;
+    u64 working_buffer_offset;
+};
+
 struct Data {
     DataResource datas[parent.data_descriptions[std::core::array_index()].resource_count];
-    std::mem::AlignTo<2048>;
+};
+
+struct Unknown {
+    u8 data[16];
 };
 
 struct Resources {
@@ -68,8 +68,12 @@ struct Resources {
     u32 resource_count;
     Resource resources[resource_count];
     u64;
-    u64;
-    u32;
+    u32 num;
+    Unknown unknown[num];
+    u32 num2;
+    u32 unknown2[num2];
+    u32 resource_count2;
+    Resource resources2[resource_count2];
     std::mem::AlignTo<2048>;
     Data datas[data_count] @ data_offset * 16;
 };
