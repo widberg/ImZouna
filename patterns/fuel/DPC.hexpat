@@ -24,7 +24,7 @@ struct Header {
     u32 block_count;
     u32 block_working_buffer_capacity_even;
     u32 block_working_buffer_capacity_odd;
-    u32 padded_size;
+    u32 total_padded_block_size;
     VersionTriple version_triple;
     BlockDescription block_descriptions[block_count];
     BlockDescription empty_block_descriptions[64 - block_count];

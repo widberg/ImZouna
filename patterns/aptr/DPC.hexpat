@@ -1,9 +1,7 @@
 // Adapted from
 // https://github.com/amrshaheen61/APT_DPC_Tool/blob/master/APT%20DPC%20Tool/Core/DpcHelper.cs
 
-#include <std/core.pat>
-#include <std/sys.pat>
-#include <std/mem.pat>
+#include <zouna.hexpat>
 
 struct Resource {
     u64 name;
@@ -27,8 +25,33 @@ struct DataDescription {
     u64 working_buffer_offset;
 };
 
+enum CompressionType : u32 {
+    NONE = 0,
+    LZ4 = 2,
+};
+
+struct DataResource {
+    u64 class_name;
+    u64 name;
+    u64 link_name;
+    u32 size;
+    u32 link_header_size;
+    u32 decompressed_body_size;
+    CompressionType compression_type;
+    std::assert(std::core::is_valid_enum(compression_type), "!std::core::is_valid_enum(compression_type)");
+    u32 compressed_body_size;
+    u32 zero;
+    std::assert(zero == 0, "zero != 0");
+    u8 link_header[link_header_size];
+    if (compressed_body_size != 0) {
+        u8 compressed_data[compressed_body_size];
+    } else {
+        u8 decompressed_data[decompressed_body_size];
+    }
+};
+
 struct Data {
-    u8 data[parent.data_descriptions[std::core::array_index()].size];
+    DataResource datas[parent.data_descriptions[std::core::array_index()].resource_count];
     std::mem::AlignTo<2048>;
 };
 

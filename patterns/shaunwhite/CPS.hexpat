@@ -14,6 +14,7 @@ struct Script {
     u8 compressed[compressed_size] @ offset_in_bigfile; /// LZO Compressed data (They're all compressed)
 };
 
+// Decrypt with scripts/cps.py
 struct CPS {
     Header header;
     Script scripts[header.script_count];

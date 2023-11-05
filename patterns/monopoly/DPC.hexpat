@@ -20,8 +20,9 @@ struct Header {
     u32 version_oneple; // Like the version triple but theres only one
     u32 is_not_rtc;
     u32 block_count;
-    u64 block_working_buffer_capacity_even;
+    u32 block_working_buffer_capacity_even;
     u32 block_working_buffer_capacity_odd;
+    u32 total_padded_block_size;
     BlockDescription block_descriptions[block_count];
     std::mem::AlignTo<0x0000072C>;
     u32 block_sector_padding_size;

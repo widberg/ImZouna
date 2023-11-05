@@ -20,7 +20,7 @@ struct Header {
     u32 block_count;
     u64 block_working_buffer_capacity_even;
     u64 block_working_buffer_capacity_odd;
-    u64 padded_size;
+    u64 total_padded_block_size;
     BlockDescription block_descriptions[block_count];
     std::mem::AlignTo<0x6E8>;
     u64 block_sector_padding_size;

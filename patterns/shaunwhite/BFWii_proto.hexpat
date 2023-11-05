@@ -20,9 +20,9 @@ struct Block {
         block_size != parent.header.decompressed_block_size) {
         // lzo1x_decompress_safe(compressed_buffer, compressed_size, decompressed_buffer, &l_DecrompressedLength, 0)
         // decompressed_buffer should be minimum decompressed_block_size
-        u8 compressed[block_size - 4]; // Compressed
+        u8 compressed[block_size]; // Compressed
     } else {
-        u8 uncompressed[block_size - 4]; // Uncompressed
+        u8 uncompressed[block_size]; // Uncompressed
     }
     std::mem::AlignTo<2048>;
 };
