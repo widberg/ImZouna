@@ -5,7 +5,7 @@
 
 enum CompressionType : u8 {
     NONE = 0,
-    LZ4 = 4,
+    Zlib = 4,
 };
 
 struct DataResource {
