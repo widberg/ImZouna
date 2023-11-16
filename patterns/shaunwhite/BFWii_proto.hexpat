@@ -22,7 +22,7 @@ struct Block {
         // decompressed_buffer should be minimum decompressed_block_size
         u8 compressed[block_size]; // Compressed
     } else {
-        u8 uncompressed[block_size]; // Uncompressed
+        u8 uncompressed[block_size - 4]; // Uncompressed
     }
     std::mem::AlignTo<2048>;
 };
