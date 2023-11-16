@@ -37,7 +37,12 @@ struct Resource {
     u32 decompressed_size;
     u16;
     u16;
-    DataResource data_resource @ offset * 16;
+    if (parent.parent.parent.parent.header.resources_block_size != 0 &&
+        parent.parent.parent.parent.header.resources_block_offset != 0 &&
+        parent.parent.parent.parent.header.map_size == 0 &&
+        parent.parent.parent.parent.header.map_offset == 0) {
+        DataResource data_resource @ offset * 16;
+    }
 };
 
 struct DataDescription {
