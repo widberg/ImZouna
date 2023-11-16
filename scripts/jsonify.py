@@ -2,8 +2,7 @@ import argparse
 from pathlib import Path
 import subprocess
 import os
-
-ImFUELdir = Path(__file__).parent.parent.absolute()
+from config import IMZOUNA_DIR
 
 
 def main():
@@ -29,13 +28,13 @@ def main():
             "format",
             "-v",
             "-I",
-            ImFUELdir / "includes",
+            IMZOUNA_DIR / "includes",
             "-i",
             binary_path.absolute(),
             "-o",
             json_path.absolute(),
             "-p",
-            ImFUELdir / f"patterns/fuel/{os.path.splitext(binary_path)[1][1:]}.hexpat",
+            IMZOUNA_DIR / f"patterns/fuel/{os.path.splitext(binary_path)[1][1:]}.hexpat",
         ],
         stderr=subprocess.PIPE,
         stdout=subprocess.PIPE,

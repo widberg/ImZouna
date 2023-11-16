@@ -1,27 +1,6 @@
 import argparse, os, hashlib, csv, struct
 from pathlib import Path
-
-
-BIGFILE_GALLERY_DIRECTORY_PATH = Path(__file__).parent.parent / "bigfiles"
-
-extension_to_endian = {
-    "DPC": "<",
-    "DUA": "<",
-    "DMC": "<",
-    "DBM": ">",
-    "DPS": "<",
-    "DP3": ">",
-    "DPP": "<",
-    "DXB": ">",
-    "D36": ">",
-    "DGC": ">",
-    "DRV": ">",
-    "DNX": "<",
-    "DBC": "<",
-    "DBR": ">",
-    "BFPC": "<",
-    "BFWii": ">",
-}
+from config import BIGFILE_GALLERY_DIRECTORY_PATH, EXTENSION_TO_ENDIAN
 
 def catalogue():
     hashes = {}
@@ -45,9 +24,9 @@ def catalogue():
                 )
                 versions.add(bigfile_path_relative.parts[2])
                 hashes[bigfile_path_relative] = sha256_value
-                if bigfile_path_relative.suffix[1:] in extension_to_endian:
+                if bigfile_path_relative.suffix[1:] in EXTENSION_TO_ENDIAN:
                     f.seek(0x00000114)
-                    endian = extension_to_endian[bigfile_path_relative.suffix[1:]]
+                    endian = EXTENSION_TO_ENDIAN[bigfile_path_relative.suffix[1:]]
                     x, y, z = struct.unpack(endian + "III", f.read(12))
                     version_triple = (x, y, z)
                     if bigfile_path_relative.parts[2] not in version_triples:

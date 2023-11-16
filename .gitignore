@@ -3,3 +3,4 @@
 .idea/
 magic/*.mgc
 /bigfiles
+/scripts/__pycache__/

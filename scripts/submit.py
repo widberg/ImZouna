@@ -1,27 +1,7 @@
 import argparse, shutil
 from pathlib import Path
+from config import BIGFILE_GALLERY_DIRECTORY_PATH, BIGFILE_EXTENSIONS
 
-BIGFILE_GALLERY_DIRECTORY_PATH = Path(__file__).parent.parent / "bigfiles"
-
-BIGFILE_EXTENSIONS = [
-    "DPC",
-    "DMC",
-    "DBM",
-    "DPS",
-    "DP3",
-    "DPP",
-    "DXB",
-    "D36",
-    "DGC",
-    "DRV",
-    "DUA",
-    "DNX",
-    "DBC",
-    "DBR",
-    "BFPC",
-    "BFWii",
-    "BFPS2",
-]
 
 def get_jpg_file_path(bigfile_path):
     return bigfile_path.with_suffix(".JPG")

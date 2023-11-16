@@ -5,6 +5,8 @@ import os
 from queue import Queue
 from threading import Thread
 import time
+from config import IMZOUNA_DIR
+
 
 extensions = [
     "Animation_Z",
@@ -51,7 +53,6 @@ def get_paths_with_extension(working_directory, extension):
     return Path(working_directory).rglob(f"*.{extension}")
 
 
-ImFUELdir = Path(__file__).parent.parent.absolute()
 q = Queue()
 faileds = []
 
@@ -68,9 +69,9 @@ def worker():
                     "run",
                     "-v",
                     "-I",
-                    ImFUELdir / "includes",
+                    IMZOUNA_DIR / "includes",
                     path.absolute(),
-                    ImFUELdir / f"patterns/fuel/{os.path.splitext(path)[1][1:]}.hexpat",
+                    IMZOUNA_DIR / f"patterns/fuel/{os.path.splitext(path)[1][1:]}.hexpat",
                 ],
                 stderr=subprocess.PIPE,
                 stdout=subprocess.PIPE,
