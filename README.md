@@ -40,9 +40,9 @@ See also: [zouna-templates-docs](https://github.com/SabeMP/zouna-templates-docs)
 | 2012 | Kinect Rush: A Disney-Pixar Adventure - Asobo                                   | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)     |
 | 2013 | Super Farm (Re-release) - Asobo                                                 | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)     |
 | 2014 | Monopoly Plus/Monopoly Deal - Asobo                                             | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)     |
-| 2015 | The Mighty Quest for Epic Loot - Ubisoft Montreal                               | [`patterns/mqfel/BFPC.hexpat`](patterns/shaunwhite/BFPC.hexpat) |
+| 2015 | The Mighty Quest for Epic Loot - Ubisoft Montreal                               | [`patterns/mqfel/BFPC.hexpat`](patterns/shaunwhite/BFPC.hexpat)    |
 | 2016 | Young Conker - Asobo                                                            | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)     |
-|      | Fragments - Asobo                                                               | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)     |
+|      | Fragments - Asobo                                                               | [`patterns/fragments/DUA.hexpat`](patterns/fragments/DUA.hexpat)   |
 | 2017 | Rush: A Disney-Pixar Adventure (Re-release) - Asobo                             | [`patterns/rush/DPC.hexpat`](patterns/rush/DPC.hexpat)             |
 |      | Monopoly Plus/Monopoly Deal/Monopoly for Nintendo Switch (Re-release) - Asobo   | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)     |
 | 2019 | A Plague Tale: Innocence - Asobo                                                | [`patterns/apti/DPC.hexpat`](patterns/apti/DPC.hexpat)             |
