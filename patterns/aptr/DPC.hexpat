@@ -119,9 +119,35 @@ struct Header {
     std::mem::AlignTo<4096>;
 };
 
+struct MapResource {
+    Name_Z64 class_name;
+    Name_Z64 name;
+    Name_Z64 link_name;
+    u32 offset;
+    u32 compressed_size;
+    u64;
+    u32 decompressed_size;
+    u64;
+    u64;
+};
+
+struct MapEntry {
+};
+
+struct Map {
+    DynArray_Z<MapResource> map_resources;
+    DynArray_Z<MapEntry> map_entries;
+};
+
 struct AptrBigFile {
     Header header;
-    BlockDescriptions block_descriptions @ header.block_description_offset * 16;
+    if (header.block_description_offset != 0) {
+        BlockDescriptions block_descriptions @ header.block_description_offset * 16;
+    }
+    
+    if (header.map_offset != 0) {
+        Map map @ header.map_offset * 16;
+    }
 };
 
 AptrBigFile aptr_big_file @ 0x0;
