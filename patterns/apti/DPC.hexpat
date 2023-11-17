@@ -84,9 +84,12 @@ struct Header {
     char version[256];
     u32;
     u32 is_not_rtc;
-    u64 block_description_offset;
-    u64;
-    u64;
+    u32 block_description_offset;
+    u32;
+    u32 pool_offset;
+    u32;
+    u32;
+    u32;
     u64 padding_size;
     u64;
     u64 file_size;
@@ -96,9 +99,44 @@ struct Header {
     std::mem::AlignTo<4096>;
 };
 
+struct ReferenceRecord {
+    u32 start_chunk_index;
+    u32 end_chunk_index;
+    u32 object_names_starting_index;
+    u16 placeholder_dpc_index;
+    u16 object_names_count;
+};
+
+struct PoolManifest {
+    u32 equals0x0;
+    u32 equals0x00;
+    u32 object_names_count_sum;
+    DynArray_Z<u32> object_names_indices;
+    DynArray_Z<Name_Z64> object_names;
+    DynArray_Z<u32> reference_counts;
+    DynArray_Z<u32> object_padded_size;
+    DynArray_Z<u32> reference_records_indices;
+    DynArray_Z<ReferenceRecord> reference_records;
+    std::assert(object_names.size == reference_counts.size, "object_names.size != reference_counts.size");
+    std::assert(reference_counts.size == object_padded_size.size, "reference_counts.size != object_padded_size.size");
+    std::assert(object_padded_size.size == reference_records_indices.size, "object_padded_size.size != reference_records_indices.size");
+    std::assert(reference_records_indices.size == reference_records.size, "reference_records_indices.size != reference_records.size");
+    u32 terminal;
+};
+
+struct PoolObject : DataResource {
+    std::mem::AlignTo<2048>;
+};
+
+struct Pool {
+    PoolManifest pool_manifest;
+    std::mem::AlignTo<2048>;
+    PoolObject pool_objects[pool_manifest.object_names_indices.size];
+};
 struct AptiBigFile {
     Header header;
     BlockDescriptions block_descriptions @ header.block_description_offset * 2048;
+    Pool pool @ header.pool_offset * 2048;
 };
 
 AptiBigFile apti_big_file @ 0x0;

@@ -2,6 +2,7 @@
 // https://github.com/amrshaheen61/APT_DPC_Tool/blob/master/APT%20DPC%20Tool/Core/DpcHelper.cs
 
 #include <zouna.hexpat>
+#include <std/io.pat>
 
 enum CompressionType : u8 {
     NONE = 0,
@@ -54,6 +55,7 @@ struct DataDescription {
 
 struct Data {
     DataResource datas[parent.data_descriptions[std::core::array_index()].resource_count];
+    std::mem::AlignTo<16>;  
 };
 
 struct Unknown {
@@ -97,9 +99,17 @@ struct BlockDescriptions {
     BlockDescription block_descriptions[block_count];
 };
 
+enum BigFileType : u8 {
+    RTC = 0,
+    NORMAL = 1,
+    COMMON = 2,
+
+    UPDATED1 = 4,
+};
+
 struct Header {
     char version[256];
-    u8;
+    BigFileType big_file_type;
     u32;
     u32 block_description_offset;
     u32 resources_block_size;
