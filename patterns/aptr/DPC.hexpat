@@ -2,7 +2,6 @@
 // https://github.com/amrshaheen61/APT_DPC_Tool/blob/master/APT%20DPC%20Tool/Core/DpcHelper.cs
 
 #include <zouna.hexpat>
-#include <std/io.pat>
 
 enum CompressionType : u8 {
     NONE = 0,
@@ -38,10 +37,10 @@ struct Resource {
     u32 decompressed_size;
     u16;
     u16;
-    if (parent.parent.parent.parent.header.resources_block_size != 0 &&
-        parent.parent.parent.parent.header.resources_block_offset != 0 &&
-        parent.parent.parent.parent.header.map_size == 0 &&
-        parent.parent.parent.parent.header.map_offset == 0) {
+    if (parent.parent.parent.parent.parent.header.resources_block_size != 0 &&
+        parent.parent.parent.parent.parent.header.resources_block_offset != 0 &&
+        parent.parent.parent.parent.parent.header.map_size == 0 &&
+        parent.parent.parent.parent.parent.header.map_offset == 0) {
         DataResource data_resource @ offset * 16;
     }
 };
@@ -58,8 +57,27 @@ struct Data {
     std::mem::AlignTo<16>;  
 };
 
-struct Unknown {
-    u8 data[16];
+struct Updated {
+    Name_Z64 name;
+    u32 index1;
+    u32 index2;
+};
+
+struct Updated2 {
+    Name_Z64 name1;
+    Name_Z64 name2;
+};
+
+struct UpdatedData {
+    u8 data[0x24];
+};
+
+enum BigFileType : u8 {
+    RTC = 0,
+    NORMAL = 1,
+    COMMON = 2,
+
+    UPDATED1 = 4,
 };
 
 struct Resources {
@@ -72,17 +90,16 @@ struct Resources {
     u64 padding_size;
     DataDescription data_descriptions[data_count];
     DataDescription unused_data_descriptions[52 - data_count];
-    u32 resource_count;
-    Resource resources[resource_count];
-    u64;
-    u32 num;
-    Unknown unknown[num];
-    u32 num2;
-    u32 unknown2[num2];
-    u32 resource_count2;
-    Resource resources2[resource_count2];
-    std::mem::AlignTo<2048>;
-    Data datas[data_count] @ data_offset * 16;
+    DynArray_Z<Resource> resources;
+    DynArray_Z<UpdatedData> zero;
+    DynArray_Z<Updated2> rename;
+    DynArray_Z<Updated> updateds;
+    DynArray_Z<u32> updateds_indices;
+    DynArray_Z<Resource> resources2;
+    std::mem::AlignTo<16>;
+    if (data_offset != 0) {
+        Data datas[data_count] @ data_offset * 16;
+    }
 };
 
 struct BlockDescription {
@@ -97,14 +114,6 @@ struct BlockDescription {
 struct BlockDescriptions {
     u32 block_count;
     BlockDescription block_descriptions[block_count];
-};
-
-enum BigFileType : u8 {
-    RTC = 0,
-    NORMAL = 1,
-    COMMON = 2,
-
-    UPDATED1 = 4,
 };
 
 struct Header {
