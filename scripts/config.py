@@ -33,7 +33,7 @@ EXTENSION_TO_ENDIAN = {
     "DPS": "<",
     "DP3": ">",
     "DPP": "<",
-    "DXB": ">",
+    "DXB": "<",
     "D36": ">",
     "DGC": ">",
     "DRV": ">",

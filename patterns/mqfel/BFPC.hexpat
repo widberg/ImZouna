@@ -9,7 +9,7 @@ enum CompressionType : u32 {
 };
 
 struct BlockHeader {
-    u32 checksum;
+    u32 checksum; // Always big endian 0xDEADBEEF
     u32 resource_count;
 };
 

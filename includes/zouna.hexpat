@@ -228,7 +228,8 @@ struct Sphere_Z {
     f32 radius;
 };
 
-using Name_Z = u32;
+using Name_Z = i32;
+using Name_Z64 = i64;
 
 struct Message_Z {
     /// Observed values:
