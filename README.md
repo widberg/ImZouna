@@ -121,6 +121,12 @@ See also: [zouna-templates-docs](https://github.com/SabeMP/zouna-templates-docs)
 | CPSScript    |      | [`patterns/shaunwhite/CPSScript.hexpat`](patterns/shaunwhite/CPSScript.hexpat)     |
 | Gear BigFile |      | [`patterns/shaunwhite/GearBigFile.hexpat`](patterns/shaunwhite/GearBigFile.hexpat) |
 
+### The Mighty Quest for Epic Loot
+
+| Name           | MIME | Path                                                                           |
+|----------------|------|--------------------------------------------------------------------------------|
+| StreamingAudio |      | [`patterns/mqfel/StreamingAudio.hexpat`](patterns/mqfel/StreamingAudio.hexpat) |
+
 ### Scripts
 
 | Name      | Path                                           | Description                                                    |
