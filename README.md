@@ -115,9 +115,11 @@ See also: [zouna-templates-docs](https://github.com/SabeMP/zouna-templates-docs)
 
 ### Shaun White
 
-| Name     | MIME | Path                                                             |
-|----------|------|------------------------------------------------------------------|
-| CPS      |      | [`patterns/shaunwhite/CPS.hexpat`](patterns/shaunwhite/CPS.hexpat)           |
+| Name         | MIME | Path                                                                               |
+|--------------|------|------------------------------------------------------------------------------------|
+| CPS          |      | [`patterns/shaunwhite/CPS.hexpat`](patterns/shaunwhite/CPS.hexpat)                 |
+| CPSScript    |      | [`patterns/shaunwhite/CPSScript.hexpat`](patterns/shaunwhite/CPSScript.hexpat)     |
+| Gear BigFile |      | [`patterns/shaunwhite/GearBigFile.hexpat`](patterns/shaunwhite/GearBigFile.hexpat) |
 
 ### Scripts
 
