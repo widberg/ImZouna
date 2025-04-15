@@ -2,20 +2,35 @@
 
 #include <zouna.hexpat>
 
-struct Unknown2 {
+struct SeadEntry_Z {
     /// 0xFFFFFFFF
-    u32 placeholder0;
+    u32 NextObjectOfThisEntry;
     /// 0xFFFFFFFF
-    u32 placeholder1;
+    u32 PrevObjectOfThisEntry;
     /// starting at 1
-    u32 index;
+    u32 NextEntryOfThisObject;
     /// 0xFFFFFFFF
     u32 placeholder2;
-    /// UUID?
-    /// Increments by 1
-    /// Starts at a very large number
-    u32 unknown4;
-    u32 zero;
+    u32 GridId;
+    Name_Z nodeCrc32;
+};
+
+struct SeadHandle_Z {
+    Vec2f PMin;
+    Vec2f PMax;
+    Vec2f InvDiag;
+    u32 sizeX;
+    u32 sizeY;
+    float e;
+    float f;
+    float a;
+    float b;
+    u32 c;
+    u32 d;
+    u32 firstFree;
+    u32 freeCount;
+    DynArray_Z<u32> grid;
+    DynArray_Z<SeadEntry_Z> seadEntries;
 };
 
 struct World_Z : ResourceObject_Z {
@@ -27,14 +42,8 @@ struct World_Z : ResourceObject_Z {
     Name_Z node_name1;
     DynArray_Z<u32> unused17s;
     DynArray_Z<u8> unuseds;
-    Mat4f unknown0;
-    /// can be -1
-    DynArray_Z<i32> indices0;
-    DynArray_Z<Unknown2> unknown2s;
-    Mat4f unknown3s;
-    /// can be -1
-    DynArray_Z<i32> indices1;
-    DynArray_Z<Unknown2> unknown5s;
+    SeadHandle_Z display;
+    SeadHandle_Z collision;
     DynArray_Z<Name_Z> unused6s;
     DynArray_Z<Name_Z> unused7s;
     DynArray_Z<Name_Z> unused8s;

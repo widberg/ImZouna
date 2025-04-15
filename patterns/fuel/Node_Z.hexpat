@@ -2,13 +2,6 @@
 
 #include <zouna.hexpat>
 
-struct Rect {
-    i32 x1;
-    i32 y1;
-    i32 x2;
-    i32 y2;
-};
-
 struct Node_Z : ResourceObject_Z {
     /// Name of the parent Node_Z
     /// 0 if root Node_Z

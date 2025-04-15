@@ -228,6 +228,13 @@ struct Sphere_Z {
     f32 radius;
 };
 
+struct Rect {
+    i32 x1;
+    i32 y1;
+    i32 x2;
+    i32 y2;
+};
+
 using Name_Z = i32;
 using Name_Z64 = i64;
 
