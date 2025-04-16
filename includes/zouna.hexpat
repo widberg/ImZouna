@@ -9,6 +9,7 @@
 #include <std/sys.pat>
 #include <std/string.pat>
 #include <std/core.pat>
+#include <bff_header.hexpat>
 
 u8 endian in;
 std::core::set_endian(endian);
