@@ -10,45 +10,53 @@ See also: [zouna-templates-docs](https://github.com/SabeMP/zouna-templates-docs)
 
 ### Hex Patterns
 
+#### Common
+
+| Name       | MIME | Path                                                       |
+|------------|------|------------------------------------------------------------|
+| Bff Header |      | [`includes/bff_header.hexpat`](includes/bff_header.hexpat) |
+| Zouna      |      | [`includes/zouna.hexpat`](includes/zouna.hexpat)           |
+
 #### BigFile
 
-| Year | Game                                                                            | Format                                                                                         |
-|------|---------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| 2002 | Jimmy Neutron: Boy Genius - BigSky                                              | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                                       |
-|      | SpongeBob SquarePants: Revenge of the Flying Dutchman - BigSky                  | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                                       |
-|      | Spirits & Spells (Castleween) (Mahou no Pumpkin) - Wanadoo                      | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                                       |
-| 2003 | Super Farm - Asobo                                                              | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                                       |
-| 2004 | Sitting Ducks - Asobo                                                           | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                                       |
-|      | The Mummy: The Animated Series - Asobo                                          | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                                       |
-| 2005 | CT Special Forces: Fire for Effect (Nemesis Strike) - Asobo                     | [`patterns/garfield/DPC.hexpat`](patterns/garfield/DPC.hexpat)                                 |
-|      | Ratatouille (Prototype) - Asobo                                                 | [`patterns/garfield/DPC.hexpat`](patterns/garfield/DPC.hexpat)                                 |
-| 2006 | Garfield: A Tail of Two Kitties (Garfield 2) - Asobo                            | [`patterns/garfield/DPC.hexpat`](patterns/garfield/DPC.hexpat)                                 |
-|      | Championsheep Rally - Black Sheep                                               | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                                       |
-| 2007 | Ratatouille - Asobo                                                             | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)                                         |
-|      | The Ugly Duckling and Me - Black Sheep                                          | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                                       |
-|      | En Taxi avec Oui-Oui - Black Sheep                                              | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                                       |
-| 2008 | WALL-E - Asobo                                                                  | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)                                         |
-|      | The Magic Roundabout - Black Sheep                                              | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                                       |
-|      | Shaun White Snowboarding/Shaun White Snowboarding: Road Trip (Prototype) - Ubisoft Montreal | [`patterns/shaunwhite/BFWii_proto.hexpat`](patterns/shaunwhite/BFWii_proto.hexpat) |
-|      | Shaun White Snowboarding/Shaun White Snowboarding: Road Trip - Ubisoft Montreal | [`patterns/shaunwhite/BFWii.hexpat`](patterns/shaunwhite/BFWii.hexpat)                         |
-|      | Warning: Code De La Route - Black Sheep                                         | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                                       |
-| 2009 | FUEL - Asobo                                                                    | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)                                         |
-|      | Up - Asobo                                                                      | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)                                         |
-|      | Shaun White Snowboarding: World Stage - Ubisoft Montreal                        | [`patterns/shaunwhite/BFWii_proto.hexpat`](patterns/shaunwhite/BFWii_proto.hexpat)             |
-| 2010 | Toy Story 3 - Asobo                                                             | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)                                         |
-|      | Racket Sports/Racquet Sports/Racket Sports Party - Asobo                        | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)                                         |
-|      | Happy Neuron Academy - Black Sheep                                              | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                                       |
-| 2012 | Kinect Rush: A Disney-Pixar Adventure - Asobo                                   | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)                                 |
-| 2013 | Super Farm (Re-release) - Asobo                                                 | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)                                 |
-| 2014 | Monopoly Plus/Monopoly Deal - Asobo                                             | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)                                 |
-| 2015 | The Mighty Quest for Epic Loot - Ubisoft Montreal                               | [`patterns/mqfel/BFPC.hexpat`](patterns/shaunwhite/BFPC.hexpat)                                |
-| 2016 | Young Conker - Asobo                                                            | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)                                 |
-|      | Fragments - Asobo                                                               | [`patterns/fragments/DUA.hexpat`](patterns/fragments/DUA.hexpat)                               |
-| 2017 | Rush: A Disney-Pixar Adventure (Re-release) - Asobo                             | [`patterns/rush/DPC.hexpat`](patterns/rush/DPC.hexpat)                                         |
-|      | Monopoly Plus/Monopoly Deal/Monopoly for Nintendo Switch (Re-release) - Asobo   | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)                                 |
-| 2019 | A Plague Tale: Innocence - Asobo                                                | [`patterns/apti/DPC.hexpat`](patterns/apti/DPC.hexpat)                                         |
-| 2020 | Microsoft Flight Simulator - Asobo                                              | [`patterns/msfs/DPC.hexpat`](patterns/msfs/DPC.hexpat)                                         |
-| 2022 | A Plague Tale: Requiem - Asobo                                                  | [`patterns/aptr/DPC.hexpat`](patterns/aptr/DPC.hexpat)                                         |
+| Year | Game                                                                                        | Format     | Pattern                                                                             |
+|------|---------------------------------------------------------------------------------------------|------------|------------------------------------------------------------------------------------|
+| 2002 | Jimmy Neutron: Boy Genius - BigSky                                                          | Kalisto    | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                           |
+|      | SpongeBob SquarePants: Revenge of the Flying Dutchman - BigSky                              | Kalisto    | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                           |
+|      | Spirits & Spells (Castleween) (Mahou no Pumpkin) - Wanadoo                                  | Kalisto    | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                           |
+| 2003 | Super Farm - Asobo                                                                          | Asobo1     | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                           |
+| 2004 | Sitting Ducks - Asobo                                                                       | Asobo1     | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                           |
+|      | The Mummy: The Animated Series - Asobo                                                      | Asobo1     | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                           |
+| 2005 | CT Special Forces: Fire for Effect (Nemesis Strike) - Asobo                                 | Asobo2     | [`patterns/garfield/DPC.hexpat`](patterns/garfield/DPC.hexpat)                     |
+|      | Ratatouille (Prototype) - Asobo                                                             | Asobo2     | [`patterns/garfield/DPC.hexpat`](patterns/garfield/DPC.hexpat)                     |
+| 2006 | Garfield: A Tail of Two Kitties (Garfield 2) - Asobo                                        | Asobo2     | [`patterns/garfield/DPC.hexpat`](patterns/garfield/DPC.hexpat)                     |
+|      | Championsheep Rally - Black Sheep                                                           | BlackSheep | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                           |
+| 2007 | Ratatouille - Asobo                                                                         | Asobo3     | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)                             |
+|      | The Ugly Duckling and Me - Black Sheep                                                      | BlackSheep | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                           |
+|      | En Taxi avec Oui-Oui - Black Sheep                                                          | BlackSheep | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                           |
+| 2008 | WALL-E - Asobo                                                                              | Asobo3     | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)                             |
+|      | The Magic Roundabout - Black Sheep                                                          | BlackSheep | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                           |
+|      | Shaun White Snowboarding/Shaun White Snowboarding: Road Trip (Prototype) - Ubisoft Montreal | Ubisoft1   | [`patterns/shaunwhite/BFWii_proto.hexpat`](patterns/shaunwhite/BFWii_proto.hexpat) |
+|      | Shaun White Snowboarding/Shaun White Snowboarding: Road Trip - Ubisoft Montreal             | Ubisoft2   | [`patterns/shaunwhite/BFWii.hexpat`](patterns/shaunwhite/BFWii.hexpat)             |
+|      | Warning: Code De La Route - Black Sheep                                                     | BlackSheep | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                           |
+| 2009 | FUEL - Asobo                                                                                | Asobo3     | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)                             |
+|      | Up - Asobo                                                                                  | Asobo3     | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)                             |
+|      | Shaun White Snowboarding: World Stage - Ubisoft Montreal                                    | Ubisoft3   | [`patterns/shaunwhite/BFWii_proto.hexpat`](patterns/shaunwhite/BFWii_proto.hexpat) |
+| 2010 | Toy Story 3 - Asobo                                                                         | Asobo3     | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)                             |
+|      | Racket Sports/Racquet Sports/Racket Sports Party - Asobo                                    | Asobo3     | [`patterns/fuel/DPC.hexpat`](patterns/fuel/DPC.hexpat)                             |
+|      | Happy Neuron Academy - Black Sheep                                                          | BlackSheep | [`patterns/ducks/DPC.hexpat`](patterns/ducks/DPC.hexpat)                           |
+| 2012 | Kinect Rush: A Disney-Pixar Adventure - Asobo                                               | Asobo4     | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)                     |
+| 2013 | Super Farm (Re-release) - Asobo                                                             | Asobo4     | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)                     |
+| 2014 | Monopoly Plus/Monopoly Deal - Asobo                                                         | Asobo4     | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)                     |
+| 2015 | The Mighty Quest for Epic Loot - Ubisoft Montreal                                           | Ubisoft4   | [`patterns/mqfel/BFPC.hexpat`](patterns/shaunwhite/BFPC.hexpat)                    |
+| 2016 | Young Conker - Asobo                                                                        | Asobo4     | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)                     |
+|      | Fragments - Asobo                                                                           | Asobo4     | [`patterns/fragments/DUA.hexpat`](patterns/fragments/DUA.hexpat)                   |
+| 2017 | Rush: A Disney-Pixar Adventure (Re-release) - Asobo                                         | Asobo5     | [`patterns/rush/DPC.hexpat`](patterns/rush/DPC.hexpat)                             |
+|      | Monopoly Plus/Monopoly Deal/Monopoly for Nintendo Switch (Re-release) - Asobo               | Asobo4     | [`patterns/monopoly/DPC.hexpat`](patterns/monopoly/DPC.hexpat)                     |
+| 2019 | A Plague Tale: Innocence - Asobo                                                            | Asobo6     | [`patterns/apti/DPC.hexpat`](patterns/apti/DPC.hexpat)                             |
+| 2020 | Microsoft Flight Simulator - Asobo                                                          | Asobo7     | [`patterns/msfs/DPC.hexpat`](patterns/msfs/DPC.hexpat)                             |
+| 2022 | A Plague Tale: Requiem - Asobo                                                              | Asobo8     | [`patterns/aptr/DPC.hexpat`](patterns/aptr/DPC.hexpat)                             |
+| 2024 | Microsoft Flight Simulator 2024 - Asobo                                                     | ??????     |                                                                                    |
 
 #### Ratatouille
 
