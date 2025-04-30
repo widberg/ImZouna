@@ -36,8 +36,14 @@ struct VersionUbisoft {
     u32 cvshader;
 };
 
+struct VersionOther {
+    u8 size;
+    char string[size];
+};
+
 struct BffHeaderInternal {
     u32 magic;
+    u16 size;
     Platform platform;
     VersionFormat version_format;
     match (version_format) {
@@ -46,7 +52,7 @@ struct BffHeaderInternal {
         (VersionFormat::Kalisto): u32 version_kalisto[2];
         (VersionFormat::BlackSheep): u32 version_black_sheep[2];
         (VersionFormat::Ubisoft): VersionUbisoft version_ubisoft;
-        (VersionFormat::Other): char version_other[];
+        (VersionFormat::Other): VersionOther version_other;
     }
     std::mem::AlignTo<4>;
 };

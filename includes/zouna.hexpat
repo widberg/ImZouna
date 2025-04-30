@@ -3,13 +3,13 @@
 #pragma pattern_limit 0
 #pragma loop_limit 0
 
-#include <type/types/rust.pat>
-#include <std/math.pat>
-#include <std/mem.pat>
-#include <std/sys.pat>
-#include <std/string.pat>
-#include <std/core.pat>
-#include <bff_header.hexpat>
+import type.types.rust;
+import std.math;
+import std.mem;
+import std.sys;
+import std.string;
+import std.core;
+import bff_header;
 
 u8 endian in;
 std::core::set_endian(endian);
