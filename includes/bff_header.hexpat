@@ -28,12 +28,12 @@ enum VersionFormat : u8 {
 };
 
 struct VersionUbisoft {
-    u32 opal_version[2];
-    u32 data_version[2];
-    u32 cvt;
-    u32 cvanim;
-    u32 cvmesh;
-    u32 cvshader;
+    u16 opal_version[2];
+    u16 data_version[2];
+    u8 cvt;
+    u8 cvanim;
+    u8 cvmesh;
+    u8 cvshader;
 };
 
 struct VersionOther {
@@ -47,14 +47,14 @@ struct BffHeaderInternal {
     Platform platform;
     VersionFormat version_format;
     match (version_format) {
-        (VersionFormat::Asobo): u32 version_asobo[4];
-        (VersionFormat::AsoboLegacy): u32 version_asobo_legacy[2];
-        (VersionFormat::Kalisto): u32 version_kalisto[2];
-        (VersionFormat::BlackSheep): u32 version_black_sheep[2];
+        (VersionFormat::Asobo): u16 version_asobo[4];
+        (VersionFormat::AsoboLegacy): u16 version_asobo_legacy[2];
+        (VersionFormat::Kalisto): u16 version_kalisto[2];
+        (VersionFormat::BlackSheep): u16 version_black_sheep[2];
         (VersionFormat::Ubisoft): VersionUbisoft version_ubisoft;
         (VersionFormat::Other): VersionOther version_other;
     }
-    std::mem::AlignTo<4>;
+    std::mem::AlignTo<0x10>;
 };
 
 using BffHeader = le BffHeaderInternal;
