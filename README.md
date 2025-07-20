@@ -116,10 +116,12 @@ See also: [zouna-templates-docs](https://github.com/SabeMP/zouna-templates-docs)
 
 ### A Plague Tale: Innocence
 
-| Name     | MIME | Path                                                             |
-|----------|------|------------------------------------------------------------------|
-| psc      |      | [`patterns/apti/psc.hexpat`](patterns/apti/psc.hexpat)           |
-| psc_data |      | [`patterns/apti/psc_data.hexpat`](patterns/apti/psc_data.hexpat) |
+| Name             | MIME | Path                                                                             |
+|------------------|------|----------------------------------------------------------------------------------|
+| psc              |      | [`patterns/apti/psc.hexpat`](patterns/apti/psc.hexpat)                           |
+| psc_data         |      | [`patterns/apti/psc_data.hexpat`](patterns/apti/psc_data.hexpat)                 |
+| StreamSoundNames |      | [`patterns/apti/StreamSoundNames.hexpat`](patterns/apti/StreamSoundNames.hexpat) |
+| WwiseIDs         |      | [`patterns/apti/WwiseIDs.hexpat`](patterns/apti/WwiseIDs.hexpat)                 |
 
 ### Shaun White
 
