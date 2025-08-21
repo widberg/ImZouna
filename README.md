@@ -135,6 +135,7 @@ See also: [zouna-templates-docs](https://github.com/SabeMP/zouna-templates-docs)
 
 | Name           | MIME | Path                                                                           |
 |----------------|------|--------------------------------------------------------------------------------|
+| SettingsBin    |      | [`patterns/mqfel/SettingsBin.hexpat`](patterns/mqfel/SettingsBin.hexpat)       |
 | StreamingAudio |      | [`patterns/mqfel/StreamingAudio.hexpat`](patterns/mqfel/StreamingAudio.hexpat) |
 
 ### Scripts
