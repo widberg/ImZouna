@@ -269,7 +269,7 @@ struct Message_Z {
     Name_Z message_name;
 };
 
-struct DPCObjectHeader {
+struct DPCObjectHeader : BffHeader {
     u32 data_size;
     u32 link_header_size;
     u32 decompressed_size;

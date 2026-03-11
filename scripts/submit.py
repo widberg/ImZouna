@@ -118,6 +118,7 @@ def main():
         "--bigfiles",
         help="The path to the bigfiles directory",
         required=False,
+        type=Path,
         default=BIGFILE_GALLERY_DIRECTORY_PATH,
     )
     args = parser.parse_args()
