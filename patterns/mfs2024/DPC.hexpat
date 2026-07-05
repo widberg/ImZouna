@@ -1,11 +1,10 @@
-// Adapted from
-// https://github.com/amrshaheen61/APT_DPC_Tool/blob/master/APT%20DPC%20Tool/Core/DpcHelper.cs
+// Same as Aptr but only LZ4
 
 #include <zouna.hexpat>
 
 enum CompressionType : u8 {
     NONE = 0,
-    Zlib = 4,
+    LZ4 = 2,
 };
 
 struct DataResource {
@@ -22,9 +21,9 @@ struct DataResource {
     u8 link_header[link_header_size];
     u8 pad[padding_size];
     if (compressed_body_size != 0) {
-        padding[compressed_body_size];
+        u8 compressed_data[compressed_body_size];
     } else {
-        padding[decompressed_body_size];
+        u8 decompressed_data[decompressed_body_size];
     }
 };
 
@@ -33,10 +32,10 @@ struct Resource {
     u64 class_name;
     u32 offset;
     u32 compressed_size;
-    u32 header_and_link_header_size;
-    u32 decompressed_body_size;
-    u16 padding_size;
-    u16 compression_type;
+    u32;
+    u32 decompressed_size;
+    u16;
+    u16;
     if (parent.parent.parent.parent.parent.header.resources_block_size != 0 &&
         parent.parent.parent.parent.parent.header.resources_block_offset != 0 &&
         parent.parent.parent.parent.parent.header.map_size == 0 &&
@@ -84,8 +83,8 @@ struct Resources {
     u32 data_count;
     u32 data_offset;
     u32 working_buffer_offset;
-    u32 files_map_unknown_0;
-    u64 files_map_unknown_1;
+    u32;
+    u64;
     u64 padded_size;
     u64 padding_size;
     DataDescription data_descriptions[data_count];
@@ -103,11 +102,11 @@ struct Resources {
 };
 
 struct BlockDescription {
-    u64 map_crc_0;
-    u64 map_crc_1;
-    u64 map_crc_2;
+    u64;
+    u64;
+    u64;
     u32 resources_map_offset;
-    u32 data_resources_map_relative_offset;
+    u32 data_resources_map_offset;
     Resources resources @ resources_map_offset * 16;
 };
 
@@ -119,7 +118,7 @@ struct BlockDescriptions {
 struct Header {
     char version[256];
     BigFileType big_file_type;
-    u32 header_unknown_0;
+    u32;
     u32 block_description_offset;
     u32 resources_block_size;
     u32 resources_block_offset;
@@ -129,26 +128,18 @@ struct Header {
 };
 
 struct MapResource {
-    Name_Z64 name;
-    Name_Z64 duplicate_name;
     Name_Z64 class_name;
+    Name_Z64 name;
+    Name_Z64 link_name;
     u32 offset;
     u32 compressed_size;
-    u32 header_and_link_header_size;
-    u32 decompressed_body_size;
-    u16 padding_size;
-    CompressionType compression_type;
-    u8 map_resource_source;
-    Name_Z64 link_name;
-    u64 map_entry_hash;
+    u64;
+    u32 decompressed_size;
+    u64;
+    u64;
 };
 
 struct MapEntry {
-    Name_Z64 name;
-    Name_Z64 unknown_name_or_zero;
-    Name_Z hash_0;
-    Name_Z hash_1;
-    u32 flags;
 };
 
 struct Map {
@@ -156,7 +147,7 @@ struct Map {
     DynArray_Z<MapEntry> map_entries;
 };
 
-struct AptrBigFile {
+struct Mfs2024BigFile {
     Header header;
     if (header.block_description_offset != 0) {
         BlockDescriptions block_descriptions @ header.block_description_offset * 16;
@@ -167,4 +158,4 @@ struct AptrBigFile {
     }
 };
 
-AptrBigFile aptr_big_file @ 0x0;
+Mfs2024BigFile mfs2024_big_file @ 0x0;
