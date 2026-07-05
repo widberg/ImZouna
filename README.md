@@ -146,6 +146,7 @@ See also: [zouna-templates-docs](https://github.com/SabeMP/zouna-templates-docs)
 | converge  | [`scripts/converge.py`](scripts/converge.py)   | Copy unique BigFiles for testing                               |
 | jsonify   | [`scripts/jsonify.py`](scripts/jsonify.py)     | Generates a JSON file from a binary file                       |
 | submit    | [`scripts/submit.py`](scripts/submit.py)       | Copy BigFiles from a game directory to the repository          |
+| versions  | [`scripts/versions.py`](scripts/versions.py)   | Copy unique BigFile version strings to a YAML file             |
 | validate  | [`scripts/validate.py`](scripts/validate.py)   | Runs the patterns against all files in a directory recursively |
 | cps       | [`scripts/cps.py`](scripts/cps.py)             | Decrypt cps files                                              |
 
